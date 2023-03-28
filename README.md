@@ -5,9 +5,9 @@ This project is a chatbot application that uses OpenAI's GPT-3 to generate respo
 ## Getting Started
 
 1. Clone this repository to your local machine.
-2. (optional) Create a virtual environment for the project using `env\Scripts\activate.bat` (On Windows) or `sourceenv/bin/activate` (On macOS or Linux)
-3. Install the required packages using `pip install -r requirements.txt`
-4. Make a copy of  `config.py` with name `mine_config.py`
+2. (optional) Create a virtual environment for the project using `env\Scripts\activate.bat` (On Windows) or `sourceenv/bin/activate` (On macOS or Linux) in your terminal.
+3. Install the required packages using `pip install -r requirements.txt` in your terminal.
+4. Make a copy of  `config.py` under the `chatbot` folder with name `mine_config.py`.
 5. Generate your own secret key in Django by running the command `python manage.py generate_secret_key` in your terminal. Replace the `SECRET_KEY` in `mine_config.py` under the `chatbot` folder with the key that you generated.
 6. Sign up for an API key from OpenAI's GPT-3.5 platform. Generate an API key for OpenAI's GPT-3 service by following the instructions on the [OpenAI website](https://beta.openai.com/docs/api-reference/authentication) and replace the `OPENAI_API_KEY` in `mine_config.py` under the `chatbot` folder with your own key.
 
