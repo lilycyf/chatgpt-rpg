@@ -1,6 +1,6 @@
-# Chatbot using OpenAI's GPT-3.5
+# Chatbot using OpenAI's GPT-3
 
-This project is a chatbot application that uses OpenAI's GPT-3.5 to generate responses to user input.
+This project is a chatbot application that uses OpenAI's GPT-3 to generate responses to user input.
 
 ## Getting Started
 
