@@ -2,3 +2,4 @@
 .DS_Store
 *.sqlite3
 *.pyc
+chatbot/mine_config.py
