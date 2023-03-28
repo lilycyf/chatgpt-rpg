@@ -4,6 +4,7 @@ const chatbotButton = document.querySelector('.chatbot-input button');
 const input = document.querySelector('.chatbot-input textarea');
 const input_padding = parseInt(window.getComputedStyle(input).paddingTop) + parseInt(window.getComputedStyle(input).paddingBottom)
 
+let isWaitingForResponse = false;
 
 function addMessage(message, isUser) {
 	const messageContainer = document.createElement('div');
@@ -21,13 +22,25 @@ function addMessage(message, isUser) {
 }
 
 function sendMessage() {
-	const message = chatbotInput.value;
-	addMessage(message, true);
-	chatbotInput.value = '';
-	// Send the message to the server and get a response
-	// Replace this with your own code to interact with the ChatGPT API
-	const response = 'Hello! Hello!';
-	addMessage(response, false);
+    const message = chatbotInput.value;
+    addMessage(message, true);
+    chatbotInput.value = '';
+    chatbotButton.disabled = true;
+    isWaitingForResponse = true;
+    // Send the message to the server and get a response
+    fetch('/chatbot/?message=' + encodeURIComponent(message))
+        .then(response => response.json())
+        .then(data => {
+            const response = data.response;
+            addMessage(response, false);
+            chatbotButton.disabled = false;
+            isWaitingForResponse = false;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            chatbotButton.disabled = false;
+            isWaitingForResponse = false;
+        });
 }
 
 
@@ -37,7 +50,7 @@ function adjustTextareaHeight() {
 }
 
 chatbotButton.addEventListener('click', () => {
-    if (chatbotInput.value !== ''){
+    if (!isWaitingForResponse && chatbotInput.value !== ''){
         sendMessage();
         adjustTextareaHeight();
     }
@@ -46,7 +59,7 @@ chatbotButton.addEventListener('click', () => {
 chatbotInput.addEventListener('keydown', function(event) {
 	if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
-        if (chatbotInput.value !== ''){
+        if (!isWaitingForResponse && chatbotInput.value !== ''){
             sendMessage();
             adjustTextareaHeight();
             event.preventDefault();

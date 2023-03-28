@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>ChatGPT Web Interface</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <div class="guide-bar"></div>
@@ -22,7 +23,8 @@
                 <button>Send</button>
             </div>
         </div>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
     </div>
 </body>
 </html>
+

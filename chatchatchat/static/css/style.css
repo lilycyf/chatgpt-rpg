@@ -63,9 +63,9 @@ html, body {
     background-color: #ffffff;
   }
   
-.chatbot-message:nth-child(odd) {
-  background-color: #f1f0f0;
-}
+  .chatbot-message:nth-child(odd) {
+    background-color: #f1f0f0;
+  }
   
 
 .chatbot-input {
@@ -90,6 +90,7 @@ html, body {
     border: none;
     margin-right: 10px;
     resize: none;
+    /* height: auto; */
     max-height: 200px;
 }
 
