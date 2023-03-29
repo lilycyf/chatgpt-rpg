@@ -53,3 +53,7 @@ This project provides an example of how to build a chatbot application using Ope
 .
 
 该项目提供了如何使用OpenAI的gpt-3.5-turbo构建聊天机器人应用程序的示例。随意修改代码以满足您的需求，并在运行应用程序时不要忘记创建自己的秘密密钥和API密钥。
+
+## License
+
+This project is released under the [MIT License](./LICENSE).
