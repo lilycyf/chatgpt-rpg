@@ -18,6 +18,32 @@ const chatPage = document.querySelector('#chat');
 const editPage = document.querySelector('#edit');
 const roleplayPage = document.querySelector('#roleplay');
 
+// Get the current URL
+const url = window.location.href;
+
+if (url.endsWith("/edit/")) {
+    chatPage.style.display = 'none';
+    roleplayPage.style.display = 'none';
+    editPage.style.display = 'block';
+    chatButton.classList.remove('active');
+    roleplayButton.classList.remove('active');
+    editButton.classList.add('active');
+} else if (url.endsWith("/chat/")) {
+    chatPage.style.display = 'block';
+    editPage.style.display = 'none';
+    roleplayPage.style.display = 'none';
+    chatButton.classList.add('active');
+    editButton.classList.remove('active');
+    roleplayButton.classList.remove('active');
+} else if (url.endsWith("/roleplay/")) {
+    roleplayPage.style.display = 'block';
+    chatPage.style.display = 'none';
+    editPage.style.display = 'none';
+    roleplayButton.classList.add('active');
+    chatButton.classList.remove('active');
+    editButton.classList.remove('active');
+} 
+
 // Add event listeners for the guide bar buttons
 chatButton.addEventListener('click', function () {
     const xhr = new XMLHttpRequest();
