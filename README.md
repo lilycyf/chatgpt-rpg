@@ -4,7 +4,7 @@ This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to gen
 
 该项目是一个聊天机器人应用程序，它使用OpenAI的gpt-3.5-turboGPT来生成对用户输入的响应。
 
-![1680063729336](image/README/1680063729336.png)
+![1680069420186](image/README/1680069420186.png)
 
 ![1680064177415](image/README/1680064177415.png)
 
@@ -22,13 +22,13 @@ This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to gen
 .
 
 1. 将此存储库克隆到本地计算机。
-3. （可选）创建虚拟环境：
+2. （可选）创建虚拟环境：
    1. 运行命令 `python3 -m venv venv`以创建名为 "venv" 的新虚拟环境。
    2. 激活虚拟环境，请在终端中运行命令 `source venv/bin/activate`。在 Windows 上，请使用 `.\venv\Scripts\activate`。
-4. 在终端中使用 `pip install -r requirements.txt` 命令安装 `requirements.txt` 文件中列出的必需包。
-5. 复制 `chatbot` 文件夹下的 `config.py` 文件并将其重命名为 `mine_config.py`。
-6. 在终端中运行命令 `python manage.py generate_secret_key` 以在 Django 中生成自己的密钥。然后将 `chatbot` 文件夹下 `mine_config.py` 文件中的 `SECRET_KEY` 替换为您生成的密钥。
-7. 在 OpenAI 上注册 API 密钥。请按照 [OpenAI 网站](https://platform.openai.com/account/api-keys) 上的说明生成 OpenAI 服务的 API 密钥，然后将 `chatbot` 文件夹下的 `mine_config.py` 文件中的 `OPENAI_API_KEY` 替换为您自己的密钥。
+3. 在终端中使用 `pip install -r requirements.txt` 命令安装 `requirements.txt` 文件中列出的必需包。
+4. 复制 `chatbot` 文件夹下的 `config.py` 文件并将其重命名为 `mine_config.py`。
+5. 在终端中运行命令 `python manage.py generate_secret_key` 以在 Django 中生成自己的密钥。然后将 `chatbot` 文件夹下 `mine_config.py` 文件中的 `SECRET_KEY` 替换为您生成的密钥。
+6. 在 OpenAI 上注册 API 密钥。请按照 [OpenAI 网站](https://platform.openai.com/account/api-keys) 上的说明生成 OpenAI 服务的 API 密钥，然后将 `chatbot` 文件夹下的 `mine_config.py` 文件中的 `OPENAI_API_KEY` 替换为您自己的密钥。
 
 ## Running the Chatbot
 
