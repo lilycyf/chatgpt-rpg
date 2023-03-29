@@ -17,6 +17,7 @@ This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to gen
 5. Generate your own secret key in Django by running the command `python manage.py generate_secret_key` in your terminal. Replace the `SECRET_KEY` in `mine_config.py` under the `chatbot` folder with the key that you generated.
 6. Sign up for an API key from OpenAI. Generate an API key for OpenAI's service by following the instructions on the [OpenAI website](https://platform.openai.com/account/api-keys) and replace the `OPENAI_API_KEY` in `mine_config.py` under the `chatbot` folder with your own key.
 
+.
 1. 克隆此存储库到本地计算机。
 2. （可选）使用终端中的 `env\Scripts\activate.bat`（在Windows上）或 `sourceenv/bin/activate`（在macOS或Linux上）为该项目创建虚拟环境。
 3. 使用终端中的 `pip install -r requirements.txt`安装所需的软件包。
