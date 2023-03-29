@@ -2,9 +2,14 @@ from django.shortcuts import render
 from django.conf import settings
 from django.http import JsonResponse
 import requests
+import json
 
 def chatbot(request):
-    message = request.GET.get('message', '')
+    messageHistory = request.GET.get('messageHistory')
+    print("testtest")
+    print(messageHistory)
+    messageHistory = json.loads(messageHistory)
+
     api_key = settings.OPENAI_API_KEY
 
     endpoint = f'https://api.openai.com/v1/chat/completions'
@@ -14,7 +19,7 @@ def chatbot(request):
     }
     data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": message}]
+        "messages": messageHistory
     }
     headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)

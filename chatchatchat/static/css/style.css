@@ -27,7 +27,6 @@ html, body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 20px;
 	box-sizing: border-box;
 	font-family: Arial, sans-serif;
 }
@@ -39,7 +38,7 @@ html, body {
 
 .chatbot-messages {
 	height: 100%;
-    width: 80%;
+    width: 70%;
     margin-bottom: 50px;
 	overflow-y: scroll;
 }
@@ -52,21 +51,19 @@ html, body {
 	padding: 20px;
 	max-width: 100%;
 	align-self: flex-start;
+  background-color: #f1f0f0;
 }
 
-.chatbot-message:last-child {
-	align-self: flex-end;
-    margin-bottom: 150px;
+.user-message {
+	padding: 20px;
+	max-width: 100%;
+	align-self: flex-start;
+  background-color: #ffffff;
 }
 
-.chatbot-message:nth-child(even) {
-    background-color: #ffffff;
-  }
-  
-  .chatbot-message:nth-child(odd) {
-    background-color: #f1f0f0;
-  }
-  
+.end-message {
+  margin-bottom: 120px;
+}
 
 .chatbot-input {
     display: flex;
@@ -74,7 +71,7 @@ html, body {
     bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 70%;
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 10px;
@@ -90,7 +87,6 @@ html, body {
     border: none;
     margin-right: 10px;
     resize: none;
-    /* height: auto; */
     max-height: 200px;
 }
 
@@ -105,13 +101,34 @@ html, body {
 
 
 p {
-    margin: 1px;
+  margin: 0px;
 }
 
 textarea {
-    height: auto;
-  }
+  height: auto;
+}
 
+pre {
+  background-color: #252525;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 0px;
+  overflow-x: auto;
+}
+code{
+  font-family: Söhne Mono, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  font-size:0.875em
+}
+
+/* Style for Python code blocks */
+pre code.language-python {
+  color: #ffffff;
+}
+
+/* Style for JavaScript code blocks */
+pre code.language-javascript {
+  color: #ffffff;
+}
 
 @media screen and (max-width: 700px) {
     .guide-bar {
