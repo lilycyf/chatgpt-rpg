@@ -33,7 +33,7 @@ Before start the server, navigate to the root folder of the project in your term
 
 To run the chatbot, run the command `python manage.py runserver`. Then open your web browser and go to `http://localhost:8000` to access the chatbot application.
 
-
+.
 注意：如果在步骤2中设置了虚拟环境，则在运行与该项目相关的任何命令之前，您需要激活它。要激活虚拟环境，请运行 `source env/bin/activate`。要停用它，只需运行 `deactivate`命令。
 
 在开始服务器之前，请在终端中导航到项目的根文件夹，并运行命令 `python manage.py migrate`以应用数据库迁移。
@@ -44,5 +44,5 @@ To run the chatbot, run the command `python manage.py runserver`. Then open your
 
 This project provides an example of how to build a chatbot application using OpenAI's gpt-3.5-turbo. Feel free to modify the code to suit your needs, and don't forget to create your own secret key and API key when running the application.
 
-
+.
 该项目提供了如何使用OpenAI的gpt-3.5-turbo构建聊天机器人应用程序的示例。随意修改代码以满足您的需求，并在运行应用程序时不要忘记创建自己的秘密密钥和API密钥。
