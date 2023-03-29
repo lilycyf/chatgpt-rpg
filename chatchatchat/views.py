@@ -27,5 +27,36 @@ def chatbot(request):
     response_text = response['content']
     return JsonResponse({'response': response_text})
 
+
+def editbot(request):
+    editInput = request.GET.get('input')
+    editInstruction = request.GET.get('instruction')
+    print("testtest")
+    print(editInput)
+    print(editInstruction)
+
+    api_key = settings.OPENAI_API_KEY
+
+    endpoint = f'https://api.openai.com/v1/edits'
+    headers = {
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        "model": "text-davinci-edit-001",
+        "input": editInput,
+        "instruction": editInstruction,
+    }
+    headers = {'Authorization': f'Bearer {api_key}'}
+    response = requests.post(endpoint, headers=headers, json=data)
+    response_text = response.json()['choices'][0]['text']
+    return JsonResponse({'response': response_text})
+
 def home(request):
+    return render(request, 'index.html')
+
+def chat(request):
+    return render(request, 'index.html')
+
+def edit(request):
     return render(request, 'index.html')

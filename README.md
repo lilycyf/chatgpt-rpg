@@ -2,6 +2,10 @@
 
 This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to generate responses to user input.
 
+![1680063729336](image/README/1680063729336.png)
+
+![1680064177415](image/README/1680064177415.png)
+
 ## Getting Started
 
 1. Clone this repository to your local machine.

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>ChatGPT Web Interface</title>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>ChatGPT Web Interface</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <div class="guide-bar"></div>
-    <div class="chatbot-container">
+    <div class="guide-bar">
+        <button class="guide-bar-button chat-button active" data-page="chat">Chat</button>
+        <button class="guide-bar-button edit-button" data-page="edit">Edit</button>
+    </div>
+    <div id="chat" class="chatbot-container">
         <div class="chatbot">
             <div class="chatbot-header">
-                <h1>ChatChatChat</h1>
+                <h1>Chat</h1>
                 <p>Your friendly AI chatbot</p>
             </div>
             <div class="chatbot-messages">
@@ -24,8 +29,27 @@
                 <button>Send</button>
             </div>
         </div>
-        <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
     </div>
+    <div id="edit" class="edit-container">
+        <div class="edit">
+            <div class="edit-header">
+                <h1>Edit</h1>
+                <p>Your friendly AI chatbot</p>
+            </div>
+            <div class="edit-messages">
+                <div class="chatbot-message">
+                    <p>Hello! How can I assist you today?</p>
+                </div>
+                <div class="end-message"></div>
+            </div>
+            <div class="edit-input">
+                <textarea class="input" rows="1" placeholder="Type your input..."></textarea>
+                <textarea class="instruction" rows="1" placeholder="Type your instruction..."></textarea>
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </body>
-</html>
 
+</html>
