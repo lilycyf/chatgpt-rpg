@@ -11,13 +11,14 @@
     <div class="guide-bar">
         <div class="guide-bar-page-buttons">
             <button class="guide-bar-button chat-button active" data-page="chat">Chat</button>
+            <button class="guide-bar-button roleplay-button" data-page="roleplay">RolePlay</button>
             <button class="guide-bar-button edit-button" data-page="edit">Edit</button>
             <button class="guide-bar-button button" data-page="test">Test</button>
             <button class="guide-bar-button button" data-page="test">Test</button>
             <button class="guide-bar-button button" data-page="test">Test</button>
         </div>
     </div>
-    <div id="chat" class="chatbot-container">
+    <div id="chat" class="chatbot-container" style="display: block;">
         <div class="chatbot">
             <div class="chatbot-header">
                 <h1>Chat</h1>
@@ -35,11 +36,29 @@
             </div>
         </div>
     </div>
-    <div id="edit" class="edit-container">
+    <div id="roleplay" class="roleplay-container" style="display: none;">
+        <div class="roleplay">
+            <div class="roleplay-header">
+                <h1>RolePlay</h1>
+                <p>Your friendly AI roleplaybot</p>
+            </div>
+            <div class="chatbot-messages">
+                <div class="chatbot-message">
+                    <p>Hello! How can I assist you today?</p>
+                </div>
+                <div class="end-message"></div>
+            </div>
+            <div class="chatbot-input">
+                <textarea rows="1" placeholder="Type your message..."></textarea>
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+    <div id="edit" class="edit-container" style="display: none;">
         <div class="edit">
             <div class="edit-header">
                 <h1>Edit</h1>
-                <p>Your friendly AI chatbot</p>
+                <p>Your friendly AI editbot</p>
             </div>
             <div class="edit-messages">
                 <div class="chatbot-message">
@@ -54,7 +73,10 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    <script type="module" src="{% static 'js/script.js' %}"></script>
+    <script type="module" src="{% static 'js/chat.js' %}"></script>
+    <script type="module" src="{% static 'js/edit.js' %}"></script>
+    <script type="module" src="{% static 'js/roleplay.js' %}"></script>
 </body>
 
 </html>

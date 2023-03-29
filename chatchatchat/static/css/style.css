@@ -35,7 +35,7 @@ body {
 .guide-bar-button {
   flex-shrink: 0;
   cursor: pointer;
-  width: 60px;
+  width: 75px;
   font-size: 13px;
   margin: 0px;
   border: none;
@@ -82,6 +82,9 @@ body {
   overflow-y: scroll;
 }
 
+.edit-messages::-webkit-scrollbar {
+  display: none;
+}
 
 
 .edit-input {
@@ -218,6 +221,29 @@ body {
   cursor: pointer;
 }
 
+
+.roleplay-container {
+  position: relative;
+  height: 100%;
+  margin-left: 200px;
+}
+
+
+.roleplay {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.roleplay-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 p {
   margin: 0px;

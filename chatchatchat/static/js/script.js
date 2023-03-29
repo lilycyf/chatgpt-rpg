@@ -1,22 +1,22 @@
-const chatbotMessages = document.querySelector('.chatbot-messages');
-const chatbotInput = document.querySelector('.chatbot-input textarea');
-const chatbotButton = document.querySelector('.chatbot-input button');
-
-const editbotMessages = document.querySelector('.edit-messages');
-const editbotInputInput = document.querySelector('.edit-input .input');
-const editbotInputInstruction = document.querySelector('.edit-input .instruction');
-const editbotButton = document.querySelector('.edit-input button');
-
 let isWaitingForResponse = false;
-let messageHistory = [];
+
+function setIsWaitingForResponse(value) {
+    isWaitingForResponse = value;
+}
+
+function getIsWaitingForResponse() {
+    return isWaitingForResponse;
+}
 
 // Get the guide bar buttons
 const chatButton = document.querySelector('.chat-button');
 const editButton = document.querySelector('.edit-button');
+const roleplayButton = document.querySelector('.roleplay-button');
 
 // Get the pages
 const chatPage = document.querySelector('#chat');
 const editPage = document.querySelector('#edit');
+const roleplayPage = document.querySelector('#roleplay');
 
 // Add event listeners for the guide bar buttons
 chatButton.addEventListener('click', function () {
@@ -31,13 +31,14 @@ chatButton.addEventListener('click', function () {
             window.history.pushState({ page: 'chat' }, null, '/chat/');
         }
     };
-
     xhr.open('GET', '/chat/');
     xhr.send();
     chatPage.style.display = 'block';
     editPage.style.display = 'none';
+    roleplayPage.style.display = 'none';
     chatButton.classList.add('active');
     editButton.classList.remove('active');
+    roleplayButton.classList.remove('active');
 });
 
 editButton.addEventListener('click', function () {
@@ -56,11 +57,41 @@ editButton.addEventListener('click', function () {
     xhr.open('GET', '/edit/');
     xhr.send();
     chatPage.style.display = 'none';
+    roleplayPage.style.display = 'none';
     editPage.style.display = 'block';
     chatButton.classList.remove('active');
+    roleplayButton.classList.remove('active');
     editButton.classList.add('active');
 });
 
+roleplayButton.addEventListener('click', function () {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Update the page content
+            // const chatbotContainer = document.querySelector('.chatbot-container');
+            // chatbotContainer.innerHTML = xhr.responseText;
+
+            // Update the URL
+            window.history.pushState({ page: 'roleplay' }, null, '/roleplay/');
+        }
+    };
+
+    xhr.open('GET', '/roleplay/');
+    xhr.send();
+    roleplayPage.style.display = 'block';
+    chatPage.style.display = 'none';
+    editPage.style.display = 'none';
+    roleplayButton.classList.add('active');
+    chatButton.classList.remove('active');
+    editButton.classList.remove('active');
+});
+
+function adjustTextareaHeight(element, reference) {
+    element.style.height = 'auto';
+    let reference_padding = parseInt(window.getComputedStyle(reference).paddingTop) + parseInt(window.getComputedStyle(reference).paddingBottom)
+    element.style.height = reference.scrollHeight - reference_padding + 'px';
+}
 
 function addMessage(message, isUser, page) {
     const messageContainer = document.createElement('div');
@@ -126,117 +157,4 @@ function getLanguage(firstLine) {
     return lang;
 }
 
-function sendMessage() {
-    const message = chatbotInput.value;
-    addMessage(message, true, chatbotMessages);
-    chatbotInput.value = '';
-    chatbotButton.disabled = true;
-    isWaitingForResponse = true;
-    // Add user message to message history
-    messageHistory.push({ "role": "user", "content": message });
-
-    // Send the message to the server and get a response
-    fetch('/chatbot/?messageHistory=' + encodeURIComponent(JSON.stringify(messageHistory)))
-        .then(response => response.json())
-        .then(data => {
-            const response = data.response;
-            addMessage(response, false, chatbotMessages);
-            // Add assistant message to message history
-            messageHistory.push({ "role": "assistant", "content": response });
-
-            chatbotButton.disabled = false;
-            isWaitingForResponse = false;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            chatbotButton.disabled = false;
-            isWaitingForResponse = false;
-        });
-}
-
-
-function adjustTextareaHeight(element, reference) {
-    element.style.height = 'auto';
-    reference_padding = parseInt(window.getComputedStyle(reference).paddingTop) + parseInt(window.getComputedStyle(reference).paddingBottom)
-    element.style.height = reference.scrollHeight - reference_padding + 'px';
-}
-
-chatbotButton.addEventListener('click', () => {
-    if (!isWaitingForResponse && chatbotInput.value !== '') {
-        sendMessage();
-        adjustTextareaHeight(chatbotInput, chatbotInput);
-    }
-});
-
-chatbotInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        if (!isWaitingForResponse && chatbotInput.value !== '') {
-            sendMessage();
-            adjustTextareaHeight(chatbotInput, chatbotInput);
-            event.preventDefault();
-        }
-    }
-});
-
-chatbotInput.addEventListener('input', () => {
-    adjustTextareaHeight(chatbotInput, chatbotInput);
-});
-
-
-editbotInputInput.addEventListener('input', () => {
-    adjustTextareaHeight(editbotInputInput, editbotInputInput);
-    editbotInputInstruction.style.height = 'auto';
-    if (editbotInputInstruction.scrollHeight > editbotInputInput.scrollHeight) {
-        adjustTextareaHeight(editbotInputInstruction, editbotInputInstruction);
-        editbotInputInput.style.height = 'auto';
-    }
-    
-});
-
-editbotInputInstruction.addEventListener('input', () => {
-    adjustTextareaHeight(editbotInputInstruction, editbotInputInstruction);
-    editbotInputInput.style.height = 'auto';
-    if (editbotInputInstruction.scrollHeight < editbotInputInput.scrollHeight) {
-        adjustTextareaHeight(editbotInputInput, editbotInputInput);
-        editbotInputInstruction.style.height = 'auto';
-    }
-});
-
-
-editbotButton.addEventListener('click', () => {
-    if (!isWaitingForResponse && editbotInputInput.value !== '' && editbotInputInstruction.value !== '') {
-        sendEditInstruction();
-        adjustTextareaHeight(editbotInputInstruction, editbotInputInstruction);
-        editbotInputInput.style.height = 'auto';
-        adjustTextareaHeight(editbotInputInput, editbotInputInput);
-        editbotInputInstruction.style.height = 'auto';
-    }
-});
-
-
-function sendEditInstruction() {
-    const input = editbotInputInput.value;
-    const instruction = editbotInputInstruction.value;
-    const message = 'Input: ' + '\n' + input + '\n' + '\n' + 'Instruction: ' + '\n' + instruction;
-    addMessage(message, true, editbotMessages);
-    editbotInputInput.value = ''
-    editbotInputInstruction.value = ''
-    editbotButton.disabled = true;
-    isWaitingForResponse = true;
-
-    // Send the message to the server and get a response
-    fetch('/editbot/?input=' + encodeURIComponent(input) + '&instruction=' + encodeURIComponent(instruction))
-        .then(response => response.json())
-        .then(data => {
-            const response = data.response;
-            addMessage(response, false, editbotMessages);
-            editbotButton.disabled = false;
-            isWaitingForResponse = false;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            editbotButton.disabled = false;
-            isWaitingForResponse = false;
-        });
-}
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage };

@@ -5,7 +5,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('chatbot/', views.chatbot, name='chatbot'),
     path('editbot/', views.editbot, name='editbot'),
+    path('roleplaybot/', views.roleplaybot, name='roleplaybot'),
     path('chat/', views.chat, name='chat'),
     path('edit/', views.edit, name='edit'),
+    path('roleplay/', views.roleplay, name='roleplay'),
 ]
 
