@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 h1 {
   font-size: 2em;
 }
@@ -62,6 +66,17 @@ h3 {
   box-shadow: none;
 }
 
+.apis {
+  position: absolute;
+  bottom: 20px;
+}
+
+.api-input {
+font-size: 11px;
+height: 16px;
+padding: 0px;
+border: 0px;
+}
 /* chat */
 
 .chatbot-container {
@@ -261,7 +276,7 @@ label {
   margin-bottom: 1em;
 }
 
-input[type="text"],
+.other-text,
 textarea {
   padding: 0.5em;
   border: 1px solid #ccc;

@@ -17,6 +17,12 @@
             <button class="guide-bar-button button" data-page="test">Test</button>
             <button class="guide-bar-button button" data-page="test">Test</button>
         </div>
+        <div class="apis">
+            <label for="password">OpenAI API:</label>
+            <input class="api-input" type="password" id="password" name="password">
+            <button id="open-ai-api-toggle-btn">Show/Hide Password</button>
+            <button id="open-ai-api-submit-btn">Return</button>
+        </div>
     </div>
     <div id="chat" class="chatbot-container" style="display: block;">
         <div class="chatbot">
@@ -76,7 +82,7 @@
                             <label for="french">French</label><br>
                             <input type="radio" id="other" name="first-language" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="first-language-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="first-language-other-text" placeholder="Please specify">
 
                         </div>
 
@@ -92,7 +98,7 @@
                             <label for="easygoing">Easygoing</label><br>
                             <input type="radio" id="other" name="personality" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="personality-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="personality-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="communication-style">Which of these best describes your communication style?</label>
@@ -107,7 +113,7 @@
                             <label for="passive">Passive</label><br>
                             <input type="radio" id="other" name="communication-style" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="communication-style-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="communication-style-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="preferred-communication-method">What is your preferred method of communication?</label>
@@ -122,7 +128,7 @@
                             <label for="email">Email</label><br>
                             <input type="radio" id="other" name="preferred-communication-method" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="preferred-communication-method-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="preferred-communication-method-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="social-confidence-level">How would you describe your level of confidence in social situations?</label>
@@ -152,7 +158,7 @@
                             <label for="self-deprecating">Self-deprecating</label><br>
                             <input type="radio" id="other" name="sense-of-humor" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="sense-of-humor-other-text" name="sense-of-humor-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="sense-of-humor-other-text" name="sense-of-humor-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="empathy-levels">Which of these best describes your empathy levels?</label>
@@ -168,7 +174,7 @@
                             <label for="varying-empathy">Can vary</label><br>
                             <input type="radio" id="other" name="empathy-levels" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="empathy-levels-other-text" name="empathy-levels-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="empathy-levels-other-text" name="empathy-levels-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="patience-level">Which of these best describes your level of patience?</label>
@@ -183,7 +189,7 @@
                             <label for="patience-impatient">Impatient</label><br>
                             <input type="radio" id="patience-other" name="patience-level" value="Other">
                             <label for="patience-other">Other:</label>
-                            <input type="text" id="patience-other-text" name="patience-level-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="patience-other-text" name="patience-level-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="optimism-level">Which of these best describes your level of optimism?</label>
@@ -198,7 +204,7 @@
                             <label for="optimism-realistic">Realistic</label><br>
                             <input type="radio" id="optimism-other" name="optimism-level" value="Other">
                             <label for="optimism-other">Other:</label>
-                            <input type="text" id="optimism-other-text" name="optimism-level-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="optimism-other-text" name="optimism-level-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="assertiveness-level">Which of these best describes your level of assertiveness?</label>
@@ -225,7 +231,7 @@
                             <label for="postgraduate-degree">Postgraduate degree</label><br>
                             <input type="radio" id="other" name="educational-background" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="educational-background-other-text" name="educational-background-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="educational-background-other-text" name="educational-background-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="work-experience">Which of these best describes your work experience?</label>
@@ -238,7 +244,7 @@
                             <label for="senior-level">Senior level</label><br>
                             <input type="radio" id="other" name="work-experience" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="work-experience-other-text" name="work-experience-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="work-experience-other-text" name="work-experience-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="job-title">What is your job title?</label>
@@ -253,7 +259,7 @@
                             <label for="customer-service-representative">Customer service representative</label><br>
                             <input type="radio" id="other" name="job-title" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="job-title-other-text" name="job-title-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="job-title-other-text" name="job-title-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="age-range">What is your age range?</label>
@@ -280,7 +286,7 @@
                             <label for="non-binary">Non-binary</label><br>
                             <input type="radio" id="other" name="gender" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="gender-other-text" name="gender-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="gender-other-text" name="gender-other-text" placeholder="Please specify">
                         </div>
                         <label class="question" for="marital-status">What is your marital status?</label>
                         <div class="choices">
@@ -294,7 +300,7 @@
                             <label for="widowed">Widowed</label><br>
                             <input type="radio" id="other" name="marital-status" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="marital-status-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="marital-status-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="religion">What is your religion?</label>
@@ -309,7 +315,7 @@
                             <label for="hindu">Hindu</label><br>
                             <input type="radio" id="other" name="religion" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="religion-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="religion-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="political-affiliation">What is your political affiliation?</label>
@@ -322,7 +328,7 @@
                             <label for="independent">Independent</label><br>
                             <input type="radio" id="other" name="political-affiliation" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="political-affiliation-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="political-affiliation-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="cultural-background">Which of these best describes your cultural background?</label>
@@ -337,7 +343,7 @@
                             <label for="african">African</label><br>
                             <input type="radio" id="other" name="cultural-background" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="cultural-background-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="cultural-background-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="socioeconomic-status">What is your socioeconomic status?</label>
@@ -350,7 +356,7 @@
                             <label for="high-income">High income</label><br>
                             <input type="radio" id="other" name="socioeconomic-status" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" id="other-text" name="socioeconomic-status-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="other-text" name="socioeconomic-status-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="excited-response">If someone said "I'm so excited for this weekend," how would you reply?</label>
@@ -363,7 +369,7 @@
                             <label for="excited-c">"That's nice."</label><br>
                             <input type="radio" id="excited-other" name="excited-response" value="Other">
                             <label for="excited-other">Other:</label>
-                            <input type="text" id="excited-text" name="excited-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="excited-text" name="excited-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="interview-response">If someone said "I'm really nervous about this interview," how would you reply?</label>
@@ -376,7 +382,7 @@
                             <label for="interview-c">"Why are you so nervous?"</label><br>
                             <input type="radio" id="interview-other" name="interview-response" value="Other">
                             <label for="interview-other">Other:</label>
-                            <input type="text" id="interview-text" name="interview-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="interview-text" name="interview-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="busy-response">If someone said "I can't believe how busy I am lately," how would you reply?</label>
@@ -389,7 +395,7 @@
                             <label for="busy-c">"That's just life."</label><br>
                             <input type="radio" id="busy-other" name="busy-response" value="Other">
                             <label for="busy-other">Other:</label>
-                            <input type="text" id="busy-text" name="busy-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="busy-text" name="busy-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="not-well-response">If someone said "I'm not feeling very well today," how would you reply?</label>
@@ -402,7 +408,7 @@
                             <label for="not-well-c">"That's too bad."</label><br>
                             <input type="radio" id="not-well-other" name="not-well-response" value="Other">
                             <label for="not-well-other">Other:</label>
-                            <input type="text" id="not-well-text" name="not-well-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="not-well-text" name="not-well-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="bored-response">If someone said "I'm so bored right now," how would you reply?</label>
@@ -415,7 +421,7 @@
                             <label for="bored-c">"That's too bad."</label><br>
                             <input type="radio" id="bored-other" name="bored-response" value="Other">
                             <label for="bored-other">Other:</label>
-                            <input type="text" id="bored-text" name="bored-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="bored-text" name="bored-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="stressed-response">If someone said "I'm really stressed out right now," how would you reply?</label>
@@ -428,7 +434,7 @@
                             <label for="stressed-c">"That's just how life is, unfortunately."</label><br>
                             <input type="radio" id="stressed-other" name="stressed-response" value="Other">
                             <label for="stressed-other">Other:</label>
-                            <input type="text" id="stressed-text" name="stressed-response-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="stressed-text" name="stressed-response-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="tired-reply">If someone said "I'm so tired today," how would you reply?</label>
@@ -441,7 +447,7 @@
                             <label for="tired-reply-c">That's too bad.</label><br>
                             <input type="radio" id="tired-reply-other" name="tired-reply" value="Other">
                             <label for="tired-reply-other">Other:</label>
-                            <input type="text" id="tired-reply-other-text" name="tired-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="tired-reply-other-text" name="tired-reply-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="lonely-reply">If someone said "I'm feeling really lonely lately," how would you reply?</label>
@@ -454,7 +460,7 @@
                             <label for="lonely-reply-c">That's just life.</label><br>
                             <input type="radio" id="lonely-reply-other" name="lonely-reply" value="Other">
                             <label for="lonely-reply-other">Other:</label>
-                            <input type="text" id="lonely-reply-other-text" name="lonely-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="lonely-reply-other-text" name="lonely-reply-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="angry-reply">If someone said "I'm really angry about this situation," how would you reply?</label>
@@ -468,7 +474,7 @@
                             <label for="angry-reply-c">That's too bad.</label><br>
                             <input type="radio" id="angry-reply-other" name="angry-reply" value="Other">
                             <label for="angry-reply-other">Other:</label>
-                            <input type="text" id="angry-reply-other-text" name="angry-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="angry-reply-other-text" name="angry-reply-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="proud-reply">If someone said "I'm really proud of myself for accomplishing this," how would you reply?</label>
@@ -481,7 +487,7 @@
                             <label for="proud-reply-c">That's nice.</label><br>
                             <input type="radio" id="proud-reply-other" name="proud-reply" value="Other">
                             <label for="proud-reply-other">Other:</label>
-                            <input type="text" id="proud-reply-other-text" name="proud-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="proud-reply-other-text" name="proud-reply-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="overwhelmed-reply">If someone said "I'm feeling really overwhelmed right now," how would you reply?</label>
@@ -495,7 +501,7 @@
                             <label for="overwhelmed-reply-c">That's just life.</label><br>
                             <input type="radio" id="overwhelmed-reply-other" name="overwhelmed-reply" value="Other">
                             <label for="overwhelmed-reply-other">Other:</label>
-                            <input type="text" id="overwhelmed-reply-other-text" name="overwhelmed-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="overwhelmed-reply-other-text" name="overwhelmed-reply-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="bored-reply">If someone said "I'm really bored at work today," how would you reply?</label>
@@ -509,7 +515,7 @@
                             <label for="bored-reply-c">That's too bad.</label><br>
                             <input type="radio" id="bored-reply-other" name="bored-reply" value="Other">
                             <label for="bored-reply-other">Other:</label>
-                            <input type="text" id="bored-reply-other-text" name="bored-reply-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="bored-reply-other-text" name="bored-reply-other-text" placeholder="Please specify">
                         </div>
                         <label class="question" for="anxious-about-meeting">If someone said "I'm really anxious about this meeting," how would you reply?</label>
                         <div class="choices">
@@ -521,7 +527,7 @@
                             <label for="anxious-c">"That's too bad."</label><br>
                             <input type="radio" id="anxious-other" name="anxious-about-meeting" value="Other">
                             <label for="anxious-other">Other:</label>
-                            <input type="text" id="anxious-other-text" name="anxious-about-meeting-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="anxious-other-text" name="anxious-about-meeting-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="happy-with-life">If someone said "I'm really happy with how my life is going right now," how would you reply?</label>
@@ -534,7 +540,7 @@
                             <label for="happy-c">"That's nice."</label><br>
                             <input type="radio" id="happy-other" name="happy-with-life" value="Other">
                             <label for="happy-other">Other:</label>
-                            <input type="text" id="happy-other-text" name="happy-with-life-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="happy-other-text" name="happy-with-life-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="frustrated-by-situation">If someone said "I'm really frustrated by this situation," how would you reply?</label>
@@ -547,7 +553,7 @@
                             <label for="frustrated-c">"That's too bad."</label><br>
                             <input type="radio" id="frustrated-other" name="frustrated-by-situation" value="Other">
                             <label for="frustrated-other">Other:</label>
-                            <input type="text" id="frustrated-other-text" name="frustrated-by-situation-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="frustrated-other-text" name="frustrated-by-situation-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="excited-for-restaurant">If someone said "I'm really excited to try this new restaurant," how would you reply?</label>
@@ -560,7 +566,7 @@
                             <label for="excited-c">"That's nice."</label><br>
                             <input type="radio" id="excited-other" name="excited-for-restaurant" value="Other">
                             <label for="excited-other">Other:</label>
-                            <input type="text" id="excited-other-text" name="excited-for-restaurant-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="excited-other-text" name="excited-for-restaurant-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="feeling-down">If someone said "I'm feeling really down lately," how would you reply?</label>
@@ -574,7 +580,7 @@
                             <label for="down-c">"That's just life."</label><br>
                             <input type="radio" id="down-other" name="feeling-down" value="Other">
                             <label for="down-other">Other:</label>
-                            <input type="text" id="down-other-text" name="feeling-down-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="down-other-text" name="feeling-down-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="looking-forward-to-summer">If someone said "I'm really looking forward to summer," how would you reply?</label>
@@ -587,7 +593,7 @@
                             <label for="summer-c">"That's nice."</label><br>
                             <input type="radio" id="summer-other" name="looking-forward-to-summer" value="Other">
                             <label for="summer-other">Other:</label>
-                            <input type="text" id="summer-other-text" name="looking-forward-to-summer-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="summer-other-text" name="looking-forward-to-summer-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="optimistic-about-future">If someone said "I'm feeling really optimistic about the future," how would you reply?</label>
@@ -600,7 +606,7 @@
                             <label for="optimistic-c">"That's nice."</label><br>
                             <input type="radio" id="optimistic-other" name="optimistic-about-future" value="Other">
                             <label for="optimistic-other">Other:</label>
-                            <input type="text" id="optimistic-other-text" name="optimistic-about-future-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="optimistic-other-text" name="optimistic-about-future-other-text" placeholder="Please specify">
                         </div>
 
                         <button type="submit" id="survey-submit-btn">Submit</button>
