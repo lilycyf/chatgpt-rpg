@@ -44,7 +44,15 @@
             </div>
             <div class="chatbot-messages">
                 <div class="chatbot-message">
-                    <p>Hello! How can I assist you today?</p>
+                    <div class="audio-message">
+                        <audio controls>
+                            <source src="{% static 'media/start-speech.mp3' %}" type="audio/mpeg">
+                            Hello! How can I assist you today?
+                        </audio>
+                    </div>
+                    <div class="audio-text">
+                        <p>Hello! How can I assist you today?</p>
+                    </div>
                 </div>
                 <div class="end-message"></div>
             </div>

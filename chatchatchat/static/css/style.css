@@ -10,7 +10,8 @@ h1 {
   font-size: 2em;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-size: 2em;
   margin: 0px;
   margin-bottom: 20px;
@@ -221,16 +222,16 @@ h2, h3 {
 }
 
 .roleplaybot-personality-survey {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 30%;
-    height: 90%;
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 1;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    overflow-y: scroll;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 30%;
+  height: 90%;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  overflow-y: scroll;
 }
 
 .roleplaybot-personality-content {
@@ -297,25 +298,32 @@ button[type="submit"]:disabled {
 
 /* The warning message box */
 #warning-modal {
-  display: none; /* Hide the warning message box by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hide the warning message box by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Warning message box content */
 .warning-modal-content {
-    background-color: #ffffff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    text-align: center;
+  background-color: #ffffff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  text-align: center;
 }
 
 /* Warning message box title */
@@ -326,15 +334,15 @@ button[type="submit"]:disabled {
 
 /* Warning message box close button */
 .warning-modal-close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    margin-top: -20px;
-    margin-right: -20px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -20px;
+  margin-right: -20px;
 }
 
 .warning-modal-close:hover,
@@ -352,12 +360,12 @@ button[type="submit"]:disabled {
 }
 
 .warning-modal-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    width: 48%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 48%;
 }
 
 .warning-modal-buttons button:focus {
@@ -374,8 +382,8 @@ button[type="submit"]:disabled {
 }
 
 .warning-modal-buttons #warning-submit-btn {
-    background-color: #4CAF50;
-    color: #fff;
+  background-color: #4CAF50;
+  color: #fff;
 }
 
 .warning-modal-buttons #warning-submit-btn:hover {
@@ -503,4 +511,16 @@ pre code.language-javascript {
     margin-left: 0px;
   }
 
+}
+
+.audio-message {
+  display: flex;
+  align-items: center;
+}
+
+.audio-text {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  ;
 }
