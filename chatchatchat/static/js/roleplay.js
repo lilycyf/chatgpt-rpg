@@ -75,6 +75,10 @@ warningCancelBtn.addEventListener('click', () => {
 // submit form when agree button is clicked
 warningSubmitBtn.addEventListener('click', () => {
     warningModal.style.display = 'none';
+    roleplayPersonalitySurvey.style.display = 'none';
+    roleplayPersonalityButton.style.height = '40px';
+    roleplayPersonalityButton.style.width = '40px';
+    isSurveyOpen = false;
     // freeze form
     const inputs = form.querySelectorAll('input, select, textarea, button');
     inputs.forEach((input) => {
@@ -85,4 +89,14 @@ warningSubmitBtn.addEventListener('click', () => {
     //   form.submit();
 });
 
-
+document.addEventListener('click', function(event) {
+    // check if the clicked element is outside the roleplayPersonalitySurvey element
+    if (!roleplayPersonalitySurvey.contains(event.target) && !roleplayPersonalityButton.contains(event.target)) {
+      if (isSurveyOpen) {
+        roleplayPersonalitySurvey.style.display = 'none';
+        roleplayPersonalityButton.style.height = '40px';
+        roleplayPersonalityButton.style.width = '40px';
+        isSurveyOpen = false;
+    }
+    }
+  });

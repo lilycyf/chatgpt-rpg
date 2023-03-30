@@ -5,6 +5,17 @@ body {
   margin: 0;
   padding: 0;
 }
+
+h1 {
+  font-size: 2em;
+}
+
+h2, h3 {
+  font-size: 2em;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
 /* guide-bar */
 .guide-bar {
   position: fixed;
@@ -149,6 +160,11 @@ body {
   cursor: pointer;
 }
 
+
+.chatbot-input button:hover {
+  background-color: #3e8e41;
+}
+
 /* roleplay */
 
 .roleplay-container {
@@ -190,26 +206,31 @@ body {
 }
 
 .roleplaybot-personality button {
-  background-color: #ffffff00;
+  background-color: #ccc;
+  color: #000;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   padding: 0px;
   cursor: pointer;
   width: 40px;
   height: 40px;
 }
 
+.roleplaybot-personality button:hover {
+  background-color: #aaa;
+}
+
 .roleplaybot-personality-survey {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 280px;
-  height: 525px;
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 1;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  overflow-y: scroll;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30%;
+    height: 90%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
 }
 
 .roleplaybot-personality-content {
@@ -224,16 +245,6 @@ body {
 body {
   font-family: Arial, sans-serif;
   color: #333;
-}
-
-h1 {
-  font-size: 2em;
-}
-
-h2, h3 {
-  font-size: 2em;
-  margin: 0px;
-  margin-bottom: 20px;
 }
 
 form {
@@ -264,15 +275,16 @@ input[type="checkbox"] {
 
 button[type="submit"] {
   padding: 0.5em 1em;
-  background-color: #007bff;
+  background-color: #4CAF50;
   color: #fff;
   border: none;
   border-radius: 0.25em;
   cursor: pointer;
+  width: 100%;
 }
 
 button[type="submit"]:hover {
-  background-color: #0062cc;
+  background-color: #3e8e41;
 }
 
 
@@ -321,6 +333,8 @@ button[type="submit"]:disabled {
     text-align: center;
     width: 30px;
     height: 30px;
+    margin-top: -20px;
+    margin-right: -20px;
 }
 
 .warning-modal-close:hover,
@@ -440,6 +454,11 @@ button[type="submit"]:disabled {
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+
+.edit-input button:hover {
+  background-color: #3e8e41;
 }
 
 p {
