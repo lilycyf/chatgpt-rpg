@@ -228,6 +228,10 @@ body {
 
 h1 {
   font-size: 2em;
+}
+
+h2, h3 {
+  font-size: 2em;
   margin: 0px;
   margin-bottom: 20px;
 }
@@ -303,16 +307,20 @@ button[type="submit"]:disabled {
 }
 
 /* Warning message box title */
-.warning-modal-title {
+.warning-modal-title,
+.warning-modal-text {
   text-align: left;
 }
 
 /* Warning message box close button */
 .warning-modal-close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+    height: 30px;
 }
 
 .warning-modal-close:hover,
