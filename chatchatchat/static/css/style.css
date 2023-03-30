@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
 }
-
+/* guide-bar */
 .guide-bar {
   position: fixed;
   top: 0;
@@ -50,80 +50,8 @@ body {
   box-shadow: none;
 }
 
-.edit-container {
-  display: none;
-  position: relative;
-  height: 100%;
-  margin-left: 200px;
-}
+/* chat */
 
-.edit {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.edit-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.edit-messages {
-  height: 100%;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-bottom: 50px;
-  overflow-y: scroll;
-}
-
-.edit-messages::-webkit-scrollbar {
-  display: none;
-}
-
-
-.edit-input {
-  display: flex;
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  height: auto;
-}
-
-.edit-input textarea {
-  font-size: medium;
-  flex-grow: 1;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 10px;
-  resize: none;
-  max-height: 200px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.edit-input button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-/* Adjust the left margin of the container to create space for the guide bar */
 .chatbot-container {
   position: relative;
   height: 100%;
@@ -221,6 +149,7 @@ body {
   cursor: pointer;
 }
 
+/* roleplay */
 
 .roleplay-container {
   position: relative;
@@ -243,6 +172,266 @@ body {
 .roleplay-header {
   text-align: center;
   margin-bottom: 20px;
+}
+
+/* roleplay-survey */
+
+.roleplaybot-personality {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f1f1f1;
+  padding: 0px;
+  border-radius: 25px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(170, 170, 170);
+}
+
+.roleplaybot-personality button {
+  background-color: #ffffff00;
+  border: none;
+  border-radius: 5px;
+  padding: 0px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+
+.roleplaybot-personality-survey {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 280px;
+  height: 525px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  overflow-y: scroll;
+}
+
+.roleplaybot-personality-content {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0px;
+  width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+label {
+  margin-bottom: 0.5em;
+}
+
+.choices {
+  margin-bottom: 1em;
+}
+
+input[type="text"],
+textarea {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+  font-size: 1em;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+button[type="submit"] {
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+
+button[type="submit"]:disabled {
+  background-color: #c9c9c9;
+  cursor: not-allowed;
+}
+
+/* roleplay-survey warning message */
+
+/* The warning message box */
+#warning-modal {
+  display: none; /* Hide the warning message box by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Warning message box content */
+.warning-modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    text-align: center;
+}
+
+/* Warning message box title */
+.warning-modal-title {
+  text-align: left;
+}
+
+/* Warning message box close button */
+.warning-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.warning-modal-close:hover,
+.warning-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Warning message box buttons */
+.warning-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.warning-modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 48%;
+}
+
+.warning-modal-buttons button:focus {
+  outline: none;
+}
+
+.warning-modal-buttons #warning-cancel-btn {
+  background-color: #ccc;
+  color: #000;
+}
+
+.warning-modal-buttons #warning-cancel-btn:hover {
+  background-color: #aaa;
+}
+
+.warning-modal-buttons #warning-submit-btn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.warning-modal-buttons #warning-submit-btn:hover {
+  background-color: #3e8e41;
+}
+
+/* edit */
+
+.edit-container {
+  position: relative;
+  height: 100%;
+  margin-left: 200px;
+}
+
+.edit {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.edit-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-messages {
+  height: 100%;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 50px;
+  overflow-y: scroll;
+}
+
+.edit-messages::-webkit-scrollbar {
+  display: none;
+}
+
+
+.edit-input {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  height: auto;
+}
+
+.edit-input textarea {
+  font-size: medium;
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+  resize: none;
+  max-height: 200px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.edit-input button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 p {

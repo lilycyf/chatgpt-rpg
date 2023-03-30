@@ -52,6 +52,74 @@
                 <textarea rows="1" placeholder="Type your message..."></textarea>
                 <button>Send</button>
             </div>
+            <div class="roleplaybot-personality-survey"  style="display: none;">
+                <div class="roleplaybot-personality-content">
+                        <h1>Survey</h1>
+                        <form id="survey-form">
+                          <label class="question" for="first-language">What is your first language?</label>
+                          <div class="choices">
+                            <input type="radio" id="english" name="first-language" value="English">
+                            <label for="english">English</label><br>
+                            <input type="radio" id="spanish" name="first-language" value="Spanish">
+                            <label for="spanish">Spanish</label><br>
+                            <input type="radio" id="mandarin" name="first-language" value="Mandarin">
+                            <label for="mandarin">Mandarin</label><br>
+                            <input type="radio" id="french" name="first-language" value="French">
+                            <label for="french">French</label><br>
+                            <input type="radio" id="other" name="first-language" value="Other">
+                            <label for="other">Other:</label>
+                            <input type="text" id="other-text" name="first-language-other-text" placeholder="Please specify">
+
+                          </div>
+                  
+                          <label class="question" for="personality">Which of these best describes your personality?</label>
+                          <div class="choices">
+                            <input type="radio" id="outgoing" name="personality" value="Outgoing">
+                            <label for="outgoing">Outgoing</label><br>
+                            <input type="radio" id="shy" name="personality" value="Shy">
+                            <label for="shy">Shy</label><br>
+                            <input type="radio" id="assertive" name="personality" value="Assertive">
+                            <label for="assertive">Assertive</label><br>
+                            <input type="radio" id="easygoing" name="personality" value="Easygoing">
+                            <label for="easygoing">Easygoing</label><br>
+                            <input type="radio" id="other" name="personality" value="Other">
+                            <label for="other">Other:</label>
+                            <input type="text" id="other-text" name="personality-other-text" placeholder="Please specify">
+                          </div>
+                  
+                          <label class="question" for="communication-style">Which of these best describes your communication style?</label>
+                          <div class="choices">
+                            <input type="radio" id="direct" name="communication-style" value="Direct">
+                            <label for="direct">Direct</label><br>
+                            <input type="radio" id="indirect" name="communication-style" value="Indirect">
+                            <label for="indirect">Indirect</label><br>
+                            <input type="radio" id="assertive" name="communication-style" value="Assertive">
+                            <label for="assertive">Assertive</label><br>
+                            <input type="radio" id="passive" name="communication-style" value="Passive">
+                            <label for="passive">Passive</label><br>
+                            <input type="radio" id="other" name="communication-style" value="Other">
+                            <label for="other">Other:</label>
+                            <input type="text" id="other-text" name="communication-style-other-text" placeholder="Please specify">
+                          </div>
+                  
+                          <button type="submit" id="survey-submit-btn">Submit</button>
+                        </form>
+                        <div id="warning-modal">
+                            <div class="warning-modal-content">
+                              <span id="warning-close-btn" class="warning-modal-close">&times;</span>
+                              <h2 class="warning-modal-title">Warning!!</h2>
+                              <p class="warning-modal-text">Once you submit, you can no longer change your answers.</p>
+                              <div class="warning-modal-buttons">
+                                <button id="warning-cancel-btn">Cancel</button>
+                                <button id="warning-submit-btn">Submit</button>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+            </div>
+            <div class="roleplaybot-personality">
+                <button>P</button>
+            </div>
         </div>
     </div>
     <div id="edit" class="edit-container" style="display: none;">
