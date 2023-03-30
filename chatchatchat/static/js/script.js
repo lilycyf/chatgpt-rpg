@@ -42,7 +42,7 @@ if (url.endsWith("/edit/")) {
     roleplayButton.classList.add('active');
     chatButton.classList.remove('active');
     editButton.classList.remove('active');
-} 
+}
 
 // Add event listeners for the guide bar buttons
 chatButton.addEventListener('click', function () {
@@ -187,17 +187,17 @@ const toggleButton = document.getElementById("open-ai-api-toggle-btn");
 const submitButton = document.getElementById("open-ai-api-submit-btn");
 const passwordInput = document.getElementById("password");
 
-toggleButton.addEventListener("click", function() {
-	if (passwordInput.type === "password") {
-		passwordInput.type = "text";
-	} else {
-		passwordInput.type = "password";
-	}
+toggleButton.addEventListener("click", function () {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
 });
 
-submitButton.addEventListener("click", function() {
-	var passwordValue = passwordInput.value;
-	console.log("Password value: " + passwordValue);
+submitButton.addEventListener("click", function () {
+    var passwordValue = passwordInput.value;
+    console.log("Password value: " + passwordValue);
 });
 
 export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage };

@@ -72,11 +72,12 @@ h3 {
 }
 
 .api-input {
-font-size: 11px;
-height: 16px;
-padding: 0px;
-border: 0px;
+  font-size: 11px;
+  height: 16px;
+  padding: 0px;
+  border: 0px;
 }
+
 /* chat */
 
 .chatbot-container {

@@ -89,14 +89,14 @@ warningSubmitBtn.addEventListener('click', () => {
     //   form.submit();
 });
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     // check if the clicked element is outside the roleplayPersonalitySurvey element
     if (!roleplayPersonalitySurvey.contains(event.target) && !roleplayPersonalityButton.contains(event.target)) {
-      if (isSurveyOpen) {
-        roleplayPersonalitySurvey.style.display = 'none';
-        roleplayPersonalityButton.style.height = '40px';
-        roleplayPersonalityButton.style.width = '40px';
-        isSurveyOpen = false;
+        if (isSurveyOpen) {
+            roleplayPersonalitySurvey.style.display = 'none';
+            roleplayPersonalityButton.style.height = '40px';
+            roleplayPersonalityButton.style.width = '40px';
+            isSurveyOpen = false;
+        }
     }
-    }
-  });
+});
