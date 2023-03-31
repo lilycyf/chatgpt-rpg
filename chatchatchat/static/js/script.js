@@ -8,110 +8,78 @@ function getIsWaitingForResponse() {
     return isWaitingForResponse;
 }
 
-// Get the guide bar buttons
-const chatButton = document.querySelector('.chat-button');
-const editButton = document.querySelector('.edit-button');
-const roleplayButton = document.querySelector('.roleplay-button');
+const homePage = 'chat';
 
-// Get the pages
-const chatPage = document.querySelector('#chat');
-const editPage = document.querySelector('#edit');
-const roleplayPage = document.querySelector('#roleplay');
+const buttonPagePairs = {};
+const sections = document.querySelectorAll('.container');
+
+for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    console.log(section)
+    buttonPagePairs[section.id] = {
+        page: section,
+        button: document.querySelector(`.${section.id}-button`),
+        history: document.querySelector(`.${section.id}-histories`)
+    };
+}
 
 // Get the current URL
 const url = window.location.href;
 
-if (url.endsWith("/edit/")) {
-    chatPage.style.display = 'none';
-    roleplayPage.style.display = 'none';
-    editPage.style.display = 'block';
-    chatButton.classList.remove('active');
-    roleplayButton.classList.remove('active');
-    editButton.classList.add('active');
-} else if (url.endsWith("/chat/")) {
-    chatPage.style.display = 'block';
-    editPage.style.display = 'none';
-    roleplayPage.style.display = 'none';
-    chatButton.classList.add('active');
-    editButton.classList.remove('active');
-    roleplayButton.classList.remove('active');
-} else if (url.endsWith("/roleplay/")) {
-    roleplayPage.style.display = 'block';
-    chatPage.style.display = 'none';
-    editPage.style.display = 'none';
-    roleplayButton.classList.add('active');
-    chatButton.classList.remove('active');
-    editButton.classList.remove('active');
+// Define function to set button and page as active
+function setActive(pair) {
+    pair.button.classList.add('active');
+    pair.page.style.display = 'block';
+    pair.history.style.display = 'block';
 }
 
+// Define function to set button and page as inactive
+function setInactive(pair) {
+    pair.button.classList.remove('active');
+    pair.page.style.display = 'none';
+    pair.history.style.display = 'none';
+}
+
+// Define function to update the page based on URL
+function updatePageFromUrl(url) {
+    const pageName = url.split('/').filter(Boolean).pop(); // get the last path of the URL
+
+    // Set all pairs inactive
+    Object.values(buttonPagePairs).forEach(pair => setInactive(pair));
+
+    // Set active pair based on the page name from URL
+    const activePair = buttonPagePairs[pageName] || buttonPagePairs[homePage];
+    setActive(activePair);
+}
+
+// Update page on initial load from URL
+updatePageFromUrl(url);
+
 // Add event listeners for the guide bar buttons
-chatButton.addEventListener('click', function () {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Update the page content
-            // const chatbotContainer = document.querySelector('.chatbot-container');
-            // chatbotContainer.innerHTML = xhr.responseText;
+Object.values(buttonPagePairs).forEach(pair => {
+    pair.button.addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const pageName = pair.button.dataset.page;
+                // Update the URL and add it to the browser history
+                // window.history.pushState({ page: pageName }, null, `/${pageName}/`);
 
-            // Update the URL
-            window.history.pushState({ page: 'chat' }, null, '/chat/');
-        }
-    };
-    xhr.open('GET', '/chat/');
-    xhr.send();
-    chatPage.style.display = 'block';
-    editPage.style.display = 'none';
-    roleplayPage.style.display = 'none';
-    chatButton.classList.add('active');
-    editButton.classList.remove('active');
-    roleplayButton.classList.remove('active');
+                // Set all pairs inactive
+                Object.values(buttonPagePairs).forEach(pair => setInactive(pair));
+
+                // Set active pair based on the page name from URL
+                const activePair = buttonPagePairs[pageName];
+                setActive(activePair);
+            }
+        };
+
+        const pageName = pair.button.dataset.page
+        xhr.open('GET', `/${pageName}/`);
+        xhr.send();
+    });
 });
 
-editButton.addEventListener('click', function () {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Update the page content
-            // const chatbotContainer = document.querySelector('.chatbot-container');
-            // chatbotContainer.innerHTML = xhr.responseText;
-
-            // Update the URL
-            window.history.pushState({ page: 'edit' }, null, '/edit/');
-        }
-    };
-
-    xhr.open('GET', '/edit/');
-    xhr.send();
-    chatPage.style.display = 'none';
-    roleplayPage.style.display = 'none';
-    editPage.style.display = 'block';
-    chatButton.classList.remove('active');
-    roleplayButton.classList.remove('active');
-    editButton.classList.add('active');
-});
-
-roleplayButton.addEventListener('click', function () {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Update the page content
-            // const chatbotContainer = document.querySelector('.chatbot-container');
-            // chatbotContainer.innerHTML = xhr.responseText;
-
-            // Update the URL
-            window.history.pushState({ page: 'roleplay' }, null, '/roleplay/');
-        }
-    };
-
-    xhr.open('GET', '/roleplay/');
-    xhr.send();
-    roleplayPage.style.display = 'block';
-    chatPage.style.display = 'none';
-    editPage.style.display = 'none';
-    roleplayButton.classList.add('active');
-    chatButton.classList.remove('active');
-    editButton.classList.remove('active');
-});
 
 function adjustTextareaHeight(element, reference) {
     element.style.height = 'auto';
@@ -190,8 +158,10 @@ const passwordInput = document.getElementById("password");
 toggleButton.addEventListener("click", function () {
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
+        toggleButton.innerHTML = "visibility"
     } else {
         passwordInput.type = "password";
+        toggleButton.innerHTML = "visibility_off"
     }
 });
 
@@ -199,5 +169,13 @@ submitButton.addEventListener("click", function () {
     var passwordValue = passwordInput.value;
     console.log("Password value: " + passwordValue);
 });
+
+function adjustLayout() {
+    if (window.innerWidth < 768) {
+        // Code to adjust layout for small screens
+    } else {
+        // Code
+    }
+}
 
 export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage };

@@ -4,6 +4,8 @@
 <head>
     <title>ChatGPT Web Interface</title>
     {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
@@ -17,14 +19,60 @@
             <button class="guide-bar-button button" data-page="test">Test</button>
             <button class="guide-bar-button button" data-page="test">Test</button>
         </div>
+        <div class="guide-bar-page-histories">
+            <div class="chat-histories" style="display: block;">
+                <div class="chat-history active">
+                    <div class="chat-history-headshot">
+                        <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                    </div>
+                    <div class="chat-history-name">
+                        <h4>ChatGPT</h4>
+                        <p>Hello! How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="edit-histories" style="display: none;">
+                <div class="chat-history active">
+                    <div class="chat-history-headshot">
+                        <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                    </div>
+                    <div class="chat-history-name">
+                        <h4>ChatGPT</h4>
+                        <p>Hello! How can I assist you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="roleplay-histories" style="display: none;">
+                <div class="chat-history active">
+                    <div class="chat-history-headshot">
+                        <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                    </div>
+                    <div class="chat-history-name">
+                        <h4>ChatGPT</h4>
+                        <p>Hello! How can I assist you today?</p>
+                    </div>
+                </div>
+                <div class="chat-history">
+                    <div class="chat-history-headshot">
+                        <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                    </div>
+                    <div class="chat-history-name">
+                        <h4>Moss</h4>
+                        <p>您好！请问今天我可以如何协助您呢？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="apis">
             <label for="password">OpenAI API:</label>
-            <input class="api-input" type="password" id="password" name="password">
-            <button id="open-ai-api-toggle-btn">Show/Hide Password</button>
+            <div style="display: flex; align-items: center;">
+                <input class="api-input" type="password" id="password" name="password">
+                <span id="open-ai-api-toggle-btn" class="material-symbols-outlined">visibility_off</span>
+            </div>
             <button id="open-ai-api-submit-btn">Return</button>
         </div>
     </div>
-    <div id="chat" class="chatbot-container" style="display: block;">
+    <div id="chat" class="chatbot-container container" style="display: block;">
         <div class="chatbot">
             <div class="chatbot-header">
                 <h1>Chat</h1>
@@ -42,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div id="roleplay" class="roleplay-container" style="display: none;">
+    <div id="roleplay" class="roleplay-container container" style="display: none;">
         <div class="roleplay">
             <div class="roleplay-header">
                 <h1>RolePlay</h1>
@@ -629,7 +677,7 @@
             </div>
         </div>
     </div>
-    <div id="edit" class="edit-container" style="display: none;">
+    <div id="edit" class="edit-container container" style="display: none;">
         <div class="edit">
             <div class="edit-header">
                 <h1>Edit</h1>
@@ -648,6 +696,9 @@
             </div>
         </div>
     </div>
+    <!-- <footer>
+        <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer> -->
     <script type="module" src="{% static 'js/script.js' %}"></script>
     <script type="module" src="{% static 'js/chat.js' %}"></script>
     <script type="module" src="{% static 'js/edit.js' %}"></script>

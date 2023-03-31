@@ -69,6 +69,7 @@ h3 {
 .apis {
   position: absolute;
   bottom: 20px;
+  width: 100%;
 }
 
 .api-input {
@@ -76,17 +77,73 @@ h3 {
   height: 16px;
   padding: 0px;
   border: 0px;
+  width: 100%;
+}
+
+.material-symbols-outlined#open-ai-api-toggle-btn {
+  font-size: 20px;
+  margin: 5px;
+  font-variation-settings: 'OPSZ' 20;
+  cursor: pointer;
+}
+
+.chat-history {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.chat-history.active {
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  cursor: default;
+}
+
+.chat-history-headshot {
+  height: 100%;
+}
+
+.chat-history-headshot img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.chat-history-name {
+  flex-grow: 1;
+  max-height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
+.chat-history-name h4 {
+
+  margin: 0;
+}
+
+.chat-history-name p {
+  margin: 0;
+  font-size: 14px;
 }
 
 /* chat */
 
-.chatbot-container {
+.chatbot-container,
+.roleplay-container,
+.edit-container {
   position: relative;
   height: 100%;
   margin-left: 200px;
 }
 
-.chatbot {
+.chatbot,
+.edit,
+.roleplay {
   height: 100%;
   width: 100%;
   display: flex;
@@ -97,12 +154,16 @@ h3 {
   font-family: Arial, sans-serif;
 }
 
-.chatbot-header {
+.chatbot-header,
+.edit-header,
+.roleplay-header {
+  /* display: none; */
   text-align: center;
   margin-bottom: 20px;
 }
 
-.chatbot-messages {
+.chatbot-messages,
+.edit-messages {
   height: 100%;
   width: 70%;
   margin-left: 15%;
@@ -111,7 +172,8 @@ h3 {
   overflow-y: scroll;
 }
 
-.chatbot-messages::-webkit-scrollbar {
+.chatbot-messages::-webkit-scrollbar,
+.edit-messages::-webkit-scrollbar {
   display: none;
 }
 
@@ -184,28 +246,6 @@ h3 {
 
 /* roleplay */
 
-.roleplay-container {
-  position: relative;
-  height: 100%;
-  margin-left: 200px;
-}
-
-
-.roleplay {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.roleplay-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
 /* roleplay-survey */
 
@@ -408,42 +448,6 @@ button[type="submit"]:disabled {
 
 /* edit */
 
-.edit-container {
-  position: relative;
-  height: 100%;
-  margin-left: 200px;
-}
-
-.edit {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.edit-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.edit-messages {
-  height: 100%;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-bottom: 50px;
-  overflow-y: scroll;
-}
-
-.edit-messages::-webkit-scrollbar {
-  display: none;
-}
-
-
 .edit-input {
   display: flex;
   position: absolute;
@@ -516,19 +520,6 @@ pre code.language-javascript {
   color: #ffffff;
 }
 
-@media screen and (max-width: 700px) {
-  .guide-bar {
-    display: none;
-  }
-
-  .chatbot-container {
-    position: relative;
-    height: 100%;
-    margin-left: 0px;
-  }
-
-}
-
 .audio-message {
   display: flex;
   align-items: center;
@@ -539,4 +530,22 @@ pre code.language-javascript {
   align-items: center;
   margin-top: 20px;
   ;
+}
+
+/* Styles for small screens */
+@media screen and (max-width: 767px) {
+  .guide-bar {
+    display: none;
+  }
+
+  .chatbot-container,
+  .roleplay-container,
+  .edit-container {
+    margin-left: 0px;
+  }
+}
+
+/* Styles for large screens */
+@media screen and (min-width: 768px) {
+  
 }
