@@ -62,8 +62,8 @@ Object.values(buttonPagePairs).forEach(pair => {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const pageName = pair.button.dataset.page;
-                // Update the URL and add it to the browser history
-                // window.history.pushState({ page: pageName }, null, `/${pageName}/`);
+                // Update the URL
+                window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
 
                 // Set all pairs inactive
                 Object.values(buttonPagePairs).forEach(pair => setInactive(pair));

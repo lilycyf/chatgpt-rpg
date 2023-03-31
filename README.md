@@ -4,9 +4,11 @@ This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to gen
 
 该项目是一个聊天机器人应用程序，它使用OpenAI的gpt-3.5-turboGPT来生成对用户输入的响应。
 
-![1680069420186](image/README/1680069420186.png)
+![1680237931061](image/README/1680237931061.png)
 
-![1680064177415](image/README/1680064177415.png)
+![1680237800542](image/README/1680237800542.png)
+
+![1680238175144](image/README/1680238175144.png)
 
 ## Getting Started
 
