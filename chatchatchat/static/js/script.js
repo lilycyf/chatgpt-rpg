@@ -84,7 +84,6 @@ Object.values(buttonPagePairs).forEach(pair => {
     var historiesContainer = pair.history;
     var histories = historiesContainer.querySelectorAll('.chat-history');
     var page = pair.page.children;
-    console.log(page)
 
     histories.forEach(function (history) {
         history.addEventListener('click', function () {
@@ -99,8 +98,6 @@ Object.values(buttonPagePairs).forEach(pair => {
 
             for (var i = 0; i < page.length; i++) {
                 var childElement = page[i];
-                console.log(childElement.id)
-                console.log(`#${this.id}`)
                 if (childElement.id !== `${this.id}`){
                     childElement.style.display = 'none';
                 }else{
