@@ -21,7 +21,7 @@
         </div>
         <div class="guide-bar-page-histories">
             <div class="chat-histories" style="display: block;">
-                <div class="chat-history active">
+                <div class="chat-history active" id="100">
                     <div class="chat-history-headshot">
                         <img src="{% static 'images/default-head.png' %}" alt="default-head">
                     </div>
@@ -30,9 +30,18 @@
                         <p4>Hello! How can I assist you today?</p4>
                     </div>
                 </div>
+                <div class="chat-history" id="101">
+                    <div class="chat-history-headshot">
+                        <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                    </div>
+                    <div class="chat-history-name">
+                        <h4>Moss</h4>
+                        <p4>您好！请问今天我可以如何协助您呢？</p4>
+                    </div>
+                </div>
             </div>
             <div class="edit-histories" style="display: none;">
-                <div class="chat-history active">
+                <div class="chat-history active" id="103">
                     <div class="chat-history-headshot">
                         <img src="{% static 'images/default-head.png' %}" alt="default-head">
                     </div>
@@ -43,7 +52,7 @@
                 </div>
             </div>
             <div class="roleplay-histories" style="display: none;">
-                <div class="chat-history active">
+                <div class="chat-history active" id="104">
                     <div class="chat-history-headshot">
                         <img src="{% static 'images/default-head.png' %}" alt="default-head">
                     </div>
@@ -52,7 +61,7 @@
                         <p4>Hello! How can I assist you today?</p4>
                     </div>
                 </div>
-                <div class="chat-history">
+                <div class="chat-history" id="105">
                     <div class="chat-history-headshot">
                         <img src="{% static 'images/default-head.png' %}" alt="default-head">
                     </div>
@@ -73,7 +82,7 @@
         </div>
     </div>
     <div id="chat" class="chatbot-container container" style="display: block;">
-        <div class="chatbot">
+        <div class="chatbot" id="100">
             <div class="chatbot-header">
                 <h1>Chat</h1>
                 <p>Your friendly AI chatbot</p>
@@ -89,9 +98,25 @@
                 <button>Send</button>
             </div>
         </div>
+        <div class="chatbot" style="display: none;" id="101">
+            <div class="chatbot-header">
+                <h1>Moss</h1>
+                <p>Your friendly AI chatbot</p>
+            </div>
+            <div class="chatbot-messages">
+                <div class="chatbot-message">
+                    <p>您好！请问今天我可以如何协助您呢？</p>
+                </div>
+                <div class="end-message"></div>
+            </div>
+            <div class="chatbot-input">
+                <textarea rows="1" placeholder="Type your message..."></textarea>
+                <button>Send</button>
+            </div>
+        </div>
     </div>
     <div id="roleplay" class="roleplay-container container" style="display: none;">
-        <div class="roleplay">
+        <div class="roleplay" id="104">
             <div class="roleplay-header">
                 <h1>RolePlay</h1>
                 <p>Your friendly AI roleplaybot</p>
@@ -130,7 +155,7 @@
                             <label for="french">French</label><br>
                             <input type="radio" id="other" name="first-language" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" class="other-text" id="other-text" name="first-language-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="first-language-other-text" name="first-language-other-text" placeholder="Please specify">
 
                         </div>
 
@@ -146,7 +171,7 @@
                             <label for="easygoing">Easygoing</label><br>
                             <input type="radio" id="other" name="personality" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" class="other-text" id="other-text" name="personality-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="personality-other-text" name="personality-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="communication-style">Which of these best describes your communication style?</label>
@@ -161,7 +186,7 @@
                             <label for="passive">Passive</label><br>
                             <input type="radio" id="other" name="communication-style" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" class="other-text" id="other-text" name="communication-style-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="communication-style-other-text" name="communication-style-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="preferred-communication-method">What is your preferred method of communication?</label>
@@ -176,7 +201,7 @@
                             <label for="email">Email</label><br>
                             <input type="radio" id="other" name="preferred-communication-method" value="Other">
                             <label for="other">Other:</label>
-                            <input type="text" class="other-text" id="other-text" name="preferred-communication-method-other-text" placeholder="Please specify">
+                            <input type="text" class="other-text" id="preferred-communication-method-other-text" name="preferred-communication-method-other-text" placeholder="Please specify">
                         </div>
 
                         <label class="question" for="social-confidence-level">How would you describe your level of confidence in social situations?</label>
@@ -678,7 +703,7 @@
         </div>
     </div>
     <div id="edit" class="edit-container container" style="display: none;">
-        <div class="edit">
+        <div class="edit" id="103">
             <div class="edit-header">
                 <h1>Edit</h1>
                 <p>Your friendly AI editbot</p>

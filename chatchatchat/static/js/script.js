@@ -29,8 +29,8 @@ const url = window.location.href;
 // Define function to set button and page as active
 function setActive(pair) {
     pair.button.classList.add('active');
-    pair.page.style.display = 'block';
-    pair.history.style.display = 'block';
+    pair.page.style.display = '';
+    pair.history.style.display = '';
 }
 
 // Define function to set button and page as inactive
@@ -77,6 +77,37 @@ Object.values(buttonPagePairs).forEach(pair => {
         const pageName = pair.button.dataset.page
         xhr.open('GET', `/${pageName}/`);
         xhr.send();
+    });
+});
+
+Object.values(buttonPagePairs).forEach(pair => {
+    var historiesContainer = pair.history;
+    var histories = historiesContainer.querySelectorAll('.chat-history');
+    var page = pair.page.children;
+    console.log(page)
+
+    histories.forEach(function (history) {
+        history.addEventListener('click', function () {
+            // Remove the clicked chat history element from the list
+            this.parentNode.removeChild(this);
+
+            histories.forEach((item) => {
+                item.classList.remove('active')
+            })
+            this.classList.add('active')
+            historiesContainer.insertBefore(this, historiesContainer.firstChild);
+
+            for (var i = 0; i < page.length; i++) {
+                var childElement = page[i];
+                console.log(childElement.id)
+                console.log(`#${this.id}`)
+                if (childElement.id !== `${this.id}`){
+                    childElement.style.display = 'none';
+                }else{
+                    childElement.style.display = '';
+                }
+            }
+        });
     });
 });
 
