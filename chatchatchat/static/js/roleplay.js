@@ -49,7 +49,7 @@ serveySubmitBtn.addEventListener('click', (event) => {
         let answer;
 
         if (checkedRadio && checkedRadio.value === 'Other') {
-            const otherTextInput = div.querySelector('input[type="text"]');
+            const otherTextInput = div.querySelector('textarea');
             answer = otherTextInput.value;
         } else if (checkedRadio) {
             answer = checkedRadio.value;
