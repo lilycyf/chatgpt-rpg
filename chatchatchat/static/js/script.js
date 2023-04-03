@@ -1,3 +1,50 @@
+const menuButton = document.querySelector("#menu");
+const barInButton = document.querySelector("#barIn");
+const barOutButton = document.querySelector("#barOut");
+const guideBar = document.querySelector(".guide-bar")
+const freezeBack = document.querySelector(".freeze-background")
+
+const sections = document.querySelectorAll('.container');
+
+menuButton.addEventListener('click', function () {
+    guideBar.style.display = "flex";
+    barInButton.style.display = "flex";
+    freezeBack.style.display = "block";
+});
+
+
+barInButton.addEventListener('click', function () {
+    guideBar.style.display = "none";
+    barInButton.style.display = "none";
+    freezeBack.style.display = "none";
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        barOutButton.style.display = "flex";
+        console.log("here")
+        for (let i = 0; i < sections.length; i++) {
+            console.log("here")
+            const section = sections[i];
+            section.style.marginLeft = "0px";
+        };
+    }
+
+});
+
+
+barOutButton.addEventListener('click', function () {
+    guideBar.style.display = "flex";
+    barInButton.style.display = "flex";
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        freezeBack.style.display = "block";
+    }
+    barOutButton.style.display = "none";
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            section.style.marginLeft = "200px";
+        };
+    }
+});
+
 let isWaitingForResponse = false;
 
 function setIsWaitingForResponse(value) {
@@ -11,7 +58,6 @@ function getIsWaitingForResponse() {
 const homePage = 'chat';
 
 const buttonPagePairs = {};
-const sections = document.querySelectorAll('.container');
 
 for (let i = 0; i < sections.length; i++) {
     const section = sections[i];
@@ -40,6 +86,19 @@ function setInactive(pair) {
     pair.history.style.display = 'none';
 }
 
+
+// Define function to set guide bar buttons as active
+function setGuideBarActive(pair) {
+    pair.button.classList.add('active');
+    pair.history.style.display = '';
+}
+
+// Define function to set guide bar buttons as inactive
+function setGuideBarInactive(pair) {
+    pair.button.classList.remove('active');
+    pair.history.style.display = 'none';
+}
+
 // Define function to update the page based on URL
 function updatePageFromUrl(url) {
     const pageName = url.split('/').filter(Boolean).pop(); // get the last path of the URL
@@ -47,9 +106,23 @@ function updatePageFromUrl(url) {
     // Set all pairs inactive
     Object.values(buttonPagePairs).forEach(pair => setInactive(pair));
 
+    // set all history button inactive
+    document.querySelectorAll('.chat-history').forEach((item) => {
+        item.classList.remove('active')
+    })
+
     // Set active pair based on the page name from URL
     const activePair = buttonPagePairs[pageName] || buttonPagePairs[homePage];
-    setActive(activePair);
+    setGuideBarActive(activePair);
+
+    // set first history button active
+    var history = activePair.history.children[0]
+    history.classList.add('active')
+
+    // find the matching history page and make it active
+    if (history.id.length !== 0) {
+        document.querySelector(`.page#${history.id}`).classList.add('active')
+    }
 }
 
 // Update page on initial load from URL
@@ -58,25 +131,11 @@ updatePageFromUrl(url);
 // Add event listeners for the guide bar buttons
 Object.values(buttonPagePairs).forEach(pair => {
     pair.button.addEventListener('click', function () {
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const pageName = pair.button.dataset.page;
-                // Update the URL
-                window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
-
-                // Set all pairs inactive
-                Object.values(buttonPagePairs).forEach(pair => setInactive(pair));
-
-                // Set active pair based on the page name from URL
-                const activePair = buttonPagePairs[pageName];
-                setActive(activePair);
-            }
-        };
-
-        const pageName = pair.button.dataset.page
-        xhr.open('GET', `/${pageName}/`);
-        xhr.send();
+        // Set all this history page active, rest inactive
+        const pageName = pair.button.dataset.page;
+        Object.values(buttonPagePairs).forEach(pair => setGuideBarInactive(pair));
+        const activePair = buttonPagePairs[pageName]
+        setGuideBarActive(activePair);
     });
 });
 
@@ -87,22 +146,48 @@ Object.values(buttonPagePairs).forEach(pair => {
 
     histories.forEach(function (history) {
         history.addEventListener('click', function () {
-            // Remove the clicked chat history element from the list
-            this.parentNode.removeChild(this);
+            var historyObj = this
 
-            histories.forEach((item) => {
-                item.classList.remove('active')
-            })
-            this.classList.add('active')
-            historiesContainer.insertBefore(this, historiesContainer.firstChild);
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const pageName = pair.button.dataset.page;
+                    // Update the URL
+                    window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
+
+                    // Set active page based on the page name, rest in active
+                    Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
+                    const activePair = buttonPagePairs[pageName];
+                    activePair.page.style.display = '';
+
+                    // set this history button active, rest inactive
+                    document.querySelectorAll('.chat-history').forEach((item) => {
+                        item.classList.remove('active')
+                    })
+                    historyObj.classList.add('active')
+                }
+            };
+
+            const pageName = pair.button.dataset.page
+            xhr.open('GET', `/${pageName}/`);
+            xhr.send();
+
+            // // update order
+            // this.parentNode.removeChild(this);
+            // historiesContainer.insertBefore(this, historiesContainer.firstChild);
 
             for (var i = 0; i < page.length; i++) {
                 var childElement = page[i];
-                if (childElement.id !== `${this.id}`){
+                if (childElement.id !== `${this.id}`) {
                     childElement.style.display = 'none';
-                }else{
+                } else {
                     childElement.style.display = '';
                 }
+            }
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                guideBar.style.display = "none";
+                freezeBack.style.display = "none";
+                barInButton.style.display = "none";
             }
         });
     });

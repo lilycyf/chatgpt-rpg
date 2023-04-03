@@ -11,6 +11,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
 }
 
 button {
@@ -28,20 +29,77 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* guide-bar */
-.guide-bar {
+.freeze-background {
+  display: none;
+  /* Hide the warning message box by default */
   position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* top-bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: var(--theme);
+  align-items: center;
+  display: none;
+}
+
+/* guide-bar */
+.guide-bar-close {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+}
+
+#barOut {
+  position: absolute;
+  display: none;
+  height: 40px;
+  align-items: center;
+  left: 0px;
+}
+
+#barIn {
+  position: absolute;
+  display: grid;
+  height: 40px;
+  align-items: center;
+  left: 200px;
+}
+
+.guide-bar {
   top: 0;
   left: 0;
   width: 200px;
   height: 100%;
   background-color: var(--theme);
+  z-index: 1;
+  flex-direction: column;
+  position: absolute
 }
 
 .guide-bar-page-buttons {
   top: 0;
   left: 0;
-  height: 30px;
+  height: 40px;
   background-color: rgb(43, 43, 43);
   width: 100%;
   display: flex;
@@ -76,7 +134,7 @@ h3 {
 .apis {
   position: absolute;
   bottom: 20px;
-  width: 100%;
+  width: 200px;
 }
 
 .api-input {
@@ -100,14 +158,36 @@ h3 {
   height: 40px;
   padding: 10px;
   cursor: pointer;
-  border-radius:15px;
+  border-radius: 15px;
+  margin: 5px;
 }
 
+/* 
 .chat-history.active {
   background-color: white;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   cursor: default;
+  margin-right: 0px;
+} */
+
+.addnew {
+  border-width: 1px;
+  border-color: var(--theme-hover);
+  border-style: dotted;
+  position: relative;
+}
+
+.addnew .addnew_sign {
+  color: black;
+  position: absolute;
+  /* top: 50%;  */
+  /* left: 30px;  */
+  /* transform: translate(-50%,-50%); */
+}
+
+.addnew.active {
+  border-right-width: 0px;
 }
 
 .chat-history-headshot {
@@ -145,8 +225,8 @@ h3 {
 .roleplay-container,
 .edit-container {
   position: relative;
-  height: 100%;
   margin-left: 200px;
+  flex-grow: 1;
 }
 
 .chatbot,
@@ -205,6 +285,10 @@ h3 {
   border-width: 0px;
   border-top-width: 0.5px;
   border-style: solid;
+}
+
+.start-message {
+  margin-bottom: 10px;
 }
 
 .end-message {
@@ -516,19 +600,76 @@ pre code.language-javascript {
 
 /* Styles for small screens */
 @media screen and (max-width: 767px) {
+  .top-bar {
+    display: flex;
+  }
+
   .guide-bar {
     display: none;
+  }
+
+  #barIn {
+    display: none;
+  }
+
+  #barOut {
+    display: none;
+    left: 0px;
   }
 
   .chatbot-container,
   .roleplay-container,
   .edit-container {
+    margin-top: 40px;
     margin-left: 0px;
   }
+
+  .chat-history.active {
+    background-color: white;
+    /* border-top-right-radius: 0px; */
+    /* border-bottom-right-radius: 0px; */
+    cursor: default;
+    /* margin-right: 0px; */
+  }
+
+
+  .chatbot-messages,
+  .edit-messages {
+    /* height: 100%; */
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    /* margin-bottom: 50px; */
+    /* overflow-y: scroll; */
+  }
+
+  .chatbot-input {
+    /* display: flex; */
+    /* position: absolute; */
+    /* bottom: 50px; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    width: 90%;
+    /* background-color: var(--theme); */
+    /* padding: 10px; */
+    /* border-radius: 10px; */
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
+    /* height: auto; */
+  }
+
 }
 
 /* Styles for large screens */
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+
+  .chat-history.active {
+    background-color: white;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    cursor: default;
+    margin-right: 0px;
+  }
+}
 
 /* Styles for hover devices */
 @media (hover: hover) {
@@ -569,7 +710,7 @@ pre code.language-javascript {
     background-color: var(--theme-hover);
   }
 
-  .chat-history.active:hover{
+  .chat-history.active:hover {
     background-color: white;
   }
 }
