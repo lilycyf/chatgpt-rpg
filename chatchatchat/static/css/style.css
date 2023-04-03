@@ -134,7 +134,8 @@ h3 {
 .apis {
   position: absolute;
   bottom: 20px;
-  width: 200px;
+  width: 190px;
+  padding: 5px;
 }
 
 .api-input {
