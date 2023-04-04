@@ -278,24 +278,23 @@ function getLanguage(firstLine) {
 
 const toggleButton = document.getElementById("open-ai-api-toggle-btn");
 const submitButton = document.getElementById("open-ai-api-submit-btn");
+const openaiapiInputField = document.getElementById('openaiapi-input');
 
 let openaiapi = ""
 
 toggleButton.addEventListener("click", function () {
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+    if (openaiapiInputField.type === "password") {
+        openaiapiInputField.type = "text";
         toggleButton.innerHTML = "visibility"
     } else {
-        passwordInput.type = "password";
+        openaiapiInputField.type = "password";
         toggleButton.innerHTML = "visibility_off"
     }
 });
 
 submitButton.addEventListener('click', function(){
-    var inputField = document.getElementById('openaiapi-input');
-    var inputValue = inputField.value;
+    var inputValue = openaiapiInputField.value;
     openaiapi = inputValue;
-    console.log(openaiapi)
 })
 
 function adjustLayout() {
