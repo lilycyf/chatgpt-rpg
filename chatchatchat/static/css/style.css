@@ -1,5 +1,6 @@
 :root {
   --theme: #ffbfbf;
+  /* --theme: linear-gradient(45deg, #ffcda5, #ee4d5f); */
   --theme-hover: #e09797;
   --button-submit: #ff7373;
   --button-submit-hover: #b34b4b;
@@ -64,7 +65,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 40px;
-  background-color: var(--theme);
+  background: var(--theme);
   align-items: center;
   display: none;
 }
@@ -118,7 +119,7 @@ h3 {
   left: 0;
   width: 200px;
   height: 100%;
-  background-color: var(--theme);
+  background: var(--theme);
   z-index: 1;
   flex-direction: column;
   position: relative
@@ -159,7 +160,7 @@ h3 {
 }
 
 .guide-bar-button.active {
-  background-color: var(--theme);
+  background: var(--theme);
   box-shadow: none;
 }
 
@@ -311,7 +312,7 @@ h3 {
   padding: 20px;
   max-width: 100%;
   align-self: flex-start;
-  background-color: var(--theme);
+  background: var(--theme);
   border: rgb(203, 203, 203);
   border-width: 0px;
   border-top-width: 0.5px;
@@ -344,7 +345,7 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   width: 70%;
-  background-color: var(--theme);
+  background: var(--theme);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -385,7 +386,7 @@ h3 {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: var(--theme);
+  background: var(--theme);
   padding: 0px;
   border-radius: 25px;
   border-width: 1px;
@@ -394,7 +395,7 @@ h3 {
 }
 
 .roleplaybot-personality button {
-  background-color: var(--theme);
+  background: var(--theme);
   color: #000;
   border: none;
   border-radius: 25px;
@@ -411,7 +412,7 @@ h3 {
   width: 90%;
   max-width: 800px;
   height: 90%;
-  background-color: var(--theme);
+  background: var(--theme);
   padding: 10px;
   border-radius: 1;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -568,7 +569,7 @@ button[type="submit"]:disabled {
   left: 50%;
   transform: translateX(-50%);
   width: 70%;
-  background-color: var(--theme);
+  background: var(--theme);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -693,7 +694,7 @@ pre code.language-javascript {
     /* left: 50%; */
     /* transform: translateX(-50%); */
     width: 90%;
-    /* background-color: var(--theme); */
+    /* background: var(--theme); */
     /* padding: 10px; */
     /* border-radius: 10px; */
     /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
