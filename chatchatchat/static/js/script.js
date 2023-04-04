@@ -147,30 +147,42 @@ Object.values(buttonPagePairs).forEach(pair => {
     histories.forEach(function (history) {
         history.addEventListener('click', function () {
             var historyObj = this
+            const pageName = pair.button.dataset.page;
 
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const pageName = pair.button.dataset.page;
-                    // Update the URL
-                    window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
+            // Set active page based on the page name, rest in active
+            Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
+            const activePair = buttonPagePairs[pageName];
+            activePair.page.style.display = '';
 
-                    // Set active page based on the page name, rest in active
-                    Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
-                    const activePair = buttonPagePairs[pageName];
-                    activePair.page.style.display = '';
+            // set this history button active, rest inactive
+            document.querySelectorAll('.chat-history').forEach((item) => {
+                item.classList.remove('active')
+            })
+            historyObj.classList.add('active')
 
-                    // set this history button active, rest inactive
-                    document.querySelectorAll('.chat-history').forEach((item) => {
-                        item.classList.remove('active')
-                    })
-                    historyObj.classList.add('active')
-                }
-            };
+            // const xhr = new XMLHttpRequest();
+            // xhr.onreadystatechange = function () {
+            //     if (xhr.readyState === 4 && xhr.status === 200) {
+            //         const pageName = pair.button.dataset.page;
+            //         // Update the URL
+            //         window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
 
-            const pageName = pair.button.dataset.page
-            xhr.open('GET', `/${pageName}/`);
-            xhr.send();
+            //         // Set active page based on the page name, rest in active
+            //         Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
+            //         const activePair = buttonPagePairs[pageName];
+            //         activePair.page.style.display = '';
+
+            //         // set this history button active, rest inactive
+            //         document.querySelectorAll('.chat-history').forEach((item) => {
+            //             item.classList.remove('active')
+            //         })
+            //         historyObj.classList.add('active')
+            //     }
+            // };
+
+            // const pageName = pair.button.dataset.page
+            // xhr.open('GET', `/${pageName}/`);
+            // xhr.send();
 
             // // update order
             // this.parentNode.removeChild(this);
