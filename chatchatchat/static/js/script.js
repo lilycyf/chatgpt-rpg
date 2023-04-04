@@ -1,45 +1,62 @@
-const menuButton = document.querySelector("#menu");
-const barInButton = document.querySelector("#barIn");
-const barOutButton = document.querySelector("#barOut");
-const guideBar = document.querySelector(".guide-bar")
+const sidebarToggleButton = document.querySelector("#sidebarToggle");
+const guideBarContent = document.querySelector(".guide-bar-content")
 const freezeBack = document.querySelector(".freeze-background")
+const sidebarEle = document.querySelector(".guide-bar")
 
 const sections = document.querySelectorAll('.container');
 
-menuButton.addEventListener('click', function () {
-    guideBar.style.display = "flex";
-    barInButton.style.display = "flex";
-    freezeBack.style.display = "block";
+let _isExpanded = true;
+
+if (window.matchMedia("(max-width: 767px)").matches) {
+    sidebarToggleButton.textContent = "Menu"
+    // sidebarEle.classList.add('sidebar--collapsed');
+    // guideBarContent.style.display = "none";
+    _isExpanded = false;
+} else {
+    sidebarEle.classList.remove('sidebar--collapsed');
+    guideBarContent.style.display = "block";
+}
+
+
+const handleToggle = () => {
+    if (_isExpanded) {
+        _isExpanded = !_isExpanded;
+        sidebarEle.classList.remove('slide-in');
+        sidebarEle.classList.add('slide-out');
+        guideBarContent.style.display = "none";
+
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            freezeBack.style.display = "none";
+        }
+    } else {
+        _isExpanded = !_isExpanded;
+        sidebarEle.classList.remove('slide-out');
+        sidebarEle.classList.remove('sidebar--collapsed');
+        sidebarEle.classList.add('slide-in');
+
+        guideBarContent.style.display = "block";
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            sidebarToggleButton.textContent = "Close"
+            freezeBack.style.display = "block";
+        } else {
+            sidebarToggleButton.textContent = "chevron_left"
+        }
+    }
+};
+
+sidebarToggleButton.addEventListener('click', () => {
+    handleToggle();
 });
 
-
-barInButton.addEventListener('click', function () {
-    guideBar.style.display = "none";
-    barInButton.style.display = "none";
-    freezeBack.style.display = "none";
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        barOutButton.style.display = "flex";
-        console.log("here")
-        for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-            section.style.setProperty('--my-margin-left', '0px');
-        };
-    }
-});
-
-
-barOutButton.addEventListener('click', function () {
-    guideBar.style.display = "flex";
-    barInButton.style.display = "flex";
-    if (window.matchMedia("(max-width: 767px)").matches) {
-        freezeBack.style.display = "block";
-    }
-    barOutButton.style.display = "none";
-    if (window.matchMedia("(min-width: 768px)").matches) {
-        for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-            section.style.setProperty('--my-margin-left', '200px');
-        };
+sidebarEle.addEventListener('animationend', (e) => {
+    if (e.target === sidebarEle) {
+        sidebarEle.classList.remove('slide-in');
+        sidebarEle.classList.remove('slide-out');
+        console.log(_isExpanded)
+        if (!_isExpanded) {
+            sidebarEle.classList.add('sidebar--collapsed');
+            sidebarToggleButton.textContent = "Menu"
+        }
     }
 });
 
@@ -86,13 +103,13 @@ function setInactive(pair) {
 
 
 // Define function to set guide bar buttons as active
-function setGuideBarActive(pair) {
+function setguideBarContentActive(pair) {
     pair.button.classList.add('active');
     pair.history.style.display = '';
 }
 
 // Define function to set guide bar buttons as inactive
-function setGuideBarInactive(pair) {
+function setguideBarContentInactive(pair) {
     pair.button.classList.remove('active');
     pair.history.style.display = 'none';
 }
@@ -111,7 +128,7 @@ function updatePageFromUrl(url) {
 
     // Set active pair based on the page name from URL
     const activePair = buttonPagePairs[pageName] || buttonPagePairs[homePage];
-    setGuideBarActive(activePair);
+    setguideBarContentActive(activePair);
 
     // set first history button active
     var history = activePair.history.children[0]
@@ -131,9 +148,9 @@ Object.values(buttonPagePairs).forEach(pair => {
     pair.button.addEventListener('click', function () {
         // Set all this history page active, rest inactive
         const pageName = pair.button.dataset.page;
-        Object.values(buttonPagePairs).forEach(pair => setGuideBarInactive(pair));
+        Object.values(buttonPagePairs).forEach(pair => setguideBarContentInactive(pair));
         const activePair = buttonPagePairs[pageName]
-        setGuideBarActive(activePair);
+        setguideBarContentActive(activePair);
     });
 });
 
@@ -195,9 +212,11 @@ Object.values(buttonPagePairs).forEach(pair => {
                 }
             }
             if (window.matchMedia("(max-width: 767px)").matches) {
-                guideBar.style.display = "none";
                 freezeBack.style.display = "none";
-                barInButton.style.display = "none";
+                sidebarToggleButton.textContent = "Menu"
+                sidebarEle.classList.add('sidebar--collapsed');
+                guideBarContent.style.display = "none";
+                _isExpanded = false;
             }
         });
     });
@@ -305,12 +324,12 @@ toggleButton.addEventListener("click", function () {
     }
 });
 
-submitButton.addEventListener('click', function(){
+submitButton.addEventListener('click', function () {
     var inputValue = openaiapiInputField.value;
     openaiapi = inputValue;
     if (window.matchMedia("(max-width: 767px)").matches) {
-        guideBar.style.display = "none";
-        barInButton.style.display = "none";
+        guideBarContent.style.display = "none";
+        sidebarToggleButton.style.display = "none";
         freezeBack.style.display = "none";
     }
 })
@@ -323,4 +342,4 @@ function adjustLayout() {
     }
 }
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi  };
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi };

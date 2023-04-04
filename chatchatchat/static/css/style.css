@@ -12,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  position: fixed;
 }
 
 button {
@@ -65,28 +66,47 @@ h3 {
 }
 
 /* guide-bar */
-.guide-bar-close {
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: flex;
-}
-
-#barOut {
-  position: fixed;
-  display: none;
-  height: 40px;
-  align-items: center;
-  left: 0px;
-}
-
-#barIn {
-  position: fixed;
+#sidebarToggle {
+  position: absolute;
   display: grid;
   height: 40px;
   align-items: center;
-  left: 200px;
+  left: 100%;
+  top: 0;
+}
+
+.slide-out {
+  animation-duration: 400ms;
+  animation-name: slide-out;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-in {
+  animation-duration: 400ms;
+  animation-name: slide-in;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 
 .guide-bar {
@@ -97,7 +117,11 @@ h3 {
   background-color: var(--theme);
   z-index: 1;
   flex-direction: column;
-  position: fixed
+  position: relative
+}
+
+.sidebar--collapsed {
+  width: 0;
 }
 
 .guide-bar-page-buttons {
@@ -110,7 +134,6 @@ h3 {
   flex-wrap: nowrap;
   overflow-x: scroll;
 }
-
 
 .guide-bar-page-buttons::-webkit-scrollbar {
   display: none;
@@ -230,14 +253,16 @@ h3 {
 .chatbot-container,
 .roleplay-container,
 .edit-container {
-  position: fixed;
-  --my-margin-left: 200px; /* Set the margin value using a CSS variable */
-  --my-margin-top: 0px; /* Set the margin value using a CSS variable */
-  margin-left: var(--my-margin-left);
+  position: relative;
+  --my-margin-left: 200px;
+  /* Set the margin value using a CSS variable */
+  --my-margin-top: 0px;
+  /* Set the margin value using a CSS variable */
+  /* margin-left: var(--my-margin-left); */
   margin-top: var(--my-margin-top);
   flex-grow: 1;
   height: calc(100% - var(--my-margin-top));
-  width: calc(100% - var(--my-margin-left));
+  /* width: calc(100% - var(--my-margin-left)); */
 }
 
 .chatbot,
@@ -615,24 +640,13 @@ pre code.language-javascript {
     display: flex;
   }
 
-  .guide-bar {
-    display: none;
-  }
-
-  #barIn {
-    display: none;
-  }
-
-  #barOut {
-    display: none;
-    left: 0px;
-  }
-
   .chatbot-container,
   .roleplay-container,
   .edit-container {
+    position: fixed;
     --my-margin-top: 40px;
-    --my-margin-left: 0px;
+    margin-left: 0px;
+    width: 100%;
   }
 
   .chat-history.active {
@@ -642,7 +656,6 @@ pre code.language-javascript {
     cursor: default;
     /* margin-right: 0px; */
   }
-
 
   .chatbot-messages,
   .edit-messages {
