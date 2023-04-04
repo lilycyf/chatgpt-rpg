@@ -70,7 +70,7 @@ h3 {
 }
 
 #barOut {
-  position: absolute;
+  position: fixed;
   display: none;
   height: 40px;
   align-items: center;
@@ -78,7 +78,7 @@ h3 {
 }
 
 #barIn {
-  position: absolute;
+  position: fixed;
   display: grid;
   height: 40px;
   align-items: center;
@@ -93,7 +93,7 @@ h3 {
   background-color: var(--theme);
   z-index: 1;
   flex-direction: column;
-  position: absolute
+  position: fixed
 }
 
 .guide-bar-page-buttons {
@@ -225,9 +225,11 @@ h3 {
 .chatbot-container,
 .roleplay-container,
 .edit-container {
-  position: relative;
+  position: fixed;
   margin-left: 200px;
   flex-grow: 1;
+  height: 100%;
+  width: 100%;
 }
 
 .chatbot,
