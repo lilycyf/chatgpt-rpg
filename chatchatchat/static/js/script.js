@@ -23,7 +23,7 @@ barInButton.addEventListener('click', function () {
         for (let i = 0; i < sections.length; i++) {
             console.log("here")
             const section = sections[i];
-            section.style.marginLeft = "0px";
+            section.style.setProperty('--my-margin-left', '0px');
         };
     }
 
@@ -40,7 +40,7 @@ barOutButton.addEventListener('click', function () {
     if (window.matchMedia("(min-width: 768px)").matches) {
         for (let i = 0; i < sections.length; i++) {
             const section = sections[i];
-            section.style.marginLeft = "200px";
+            section.style.setProperty('--my-margin-left', '200px');
         };
     }
 });
