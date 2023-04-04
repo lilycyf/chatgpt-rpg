@@ -219,6 +219,7 @@ Object.values(buttonPagePairs).forEach(pair => {
                 freezeBack.style.display = "none";
                 sidebarToggleButton.textContent = "Menu"
                 // sidebarEle.classList.add('sidebar--collapsed');
+                restPage.classList.remove('frozen');
                 guideBarContent.style.display = "none";
                 _isExpanded = false;
             }
@@ -338,6 +339,7 @@ submitButton.addEventListener('click', function () {
     // }
     if (window.matchMedia("(max-width: 767px)").matches) {
         freezeBack.style.display = "none";
+        restPage.classList.remove('frozen');
         sidebarToggleButton.textContent = "Menu"
         sidebarEle.classList.add('sidebar--collapsed');
         guideBarContent.style.display = "none";
