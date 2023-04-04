@@ -211,6 +211,22 @@ function adjustTextareaHeight(element, reference) {
 }
 
 function addMessage(message, isUser, page) {
+    const lastChild = page.lastElementChild
+    // // TODO: add time
+    // const now = new Date();
+    // const year = now.getFullYear();
+    // const month = now.getMonth() + 1; // Month starts at 0, so add 1
+    // const day = now.getDate();
+    // const hours = now.getHours();
+    // const minutes = now.getMinutes();
+    // const formattedTime = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    // console.log(formattedTime);
+    // const timeContent = document.createElement('p');
+    // timeContent.classList.add('time');
+    // timeContent.textContent = formattedTime
+    // page.insertBefore(timeContent, lastChild)
+
+    // add message
     const messageContainer = document.createElement('div');
     if (isUser) {
         messageContainer.classList.add('user-message');
@@ -242,7 +258,6 @@ function addMessage(message, isUser, page) {
             }
         }
     }
-    const lastChild = page.lastElementChild
     page.insertBefore(messageContainer, lastChild)
     page.scrollTop = page.scrollHeight;
 }

@@ -29,6 +29,10 @@ h3 {
   margin-bottom: 20px;
 }
 
+.time {
+  text-align: center;
+}
+
 .freeze-background {
   display: none;
   /* Hide the warning message box by default */
