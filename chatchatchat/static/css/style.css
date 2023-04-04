@@ -53,6 +53,10 @@ h3 {
   /* Black w/ opacity */
 }
 
+.frozen {
+  pointer-events: none;
+}
+
 /* top-bar */
 .top-bar {
   position: fixed;
@@ -162,8 +166,9 @@ h3 {
 .apis {
   position: absolute;
   bottom: 20px;
-  width: 190px;
   padding: 5px;
+  right: 0px;
+  left: 0px
 }
 
 .api-input {
@@ -250,6 +255,7 @@ h3 {
 
 /* chat */
 
+.container-container,
 .chatbot-container,
 .roleplay-container,
 .edit-container {
@@ -640,6 +646,19 @@ pre code.language-javascript {
     display: flex;
   }
 
+  .guide-bar {
+    width: 100%;
+  }
+
+  .sidebar--collapsed {
+    width: 0;
+  }
+
+  .container-container {
+    position: fixed;
+    margin-left: 0px;
+    width: 100%;
+  }
   .chatbot-container,
   .roleplay-container,
   .edit-container {

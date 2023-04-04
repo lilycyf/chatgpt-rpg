@@ -2,6 +2,7 @@ const sidebarToggleButton = document.querySelector("#sidebarToggle");
 const guideBarContent = document.querySelector(".guide-bar-content")
 const freezeBack = document.querySelector(".freeze-background")
 const sidebarEle = document.querySelector(".guide-bar")
+const restPage = document.querySelector(".container-container")
 
 const sections = document.querySelectorAll('.container');
 
@@ -24,9 +25,9 @@ const handleToggle = () => {
         sidebarEle.classList.remove('slide-in');
         sidebarEle.classList.add('slide-out');
         guideBarContent.style.display = "none";
-
         if (window.matchMedia("(max-width: 767px)").matches) {
             freezeBack.style.display = "none";
+            restPage.classList.toggle('frozen');
         }
     } else {
         _isExpanded = !_isExpanded;
@@ -38,6 +39,7 @@ const handleToggle = () => {
         if (window.matchMedia("(max-width: 767px)").matches) {
             sidebarToggleButton.textContent = "Close"
             freezeBack.style.display = "block";
+            restPage.classList.toggle('frozen');
         } else {
             sidebarToggleButton.textContent = "chevron_left"
         }
@@ -212,9 +214,11 @@ Object.values(buttonPagePairs).forEach(pair => {
                 }
             }
             if (window.matchMedia("(max-width: 767px)").matches) {
+                sidebarEle.classList.remove('slide-in');
+                sidebarEle.classList.add('slide-out');
                 freezeBack.style.display = "none";
                 sidebarToggleButton.textContent = "Menu"
-                sidebarEle.classList.add('sidebar--collapsed');
+                // sidebarEle.classList.add('sidebar--collapsed');
                 guideBarContent.style.display = "none";
                 _isExpanded = false;
             }
@@ -317,20 +321,27 @@ let openaiapi = ""
 toggleButton.addEventListener("click", function () {
     if (openaiapiInputField.type === "password") {
         openaiapiInputField.type = "text";
-        toggleButton.innerHTML = "visibility"
+        toggleButton.textContent = "visibility"
     } else {
         openaiapiInputField.type = "password";
-        toggleButton.innerHTML = "visibility_off"
+        toggleButton.textContent = "visibility_off"
     }
 });
 
 submitButton.addEventListener('click', function () {
     var inputValue = openaiapiInputField.value;
     openaiapi = inputValue;
+    // if (window.matchMedia("(max-width: 767px)").matches) {
+    //     guideBarContent.style.display = "none";
+    //     sidebarToggleButton.style.display = "none";
+    //     freezeBack.style.display = "none";
+    // }
     if (window.matchMedia("(max-width: 767px)").matches) {
-        guideBarContent.style.display = "none";
-        sidebarToggleButton.style.display = "none";
         freezeBack.style.display = "none";
+        sidebarToggleButton.textContent = "Menu"
+        sidebarEle.classList.add('sidebar--collapsed');
+        guideBarContent.style.display = "none";
+        _isExpanded = false;
     }
 })
 
