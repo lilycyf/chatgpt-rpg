@@ -21,12 +21,10 @@ barInButton.addEventListener('click', function () {
         barOutButton.style.display = "flex";
         console.log("here")
         for (let i = 0; i < sections.length; i++) {
-            console.log("here")
             const section = sections[i];
             section.style.setProperty('--my-margin-left', '0px');
         };
     }
-
 });
 
 
@@ -295,6 +293,11 @@ toggleButton.addEventListener("click", function () {
 submitButton.addEventListener('click', function(){
     var inputValue = openaiapiInputField.value;
     openaiapi = inputValue;
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        guideBar.style.display = "none";
+        barInButton.style.display = "none";
+        freezeBack.style.display = "none";
+    }
 })
 
 function adjustLayout() {
