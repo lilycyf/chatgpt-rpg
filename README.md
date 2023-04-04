@@ -4,6 +4,8 @@ This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to gen
 
 该项目是一个聊天机器人应用程序，它使用OpenAI的gpt-3.5-turboGPT来生成对用户输入的响应。
 
+[demo](https://lilycyf.github.io/Chatbot-using-OpenAI-s-gpt-3.5-turboGPT/chatchatchat/demo.html)
+
 ![1680237931061](image/README/1680237931061.png)
 
 ![1680237800542](image/README/1680237800542.png)
