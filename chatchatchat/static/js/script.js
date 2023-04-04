@@ -266,7 +266,8 @@ function getLanguage(firstLine) {
 
 const toggleButton = document.getElementById("open-ai-api-toggle-btn");
 const submitButton = document.getElementById("open-ai-api-submit-btn");
-const passwordInput = document.getElementById("password");
+
+let openaiapi = ""
 
 toggleButton.addEventListener("click", function () {
     if (passwordInput.type === "password") {
@@ -278,10 +279,12 @@ toggleButton.addEventListener("click", function () {
     }
 });
 
-submitButton.addEventListener("click", function () {
-    var passwordValue = passwordInput.value;
-    console.log("Password value: " + passwordValue);
-});
+submitButton.addEventListener('click', function(){
+    var inputField = document.getElementById('openaiapi-input');
+    var inputValue = inputField.value;
+    openaiapi = inputValue;
+    console.log(openaiapi)
+})
 
 function adjustLayout() {
     if (window.innerWidth < 768) {
@@ -291,4 +294,4 @@ function adjustLayout() {
     }
 }
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage };
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi  };
