@@ -226,10 +226,13 @@ h3 {
 .roleplay-container,
 .edit-container {
   position: fixed;
-  margin-left: 200px;
+  --my-margin-left: 200px; /* Set the margin value using a CSS variable */
+  --my-margin-top: 0px; /* Set the margin value using a CSS variable */
+  margin-left: var(--my-margin-left);
+  margin-top: var(--my-margin-top);
   flex-grow: 1;
-  height: 100%;
-  width: 100%;
+  height: calc(100% - var(--my-margin-top));
+  width: calc(100% - var(--my-margin-left));
 }
 
 .chatbot,
@@ -623,8 +626,8 @@ pre code.language-javascript {
   .chatbot-container,
   .roleplay-container,
   .edit-container {
-    margin-top: 40px;
-    margin-left: 0px;
+    --my-margin-top: 40px;
+    --my-margin-left: 0px;
   }
 
   .chat-history.active {
