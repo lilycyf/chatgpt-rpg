@@ -1,6 +1,6 @@
 import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage } from "./script.js";
 
-const roleplayPersonalityButton = document.querySelector('.roleplaybot-personality button');
+// const roleplayPersonalityButton = document.querySelector('.roleplaybot-personality button');
 const roleplayPersonalitySurvey = document.querySelector('.roleplaybot-personality-survey');
 
 const serveySubmitBtn = document.querySelector('#survey-submit-btn');
@@ -12,24 +12,24 @@ const warningCloseBtn = document.querySelector('#warning-close-btn');
 
 const form = document.querySelector('#survey-form');
 
-let isSurveyOpen = false;
+// let isSurveyOpen = false;
 let roleplayHistory = [];
 let surveyResults = [];
 
-roleplayPersonalityButton.addEventListener('click', () => {
-    if (isSurveyOpen) {
-        roleplayPersonalitySurvey.style.display = 'none';
-        roleplayPersonalityButton.style.height = '40px';
-        roleplayPersonalityButton.style.width = '40px';
-        isSurveyOpen = false;
-    } else {
-        roleplayPersonalitySurvey.style.display = 'block';
-        roleplayPersonalityButton.style.height = '20px';
-        roleplayPersonalityButton.style.width = '20px';
-        isSurveyOpen = true;
+// roleplayPersonalityButton.addEventListener('click', () => {
+//     if (isSurveyOpen) {
+//         roleplayPersonalitySurvey.style.display = 'none';
+//         roleplayPersonalityButton.style.height = '40px';
+//         roleplayPersonalityButton.style.width = '40px';
+//         isSurveyOpen = false;
+//     } else {
+//         roleplayPersonalitySurvey.style.display = 'block';
+//         roleplayPersonalityButton.style.height = '20px';
+//         roleplayPersonalityButton.style.width = '20px';
+//         isSurveyOpen = true;
 
-    }
-});
+//     }
+// });
 
 // show warning modal when submit button is clicked
 serveySubmitBtn.addEventListener('click', (event) => {
@@ -76,9 +76,9 @@ warningCancelBtn.addEventListener('click', () => {
 warningSubmitBtn.addEventListener('click', () => {
     warningModal.style.display = 'none';
     roleplayPersonalitySurvey.style.display = 'none';
-    roleplayPersonalityButton.style.height = '40px';
-    roleplayPersonalityButton.style.width = '40px';
-    isSurveyOpen = false;
+    // roleplayPersonalityButton.style.height = '40px';
+    // roleplayPersonalityButton.style.width = '40px';
+    // isSurveyOpen = false;
     // freeze form
     const inputs = form.querySelectorAll('input, select, textarea, button');
     inputs.forEach((input) => {
@@ -89,14 +89,14 @@ warningSubmitBtn.addEventListener('click', () => {
     //   form.submit();
 });
 
-document.addEventListener('click', function (event) {
-    // check if the clicked element is outside the roleplayPersonalitySurvey element
-    if (!roleplayPersonalitySurvey.contains(event.target) && !roleplayPersonalityButton.contains(event.target)) {
-        if (isSurveyOpen) {
-            roleplayPersonalitySurvey.style.display = 'none';
-            roleplayPersonalityButton.style.height = '40px';
-            roleplayPersonalityButton.style.width = '40px';
-            isSurveyOpen = false;
-        }
-    }
-});
+// document.addEventListener('click', function (event) {
+//     // check if the clicked element is outside the roleplayPersonalitySurvey element
+//     if (!roleplayPersonalitySurvey.contains(event.target) && !roleplayPersonalityButton.contains(event.target)) {
+//         if (isSurveyOpen) {
+//             roleplayPersonalitySurvey.style.display = 'none';
+//             roleplayPersonalityButton.style.height = '40px';
+//             roleplayPersonalityButton.style.width = '40px';
+//             isSurveyOpen = false;
+//         }
+//     }
+// });

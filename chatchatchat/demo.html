@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="roleplay-histories" style="display: none;">
-                    <div class="chat-history addnew">
+                    <div class="chat-history addnew" id="106">
                         <span class="addnew_sign material-symbols-outlined">add</span>
                     </div>
                     <div class="chat-history" id="104">
@@ -139,32 +139,10 @@
             </div>
         </div>
         <div id="roleplay" class="roleplay-container container" style="display: none;">
-            <div class="roleplay page" id="104">
-                <div class="chatbot-messages">
-                    <div class="roleplay-header">
-                        <h1>RolePlay</h1>
-                        <p>Your friendly AI roleplaybot</p>
-                    </div>
-                    <div class="chatbot-message">
-                        <div class="audio-message">
-                            <audio controls>
-                                <source src="static/media/start-speech.mp3" type="audio/mpeg">
-                                Hello! How can I assist you today?
-                            </audio>
-                        </div>
-                        <div class="audio-text">
-                            <p>Hello! How can I assist you today?</p>
-                        </div>
-                    </div>
-                    <div class="end-message"></div>
-                </div>
-                <div class="chatbot-input">
-                    <textarea rows="1" placeholder="Type your message..."></textarea>
-                    <button>Send</button>
-                </div>
-                <div class="roleplaybot-personality-survey" style="display: none;">
+            <div class="roleplay page roleplay-start" id="106">
+                <div class="roleplaybot-personality-survey">
                     <div class="roleplaybot-personality-content">
-                        <h2>Survey</h2>
+                        <h1>Survey</h1>
                         <form id="survey-form">
                             <label class="question" for="first-language">What is your first language?</label>
                             <div class="choices">
@@ -719,9 +697,31 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <div class="roleplaybot-personality">
-                    <button>P</button>
+            </div>
+            <div class="roleplay page" id="104">
+                <div class="chatbot-messages">
+                    <div class="roleplay-header">
+                        <h1>RolePlay</h1>
+                        <p>Your friendly AI roleplaybot</p>
+                    </div>
+                    <div class="chatbot-message">
+                        <div class="audio-message">
+                            <audio controls>
+                                <source src="static/media/start-speech.mp3" type="audio/mpeg">
+                                Hello! How can I assist you today?
+                            </audio>
+                        </div>
+                        <div class="audio-text">
+                            <p>Hello! How can I assist you today?</p>
+                        </div>
+                    </div>
+                    <div class="end-message"></div>
+                </div>
+                <div class="chatbot-input">
+                    <textarea rows="1" placeholder="Type your message..."></textarea>
+                    <button>Send</button>
                 </div>
             </div>
         </div>

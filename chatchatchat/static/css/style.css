@@ -409,23 +409,18 @@ h3 {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 90%;
-  max-width: 800px;
-  height: 90%;
-  background: var(--theme);
-  padding: 10px;
-  border-radius: 1;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  background: white;
   overflow-y: scroll;
 }
 
 .roleplaybot-personality-content {
-  background-color: white;
+  background-color: var(--theme);
   border: none;
   border-radius: 5px;
-  padding: 0px;
-  width: 100%;
-  height: auto;
+  padding: 10px;
+  margin: 20px;
 }
 
 body {
@@ -660,6 +655,7 @@ pre code.language-javascript {
     margin-left: 0px;
     width: 100%;
   }
+
   .chatbot-container,
   .roleplay-container,
   .edit-container {
