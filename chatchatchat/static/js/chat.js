@@ -69,7 +69,7 @@ function sendMessage(chatbotInput, pageId) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": messageHistorySet[pageid]
+            "messages": messageHistorySet[pageId]
         };
         const requestOptions = {
             method: 'POST',
