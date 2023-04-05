@@ -1,41 +1,61 @@
 import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi } from "./script.js";
 
-const chatbotMessages = document.querySelector('.chatbot-messages');
-const chatbotInput = document.querySelector('.chatbot-input textarea');
-const chatbotButton = document.querySelector('.chatbot-input button');
+let messageHistorySet = {}
 
-let messageHistory = [];
+// Define a function to add items to the object
+function addHistorybyId(key, item) {
+    // If the key already exists in the object, add the item to the existing array
+    if (messageHistorySet.hasOwnProperty(key)) {
+        messageHistorySet[key].push(item);
+    }
+    // If the key does not exist in the object, initialize it to a new array containing the item
+    else {
+        messageHistorySet[key] = [item];
+    }
+}
 
-chatbotInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-            sendMessage();
-            adjustTextareaHeight(chatbotInput, chatbotInput);
+document.querySelectorAll('.chatbot-input textarea').forEach((chatbotInput) => {
+    chatbotInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
+            const pageId = chatbotInput.parentNode.parentNode.getAttribute("id");
+            if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
+                sendMessage(chatbotInput, pageId);
+                adjustTextareaHeight(chatbotInput, chatbotInput);
+                event.preventDefault();
+            }
         }
-    }
-});
+    });
 
-chatbotInput.addEventListener('input', () => {
-    adjustTextareaHeight(chatbotInput, chatbotInput);
-});
-
-chatbotButton.addEventListener('click', () => {
-    if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-        sendMessage();
+    chatbotInput.addEventListener('input', () => {
         adjustTextareaHeight(chatbotInput, chatbotInput);
-    }
-});
+    });
+})
 
-function sendMessage() {
+document.querySelectorAll('.chatbot-input button').forEach((chatbotButton) => {
+    chatbotButton.addEventListener('click', () => {
+        const parent = chatbotButton.parentNode;
+        const chatbotInput = parent.parentNode.querySelector("textarea");
+        if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
+            const pageId = parent.parentNode.getAttribute("id");
+            sendMessage(chatbotInput, pageId);
+            adjustTextareaHeight(chatbotInput, chatbotInput);
+        }
+    });
+})
+
+
+function sendMessage(chatbotInput, pageId) {
     const message = chatbotInput.value;
-    addMessage(message, true, chatbotMessages);
+    const page = chatbotInput.parentNode.parentNode
+    const chatbotButton = page.querySelector(".chatbot-input button");
+    const messages = page.firstElementChild
+    addMessage(message, true, messages);
     chatbotInput.value = '';
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
     // Add user message to message history
-    messageHistory.push({ "role": "user", "content": message });
+    addHistorybyId(pageId, { "role": "user", "content": message });
 
     // get api from frontend if exist
     if (openaiapi !== '') {
@@ -49,7 +69,7 @@ function sendMessage() {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": messageHistory
+            "messages": messageHistorySet[pageid]
         };
         const requestOptions = {
             method: 'POST',
@@ -62,9 +82,9 @@ function sendMessage() {
             .then(data => {
                 const response = data.choices[0].message.content;
                 console.log(response);
-                addMessage(response, false, chatbotMessages);
+                addMessage(response, false, messages);
                 // Add assistant message to message history
-                messageHistory.push({ "role": "assistant", "content": response });
+                addHistorybyId(pageId, { "role": "assistant", "content": response });
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
             })
@@ -76,13 +96,13 @@ function sendMessage() {
 
     } else {
         // Send the message to the server and get a response
-        fetch('/chatbot/?messageHistory=' + encodeURIComponent(JSON.stringify(messageHistory)))
+        fetch('/chatbot/?messageHistory=' + encodeURIComponent(JSON.stringify(messageHistorySet[pageId])))
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
-                addMessage(response, false, chatbotMessages);
+                addMessage(response, false, messages);
                 // Add assistant message to message history
-                messageHistory.push({ "role": "assistant", "content": response });
+                addHistorybyId(pageId, { "role": "assistant", "content": response });
 
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);

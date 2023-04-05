@@ -234,8 +234,8 @@ function adjustTextareaHeight(element, reference) {
     element.style.height = reference.scrollHeight - reference_padding + 'px';
 }
 
-function addMessage(message, isUser, page) {
-    const lastChild = page.lastElementChild
+function addMessage(message, isUser, messages) {
+    const lastChild = messages.lastElementChild
     // // TODO: add time
     // const now = new Date();
     // const year = now.getFullYear();
@@ -282,8 +282,8 @@ function addMessage(message, isUser, page) {
             }
         }
     }
-    page.insertBefore(messageContainer, lastChild)
-    page.scrollTop = page.scrollHeight;
+    messages.insertBefore(messageContainer, lastChild)
+    messages.scrollTop = messages.scrollHeight;
 }
 
 // TODO: Get the language of the code block
