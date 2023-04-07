@@ -25,10 +25,10 @@
             </div>
             <div class="guide-bar-page-histories">
                 <div class="chat-histories" style="display: none;">
-                    <div class="chat-history addnew">
+                    <div class="chat-history addnew" id="a99">
                         <span class="addnew_sign material-symbols-outlined">add</span>
                     </div>
-                    <div class="chat-history " id="100">
+                    <div class="chat-history" id="a100">
                         <div class="chat-history-headshot">
                             <img src="static/images/default-head.png" alt="default-head">
                         </div>
@@ -37,7 +37,7 @@
                             <p4>Hello! How can I assist you today?</p4>
                         </div>
                     </div>
-                    <div class="chat-history" id="101">
+                    <div class="chat-history" id="a101">
                         <div class="chat-history-headshot">
                             <img src="static/images/default-head.png" alt="default-head">
                         </div>
@@ -51,7 +51,7 @@
                     <div class="chat-history addnew">
                         <span class="addnew_sign material-symbols-outlined">add</span>
                     </div>
-                    <div class="chat-history" id="103">
+                    <div class="chat-history" id="a103">
                         <div class="chat-history-headshot">
                             <img src="static/images/default-head.png" alt="default-head">
                         </div>
@@ -62,10 +62,10 @@
                     </div>
                 </div>
                 <div class="roleplay-histories" style="display: none;">
-                    <div class="chat-history addnew" id="106">
+                    <div class="chat-history addnew" id="a106">
                         <span class="addnew_sign material-symbols-outlined">add</span>
                     </div>
-                    <div class="chat-history" id="104">
+                    <div class="chat-history" id="a104">
                         <div class="chat-history-headshot">
                             <img src="static/images/default-head.png" alt="default-head">
                         </div>
@@ -74,7 +74,7 @@
                             <p4>Hello! How can I assist you today?</p4>
                         </div>
                     </div>
-                    <div class="chat-history" id="105">
+                    <div class="chat-history" id="a105">
                         <div class="chat-history-headshot">
                             <img src="static/images/default-head.png" alt="default-head">
                         </div>
@@ -97,10 +97,26 @@
         <div class="addnew_sign material-symbols-outlined" id="sidebarToggle" style="margin-left: 10px; cursor: pointer;">chevron_left</div>
     </div>
     <div class="container-container">
-        <div id="chat" class="chatbot-container container" style="display: none;">
-            <div class="chatbot page" id="100">
-                <div class="chatbot-messages">
-                    <div class="chatbot-header">
+        <div id="chat" class="chat-container container" style="display: none;">
+            <div class="chat page startnew" style="display: none;" id="a99">
+                <div class="chat-messages">
+                    <div class="chat-header">
+                        <h1>Chat</h1>
+                        <p>Your friendly AI chatbot</p>
+                    </div>
+                    <div class="chatbot-message">
+                        <p>Hello! How can I assist you today?</p>
+                    </div>
+                    <div class="end-message"></div>
+                </div>
+                <div class="chatbot-input">
+                    <textarea rows="1" placeholder="Type your message..."></textarea>
+                    <button>Send</button>
+                </div>
+            </div>
+            <div class="chat page" style="display: none;" id="a100">
+                <div class="chat-messages">
+                    <div class="chat-header">
                         <h1>Chat</h1>
                         <p>Your friendly AI chatbot</p>
                     </div>
@@ -121,9 +137,9 @@
                     <button>Send</button>
                 </div>
             </div>
-            <div class="chatbot page" style="display: none;" id="101">
-                <div class="chatbot-messages">
-                    <div class="chatbot-header">
+            <div class="chat page" style="display: none;" id="a101">
+                <div class="chat-messages">
+                    <div class="chat-header">
                         <h1>Moss</h1>
                         <p>Your friendly AI chatbot</p>
                     </div>
@@ -139,7 +155,7 @@
             </div>
         </div>
         <div id="roleplay" class="roleplay-container container" style="display: none;">
-            <div class="roleplay page roleplay-start" id="106">
+            <div class="roleplay page roleplay-start" id="a106">
                 <div class="roleplaybot-personality-survey">
                     <div class="roleplaybot-personality-content">
                         <h1>Survey</h1>
@@ -700,8 +716,8 @@
 
                 </div>
             </div>
-            <div class="roleplay page" id="104">
-                <div class="chatbot-messages">
+            <div class="roleplay page" id="a104">
+                <div class="chat-messages">
                     <div class="roleplay-header">
                         <h1>RolePlay</h1>
                         <p>Your friendly AI roleplaybot</p>
@@ -726,7 +742,7 @@
             </div>
         </div>
         <div id="edit" class="edit-container container" style="display: none;">
-            <div class="edit page" id="103">
+            <div class="edit page" id="a103">
                 <div class="edit-messages">
                     <div class="edit-header">
                         <h1>Edit</h1>

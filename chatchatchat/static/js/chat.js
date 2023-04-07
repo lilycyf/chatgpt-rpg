@@ -1,4 +1,4 @@
-import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi } from "./script.js";
+import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick } from "./script.js";
 
 let messageHistorySet = {}
 
@@ -14,36 +14,123 @@ function addHistorybyId(key, item) {
     }
 }
 
-document.querySelectorAll('.chatbot-input textarea').forEach((chatbotInput) => {
-    chatbotInput.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
-            const pageId = chatbotInput.parentNode.parentNode.getAttribute("id");
-            if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-                sendMessage(chatbotInput, pageId);
-                adjustTextareaHeight(chatbotInput, chatbotInput);
-                event.preventDefault();
-            }
-        }
-    });
+function handleChatbotInputKeyDown(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        let chatbotInput = this
+        const currentPage = this.parentNode.parentNode
+        const currentPageId = currentPage.getAttribute("id");
 
+        createNewPageIfNecessary(currentPage, currentPageId)
+
+        if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
+            sendMessage(chatbotInput, currentPageId);
+            adjustTextareaHeight(chatbotInput, chatbotInput);
+            event.preventDefault();
+        }
+    }
+}
+
+function handleChatbotButtonClick(event) {
+    const currentPage = this.parentNode.parentNode
+    const currentPageId = currentPage.getAttribute("id");
+    const chatbotInput = currentPage.querySelector("textarea");
+
+    createNewPageIfNecessary(currentPage, currentPageId)
+
+    if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
+        sendMessage(chatbotInput, currentPageId);
+        adjustTextareaHeight(chatbotInput, chatbotInput);
+    }
+}
+
+function createNewPageIfNecessary(currentPage, currentPageId) {
+    if (currentPage.classList.contains('startnew')) {
+        currentPage.classList.remove('startnew');
+        const id = generateUniqueId();
+        currentPage.setAttribute('id', id);
+        const container = currentPage.parentNode;
+        const container_name = container.getAttribute("id");
+        const [newHomePage, newHistory] = newPageHistory(container_name, id, currentPageId);
+        container.appendChild(newHomePage);
+        const histories = buttonPagePairs[container_name].history;
+        const first_history = histories.children[0];
+        first_history.insertAdjacentElement('afterend', newHistory);
+        first_history.classList.remove('active')
+        newHistory.classList.add('active')
+    }
+}
+
+
+document.querySelectorAll('.chatbot-input textarea').forEach((chatbotInput) => {
+    chatbotInput.addEventListener('keydown', handleChatbotInputKeyDown)
+    chatbotInput.addEventListener('input', () => { adjustTextareaHeight(chatbotInput, chatbotInput); });
+})
+
+function generateUniqueId() {
+    const timestamp = new Date().getTime();
+    const random = Math.random().toString(36).substr(2, 9);
+    return `a${random}${timestamp}`;
+}
+
+function newPageHistory(name, id, homePageId) {
+
+    // Generate the first element
+    const page = document.createElement('div');
+    page.classList.add(`${name}`, 'page');
+    page.classList.add("startnew")
+    page.style.display = 'none';
+    page.id = homePageId;
+    page.innerHTML = `
+      <div class="${name}-messages">
+        <div class="${name}-header">
+          <h1>Moss</h1>
+          <p>Your friendly AI chatbot</p>
+        </div>
+        <div class="chatbot-message">
+          <p>您好！请问今天我可以如何协助您呢？</p>
+        </div>
+        <div class="end-message"></div>
+      </div>
+      <div class="chatbot-input">
+        <textarea rows="1" placeholder="Type your message..."></textarea>
+        <button>Send</button>
+      </div>
+    `;
+
+    const chatbotInput = page.querySelector('.chatbot-input textarea');
+    chatbotInput.addEventListener('keydown', handleChatbotInputKeyDown);
     chatbotInput.addEventListener('input', () => {
         adjustTextareaHeight(chatbotInput, chatbotInput);
     });
-})
+
+    page.querySelector('.chatbot-input button').addEventListener('click', handleChatbotButtonClick);
+
+
+    // Generate the second element
+    const history = document.createElement('div');
+    history.classList.add(`${name}-history`);
+    history.id = id;
+    history.innerHTML = `
+      <div class="chat-history-headshot">
+        <img src="/static/images/default-head.png" alt="default-head">
+      </div>
+      <div class="chat-history-name">
+        <h4>Moss</h4>
+        <p4>您好！请问今天我可以如何协助您呢？</p4>
+      </div>
+    `;
+
+    history.addEventListener('click', handleHistoryButtonClick);
+    // Return both elements
+    return [page, history];
+}
+
+
 
 document.querySelectorAll('.chatbot-input button').forEach((chatbotButton) => {
-    chatbotButton.addEventListener('click', () => {
-        const parent = chatbotButton.parentNode;
-        const chatbotInput = parent.parentNode.querySelector("textarea");
-        if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-            const pageId = parent.parentNode.getAttribute("id");
-            sendMessage(chatbotInput, pageId);
-            adjustTextareaHeight(chatbotInput, chatbotInput);
-        }
-    });
+    chatbotButton.addEventListener('click', handleChatbotButtonClick);
 })
-
 
 function sendMessage(chatbotInput, pageId) {
     const message = chatbotInput.value;

@@ -257,7 +257,7 @@ h3 {
 /* chat */
 
 .container-container,
-.chatbot-container,
+.chat-container,
 .roleplay-container,
 .edit-container {
   position: relative;
@@ -272,7 +272,7 @@ h3 {
   /* width: calc(100% - var(--my-margin-left)); */
 }
 
-.chatbot,
+.chat,
 .edit,
 .roleplay {
   height: 100%;
@@ -285,7 +285,7 @@ h3 {
   font-family: Arial, sans-serif;
 }
 
-.chatbot-header,
+.chat-header,
 .edit-header,
 .roleplay-header {
   /* display: none; */
@@ -293,7 +293,7 @@ h3 {
   margin-bottom: 20px;
 }
 
-.chatbot-messages,
+.chat-messages,
 .edit-messages {
   height: 100%;
   width: 70%;
@@ -303,7 +303,7 @@ h3 {
   overflow-y: scroll;
 }
 
-.chatbot-messages::-webkit-scrollbar,
+.chat-messages::-webkit-scrollbar,
 .edit-messages::-webkit-scrollbar {
   display: none;
 }
@@ -656,7 +656,7 @@ pre code.language-javascript {
     width: 100%;
   }
 
-  .chatbot-container,
+  .chat-container,
   .roleplay-container,
   .edit-container {
     position: fixed;
@@ -673,7 +673,7 @@ pre code.language-javascript {
     /* margin-right: 0px; */
   }
 
-  .chatbot-messages,
+  .chat-messages,
   .edit-messages {
     /* height: 100%; */
     width: 90%;

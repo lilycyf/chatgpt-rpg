@@ -74,7 +74,7 @@ function getIsWaitingForResponse() {
 
 const homePage = 'chat';
 
-const buttonPagePairs = {};
+var buttonPagePairs = {};
 
 for (let i = 0; i < sections.length; i++) {
     const section = sections[i];
@@ -130,15 +130,16 @@ function updatePageFromUrl(url) {
 
     // Set active pair based on the page name from URL
     const activePair = buttonPagePairs[pageName] || buttonPagePairs[homePage];
-    setguideBarContentActive(activePair);
+    setActive(activePair);
 
     // set first history button active
     var history = activePair.history.children[0]
     history.classList.add('active')
 
     // find the matching history page and make it active
+    console.log(history)
     if (history.id.length !== 0) {
-        document.querySelector(`.page#${history.id}`).classList.add('active')
+        document.querySelector(`.page#${history.id}`).style.display = ''
     }
 }
 
@@ -156,75 +157,85 @@ Object.values(buttonPagePairs).forEach(pair => {
     });
 });
 
+function handleHistoryButtonClick(event) {
+    var historyObj = this
+    const parentElement = historyObj.parentNode;
+    const firstClassName = parentElement.classList.item(0);
+    const pageName = firstClassName.split("-").shift();
+
+    // Set active page based on the page name, rest in active
+    Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
+    const activePair = buttonPagePairs[pageName];
+    activePair.page.style.display = '';
+
+    // set this history button active, rest inactive
+    document.querySelectorAll('.chat-history').forEach((item) => {
+        item.classList.remove('active')
+    })
+    historyObj.classList.add('active')
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         const pageName = pair.button.dataset.page;
+    //         // Update the URL
+    //         window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
+
+    //         // Set active page based on the page name, rest in active
+    //         Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
+    //         const activePair = buttonPagePairs[pageName];
+    //         activePair.page.style.display = '';
+
+    //         // set this history button active, rest inactive
+    //         document.querySelectorAll('.chat-history').forEach((item) => {
+    //             item.classList.remove('active')
+    //         })
+    //         historyObj.classList.add('active')
+    //     }
+    // };
+
+    // const pageName = pair.button.dataset.page
+    // xhr.open('GET', `/${pageName}/`);
+    // xhr.send();
+
+    // // update order
+    // this.parentNode.removeChild(this);
+    // historiesContainer.insertBefore(this, historiesContainer.firstChild);
+    console.log(page)
+    var page = buttonPagePairs[pageName].page.children;
+
+    for (var i = 0; i < page.length; i++) {
+        var childElement = page[i];
+        console.log(childElement.id)
+        console.log(this.id)
+        if (childElement.id !== `${this.id}`) {
+            childElement.style.display = 'none';
+        } else {
+            childElement.style.display = '';
+        }
+    }
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        sidebarEle.classList.remove('slide-in');
+        sidebarEle.classList.add('slide-out');
+        freezeBack.style.display = "none";
+        sidebarToggleButton.textContent = "Menu"
+        // sidebarEle.classList.add('sidebar--collapsed');
+        restPage.classList.remove('frozen');
+        guideBarContent.style.display = "none";
+        _isExpanded = false;
+    }
+
+}
+
+
 Object.values(buttonPagePairs).forEach(pair => {
     var historiesContainer = pair.history;
     var histories = historiesContainer.querySelectorAll('.chat-history');
-    var page = pair.page.children;
 
-    histories.forEach(function (history) {
-        history.addEventListener('click', function () {
-            var historyObj = this
-            const pageName = pair.button.dataset.page;
-
-            // Set active page based on the page name, rest in active
-            Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
-            const activePair = buttonPagePairs[pageName];
-            activePair.page.style.display = '';
-
-            // set this history button active, rest inactive
-            document.querySelectorAll('.chat-history').forEach((item) => {
-                item.classList.remove('active')
-            })
-            historyObj.classList.add('active')
-
-            // const xhr = new XMLHttpRequest();
-            // xhr.onreadystatechange = function () {
-            //     if (xhr.readyState === 4 && xhr.status === 200) {
-            //         const pageName = pair.button.dataset.page;
-            //         // Update the URL
-            //         window.history.replaceState({ page: pageName }, null, `/${pageName}/`);
-
-            //         // Set active page based on the page name, rest in active
-            //         Object.values(buttonPagePairs).forEach(pair => pair.page.style.display = 'none');
-            //         const activePair = buttonPagePairs[pageName];
-            //         activePair.page.style.display = '';
-
-            //         // set this history button active, rest inactive
-            //         document.querySelectorAll('.chat-history').forEach((item) => {
-            //             item.classList.remove('active')
-            //         })
-            //         historyObj.classList.add('active')
-            //     }
-            // };
-
-            // const pageName = pair.button.dataset.page
-            // xhr.open('GET', `/${pageName}/`);
-            // xhr.send();
-
-            // // update order
-            // this.parentNode.removeChild(this);
-            // historiesContainer.insertBefore(this, historiesContainer.firstChild);
-
-            for (var i = 0; i < page.length; i++) {
-                var childElement = page[i];
-                if (childElement.id !== `${this.id}`) {
-                    childElement.style.display = 'none';
-                } else {
-                    childElement.style.display = '';
-                }
-            }
-            if (window.matchMedia("(max-width: 767px)").matches) {
-                sidebarEle.classList.remove('slide-in');
-                sidebarEle.classList.add('slide-out');
-                freezeBack.style.display = "none";
-                sidebarToggleButton.textContent = "Menu"
-                // sidebarEle.classList.add('sidebar--collapsed');
-                restPage.classList.remove('frozen');
-                guideBarContent.style.display = "none";
-                _isExpanded = false;
-            }
-        });
-    });
+    histories.forEach(function(history) {
+        history.addEventListener('click', handleHistoryButtonClick);
+      });
+      
 });
 
 
@@ -355,4 +366,5 @@ function adjustLayout() {
     }
 }
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi };
+
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick};
