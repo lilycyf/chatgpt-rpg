@@ -117,8 +117,8 @@ function newPageHistory(name, id, homePageId) {
         <img src="/static/images/default-head.png" alt="default-head">
       </div>
       <div class="chat-history-name">
-        <h4>Moss</h4>
-        <p4>您好！请问今天我可以如何协助您呢？</p4>
+        <h4>NewChat</h4>
+        <p4>Hello! How can I assist you today?</p4>
       </div>
     `;
 
