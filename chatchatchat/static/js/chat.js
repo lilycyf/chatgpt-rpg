@@ -19,12 +19,12 @@ function handleChatbotInputKeyDown(event) {
         event.preventDefault();
         let chatbotInput = this
         const currentPage = this.parentNode.parentNode
-        const currentPageId = currentPage.getAttribute("id");
+        createNewPageIfNecessary(currentPage)
+        const updatedPageId = currentPage.getAttribute("id");
 
-        createNewPageIfNecessary(currentPage, currentPageId)
 
         if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-            sendMessage(chatbotInput, currentPageId);
+            sendMessage(chatbotInput, updatedPageId);
             adjustTextareaHeight(chatbotInput, chatbotInput);
             event.preventDefault();
         }
@@ -33,18 +33,19 @@ function handleChatbotInputKeyDown(event) {
 
 function handleChatbotButtonClick(event) {
     const currentPage = this.parentNode.parentNode
-    const currentPageId = currentPage.getAttribute("id");
     const chatbotInput = currentPage.querySelector("textarea");
+    createNewPageIfNecessary(currentPage)
+    const updatedPageId = currentPage.getAttribute("id");
 
-    createNewPageIfNecessary(currentPage, currentPageId)
 
     if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-        sendMessage(chatbotInput, currentPageId);
+        sendMessage(chatbotInput, updatedPageId);
         adjustTextareaHeight(chatbotInput, chatbotInput);
     }
 }
 
-function createNewPageIfNecessary(currentPage, currentPageId) {
+function createNewPageIfNecessary(currentPage) {
+    const currentPageId = currentPage.getAttribute("id");
     if (currentPage.classList.contains('startnew')) {
         currentPage.classList.remove('startnew');
         const id = generateUniqueId();
@@ -132,12 +133,25 @@ document.querySelectorAll('.chatbot-input button').forEach((chatbotButton) => {
     chatbotButton.addEventListener('click', handleChatbotButtonClick);
 })
 
+function updateHistoryTextOrder(pageId, message){
+    console.log(`.chat-history#${pageId} p4`)
+    const history = document.querySelector(`.chat-history#${pageId}`)
+    // update order
+    const historiesContainer = history.parentNode
+    historiesContainer.removeChild(history);
+    historiesContainer.firstElementChild.insertAdjacentElement("afterend", history)
+
+    const historyTextBox = document.querySelector('p4')
+    historyTextBox.textContent = message
+}
+
 function sendMessage(chatbotInput, pageId) {
     const message = chatbotInput.value;
     const page = chatbotInput.parentNode.parentNode
     const chatbotButton = page.querySelector(".chatbot-input button");
     const messages = page.firstElementChild
     addMessage(message, true, messages);
+    updateHistoryTextOrder(pageId, message);
     chatbotInput.value = '';
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
@@ -170,6 +184,7 @@ function sendMessage(chatbotInput, pageId) {
                 const response = data.choices[0].message.content;
                 console.log(response);
                 addMessage(response, false, messages);
+                updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
                 addHistorybyId(pageId, { "role": "assistant", "content": response });
                 chatbotButton.disabled = false;
@@ -188,6 +203,7 @@ function sendMessage(chatbotInput, pageId) {
             .then(data => {
                 const response = data.response;
                 addMessage(response, false, messages);
+                updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
                 addHistorybyId(pageId, { "role": "assistant", "content": response });
 
