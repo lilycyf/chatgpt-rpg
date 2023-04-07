@@ -85,11 +85,11 @@ function newPageHistory(name, id, homePageId) {
     page.innerHTML = `
       <div class="${name}-messages">
         <div class="${name}-header">
-          <h1>Moss</h1>
+          <h1>NewChat</h1>
           <p>Your friendly AI chatbot</p>
         </div>
         <div class="chatbot-message">
-          <p>您好！请问今天我可以如何协助您呢？</p>
+          <p>Hello! How can I assist you today?</p>
         </div>
         <div class="end-message"></div>
       </div>
