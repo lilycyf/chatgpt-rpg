@@ -114,7 +114,7 @@ function newPageHistory(name, id, homePageId) {
     history.id = id;
     history.innerHTML = `
       <div class="chat-history-headshot">
-        <img src="/static/images/default-head.png" alt="default-head">
+        <img src="static/images/default-head.png" alt="default-head">
       </div>
       <div class="chat-history-name">
         <h4>NewChat</h4>
