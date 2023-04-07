@@ -160,7 +160,369 @@
                     <div class="roleplaybot-personality-content">
                         <h1>Survey</h1>
                         <form id="survey-form">
-                            <label class="question" for="first-language">What is your first language?</label>
+                            <div class="question">
+                                <label for="firstname">First Name:</label><br>
+                                <input type="text" id="firstname" name="firstname"><br>
+                            </div>
+                            <div class="question">
+                                <label for="lastname">Last Name:</label><br>
+                                <input type="text" id="lastname" name="lastname"><br>
+                            </div>
+                            <div class="question">
+                                <label for="height">Height:</label><br>
+                                <input type="number" id="height" name="height"><br>
+                            </div>
+
+                            <div class="question">
+                                <label for="occupation">Which occupation would you like your character to have?</label><br>
+                                <input type="text" id="occupation" name="occupation"><br>
+                            </div>
+                            <div class="language">
+                                <label for="occupation">Which language(s) does your character speak fluently?</label><br>
+                                <input type="text" id="language" name="language"><br>
+                            </div>
+
+                            <div class="question">
+                                <p>Which hair color would you like your character to have?</p>
+                                <div class="choices">
+                                    <input type="radio" id="hair-black" name="hair-color" value="Black">
+                                    <label for="hair-black">Black</label><br>
+                                    <input type="radio" id="hair-brown" name="hair-color" value="Brown">
+                                    <label for="hair-brown">Brown</label><br>
+                                    <input type="radio" id="hair-blonde" name="hair-color" value="Blonde">
+                                    <label for="hair-blonde">Blonde</label><br>
+                                    <input type="radio" id="hair-red" name="hair-color" value="Red">
+                                    <label for="hair-red">Red</label><br>
+                                    <input type="radio" id="hair-other" name="hair-color" value="Other">
+                                    <label for="hair-other">Other (please specify):</label>
+                                    <input type="text" class="other-text" id="hair-other-text" name="hair-color-other-text">
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p>Which eye color would you like your character to have?</p>
+                                <div class="choices">
+                                    <input type="radio" id="eye-brown" name="eye-color" value="Brown">
+                                    <label for="eye-brown">Brown</label><br>
+                                    <input type="radio" id="eye-blue" name="eye-color" value="Blue">
+                                    <label for="eye-blue">Blue</label><br>
+                                    <input type="radio" id="eye-green" name="eye-color" value="Green">
+                                    <label for="eye-green">Green</label><br>
+                                    <input type="radio" id="eye-hazel" name="eye-color" value="Hazel">
+                                    <label for="eye-hazel">Hazel</label><br>
+                                    <input type="radio" id="eye-other" name="eye-color" value="Other">
+                                    <label for="eye-other">Other (please specify):</label>
+                                    <input type="text" class="other-text" id="eye-other-text" name="eye-color-other-text">
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p>Which body type would you like your character to have?</p>
+                                <div class="choices">
+                                    <input type="radio" id="body-thin" name="body-type" value="Thin">
+                                    <label for="body-thin">Thin</label><br>
+                                    <input type="radio" id="body-average" name="body-type" value="Average">
+                                    <label for="body-average">Average</label><br>
+                                    <input type="radio" id="body-muscular" name="body-type" value="Muscular">
+                                    <label for="body-muscular">Muscular</label><br>
+                                    <input type="radio" id="body-curvy" name="body-type" value="Curvy">
+                                    <label for="body-curvy">Curvy</label><br>
+                                    <input type="radio" id="body-other" name="body-type" value="Other">
+                                    <label for="body-other">Other (please specify):</label>
+                                    <input type="text" class="other-text" id="body-type-other-text" name="body-type-other-text">
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Which of the following personality traits would you like your character to have? (select all that apply)</p>
+                                <div class="choices">
+                                    <input type="checkbox" id="outgoing" name="personality-traits" value="Outgoing">
+                                    <label for="outgoing">Outgoing</label><br>
+
+                                    <input type="checkbox" id="shy" name="personality-traits" value="Shy">
+                                    <label for="shy">Shy</label><br>
+
+                                    <input type="checkbox" id="creative" name="personality-traits" value="Creative">
+                                    <label for="creative">Creative</label><br>
+
+                                    <input type="checkbox" id="analytical" name="personality-traits" value="Analytical">
+                                    <label for="analytical">Analytical</label><br>
+
+                                    <input type="checkbox" id="empathetic" name="personality-traits" value="Empathetic">
+                                    <label for="empathetic">Empathetic</label><br>
+
+                                    <input type="checkbox" id="assertive" name="personality-traits" value="Assertive">
+                                    <label for="assertive">Assertive</label><br>
+
+                                    <input type="checkbox" id="reserved" name="personality-traits" value="Reserved">
+                                    <label for="reserved">Reserved</label><br>
+
+                                    <input type="checkbox" id="adventurous" name="personality-traits" value="Adventurous">
+                                    <label for="adventurous">Adventurous</label><br>
+
+                                    <input type="checkbox" id="confident" name="personality-traits" value="Confident">
+                                    <label for="confident">Confident</label><br>
+
+                                    <input type="checkbox" id="humble" name="personality-traits" value="Humble">
+                                    <label for="humble">Humble</label><br>
+
+                                    <input type="checkbox" id="optimistic" name="personality-traits" value="Optimistic">
+                                    <label for="optimistic">Optimistic</label><br>
+
+                                    <input type="checkbox" id="pessimistic" name="personality-traits" value="Pessimistic">
+                                    <label for="pessimistic">Pessimistic</label><br>
+
+                                    <input type="checkbox" id="ambitious" name="personality-traits" value="Ambitious">
+                                    <label for="ambitious">Ambitious</label><br>
+
+                                    <input type="checkbox" id="laid-back" name="personality-traits" value="Laid-back">
+                                    <label for="laid-back">Laid-back</label><br>
+
+                                    <input type="checkbox" id="curious" name="personality-traits" value="Curious">
+                                    <label for="curious">Curious</label><br>
+
+                                    <input type="checkbox" id="cautious" name="personality-traits" value="Cautious">
+                                    <label for="cautious">Cautious</label><br>
+
+                                    <input type="checkbox" id="perfectionistic" name="personality-traits" value="Perfectionistic">
+                                    <label for="perfectionistic">Perfectionistic</label><br>
+
+                                    <input type="checkbox" id="easy-going" name="personality-traits" value="Easy-going">
+                                    <label for="easy-going">Easy-going</label><br>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Which of the following values is important to your character? (select all that apply)</p>
+                                <div class="choices">
+                                    <input type="checkbox" id="loyalty" name="values" value="Loyalty">
+                                    <label for="loyalty">Loyalty</label><br>
+
+                                    <input type="checkbox" id="honesty" name="values" value="Honesty">
+                                    <label for="honesty">Honesty</label><br>
+
+                                    <input type="checkbox" id="ambition" name="values" value="Ambition">
+                                    <label for="ambition">Ambition</label><br>
+
+                                    <input type="checkbox" id="compassion" name="values" value="Compassion">
+                                    <label for="compassion">Compassion</label><br>
+
+                                    <input type="checkbox" id="freedom" name="values" value="Freedom">
+                                    <label for="freedom">Freedom</label><br>
+
+                                    <input type="checkbox" id="family" name="values" value="Family">
+                                    <label for="family">Family</label><br>
+
+                                    <input type="checkbox" id="creativity" name="values" value="Creativity">
+                                    <label for="creativity">Creativity</label><br>
+
+                                    <input type="checkbox" id="knowledge" name="values" value="Knowledge">
+                                    <label for="knowledge">Knowledge</label><br>
+
+                                    <input type="checkbox" id="integrity" name="values" value="Integrity">
+                                    <label for="integrity">Integrity</label><br>
+
+                                    <input type="checkbox" id="justice" name="values" value="Justice">
+                                    <label for="justice">Justice</label><br>
+
+                                    <input type="checkbox" id="respect" name="values" value="Respect">
+                                    <label for="respect">Respect</label><br>
+
+                                    <input type="checkbox" id="empathy" name="values" value="Empathy">
+                                    <label for="empathy">Empathy</label><br>
+
+                                    <input type="checkbox" id="spirituality" name="values" value="Spirituality">
+                                    <label for="spirituality">Spirituality</label><br>
+
+                                    <input type="checkbox" id="independence" name="values" value="Independence">
+                                    <label for="independence">Independence</label><br>
+
+                                    <input type="checkbox" id="equality" name="values" value="Equality">
+                                    <label for="equality">Equality</label><br>
+
+                                    <input type="checkbox" id="perseverance" name="values" value="Perseverance">
+                                    <label for="perseverance">Perseverance</label><br>
+
+                                    <input type="checkbox" id="sustainability" name="values" value="Sustainability">
+                                    <label for="sustainability">Sustainability</label><br>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Which of the following events in your character's past would you like to include? (select all that apply)</p>
+                                <div class="choices">
+                                    <input type="checkbox" id="new-city" name="past-events[]" value="Moved to a new city">
+                                    <label for="new-city">Moved to a new city</label><br>
+                                    <input type="checkbox" id="traumatic-event" name="past-events[]" value="Experienced a traumatic event">
+                                    <label for="traumatic-event">Experienced a traumatic event</label><br>
+                                    <input type="checkbox" id="difficult-childhood" name="past-events[]" value="Had a difficult childhood">
+                                    <label for="difficult-childhood">Had a difficult childhood</label><br>
+                                    <input type="checkbox" id="study-abroad" name="past-events[]" value="Studied abroad">
+                                    <label for="study-abroad">Studied abroad</label><br>
+                                    <input type="checkbox" id="gap-year" name="past-events[]" value="Took a gap year">
+                                    <label for="gap-year">Took a gap year</label><br>
+                                    <input type="checkbox" id="military" name="past-events[]" value="Served in the military">
+                                    <label for="military">Served in the military</label><br>
+                                    <input type="checkbox" id="serious-illness" name="past-events[]" value="Went through a serious illness or injury">
+                                    <label for="serious-illness">Went through a serious illness or injury</label><br>
+                                    <input type="checkbox" id="lost-loved-one" name="past-events[]" value="Lost a loved one">
+                                    <label for="lost-loved-one">Lost a loved one</label><br>
+                                    <input type="checkbox" id="personal-achievement" name="past-events[]" value="Experienced a significant personal achievement">
+                                    <label for="personal-achievement">Experienced a significant personal achievement</label><br>
+                                    <input type="checkbox" id="overcome-obstacle" name="past-events[]" value="Overcame a major obstacle or challenge">
+                                    <label for="overcome-obstacle">Overcame a major obstacle or challenge</label><br>
+                                    <input type="checkbox" id="change-career" name="past-events[]" value="Changed career paths">
+                                    <label for="change-career">Changed career paths</label><br>
+                                    <input type="checkbox" id="serious-accident" name="past-events[]" value="Was involved in a serious accident">
+                                    <label for="serious-accident">Was involved in a serious accident</label><br>
+                                    <input type="checkbox" id="crime" name="past-events[]" value="Witnessed or was involved in a crime">
+                                    <label for="crime">Witnessed or was involved in a crime</label><br>
+                                    <input type="checkbox" id="epiphany" name="past-events[]" value="Had a life-changing epiphany or realization">
+                                    <label for="epiphany">Had a life-changing epiphany or realization</label><br>
+                                    <input type="checkbox" id="become-parent" name="past-events[]" value="Became a parent">
+                                    <label for="become-parent">Became a parent</label><br>
+                                    <input type="checkbox" id="own-business" name="past-events[]" value="Started their own business">
+                                    <label for="own-business">Started their own business</label><br>
+                                    <input type="checkbox" id="caregiver" name="past-events[]" value="Became a caregiver for a family member">
+                                    <label for="caregiver">Became a caregiver for a family member</label><br>
+                                </div>
+                            </div>
+                            <div class="question">
+                                <p>Communication Style:</p>
+                                <ul>
+                                    <li>What is your character's preferred method of communication with others?</li>
+                                    <li>Does your character tend to be more direct or indirect in their communication style?</li>
+                                    <li>How does your character handle misunderstandings or miscommunications in a conversation?</li>
+                                    <li>Does your character have any cultural or social influences on their communication style?</li>
+                                    <li>What kind of body language does your character typically use in conversations?</li>
+                                    <li>Is your character comfortable with public speaking or presenting to a group?</li>
+                                    <li>What are some key traits of your character's communication style?</li>
+                                    <li>How does your character adapt their communication style in different situations or with different people?</li>
+                                    <li>Is there anything that makes your character particularly nervous or anxious when communicating with others?</li>
+                                    <li>How does your character express appreciation or gratitude towards others in their communication style?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's communication Style:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Backstory:</p>
+                                <ul>
+                                    <li>What events in the character's past have shaped who they are today?</li>
+                                    <li>What kind of family background does the character have?</li>
+                                    <li>What significant life events has the character experienced?</li>
+                                    <li>What kind of education or training has the character received?</li>
+                                    <li>What are the character's career aspirations or goals?</li>
+                                    <li>What significant life events have shaped your character's personality?</li>
+                                    <li>What was your character's childhood like?</li>
+                                    <li>What experiences did your character have during adolescence?</li>
+                                    <li>What challenges did your character face in achieving their proudest accomplishments?</li>
+                                    <li>Has your character traveled or gone on any adventures?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's backstory:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Personality:</p>
+                                <ul>
+                                    <li>What are your character's top strengths and weaknesses?</li>
+                                    <li>What are some of your character's likes and dislikes?</li>
+                                    <li>What motivates your character and keeps them going?</li>
+                                    <li>How does your character typically handle stress or difficult situations?</li>
+                                    <li>Is your character more of an introverted or extroverted person?</li>
+                                    <li>What type of sense of humor does your character have?</li>
+                                    <li>Is your character more of an adventurous or cautious person?</li>
+                                    <li>What are some of your character's biggest fears and insecurities?</li>
+                                    <li>How do these fears and insecurities affect your character's behavior and interactions with others?</li>
+                                    <li>Does your character have any coping mechanisms for dealing with these fears and insecurities?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's personality:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Hobbies or Interests:</p>
+                                <ul>
+                                    <li>What inspired your character to take up their current hobbies or interests?</li>
+                                    <li>Does your character have a favorite hobby or interest that they are particularly passionate about?</li>
+                                    <li>How does your character usually spend their free time?</li>
+                                    <li>Has your character ever tried a new hobby or interest outside of their comfort zone? What was the experience like for them?</li>
+                                    <li>Does your character have any unique talents or skills that they enjoy practicing or showing off?</li>
+                                    <li>Is there a specific type of cuisine or dish that your character is particularly skilled at cooking or enjoys eating?</li>
+                                    <li>Does your character have a preferred way of experiencing books, movies, or TV shows (such as reading, watching, or listening to audiobooks)?</li>
+                                    <li>Has your character ever traveled to a place specifically to pursue one of their interests or hobbies?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's hobbies or interests:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Personal Values:</p>
+                                <ul>
+                                    <li>Does your character prioritize personal or professional goals?</li>
+                                    <li>How important is financial success to your character?</li>
+                                    <li>Does your character have a strong sense of spirituality or faith?</li>
+                                    <li>Does your character have a sense of social responsibility or desire to give back to their community?</li>
+                                    <li>How does your character treat others and why?</li>
+                                    <li>Is your character willing to compromise their values for personal gain?</li>
+                                    <li>How does your character react to injustice or unfair treatment?</li>
+                                    <li>Does your character have any role models or sources of inspiration?</li>
+                                    <li>How does your character handle conflicting values or beliefs with others?</li>
+                                    <li>What does your character consider to be their purpose in life?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's personal values:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Culture and Background:</p>
+                                <ul>
+                                    <li>What cultural or ethnic background does your character come from?</li>
+                                    <li>How has your character's background influenced their values or beliefs?</li>
+                                    <li>Does your character have any customs or traditions they practice regularly?</li>
+                                    <li>What holidays or celebrations does your character look forward to?</li>
+                                    <li>How does your character identify culturally?</li>
+                                    <li>What cultural traditions or practices does your character value or participate in?</li>
+                                    <li>Does your character face any challenges related to their cultural identity?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's culture and background:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="question">
+                                <p>Future Plans:</p>
+                                <ul>
+                                    <li>What steps is your character taking to achieve their future goals?</li>
+                                    <li>How does your character envision their ideal future?</li>
+                                    <li>Are there any particular challenges or obstacles your character anticipates in achieving their future plans?</li>
+                                    <li>Is your character open to new opportunities or changes in their future plans?</li>
+                                    <li>Does your character have any fears or concerns about their future?</li>
+                                    <li>What would be a dream achievement or accomplishment for your character in the future?</li>
+                                    <li>Does your character have any backup plans in case their current plans don't work out?</li>
+                                    <li>What kind of impact does your character hope to make in the world in the future?</li>
+                                    <li>Does your character have any plans for retirement or later in life?</li>
+                                    <li>How does your character balance their current lifestyle with their future plans and goals?</li>
+                                </ul>
+                                <div class="long-answer">
+                                    <label for="long-answer">Please describe your character's future plan:</label><br>
+                                    <textarea rows="8" cols="50"></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <!-- <label class="question" for="first-language">What is your first language?</label>
                             <div class="choices">
                                 <input type="radio" id="english" name="first-language" value="English">
                                 <label for="english">English</label><br>
@@ -697,7 +1059,7 @@
                                 <input type="radio" id="optimistic-other" name="optimistic-about-future" value="Other">
                                 <label for="optimistic-other">Other:</label>
                                 <textarea rows="1" class="other-text" id="optimistic-other-text" name="optimistic-about-future-other-text" placeholder="Please specify"></textarea>
-                            </div>
+                            </div> -->
 
                             <button type="submit" id="survey-submit-btn">Submit</button>
                         </form>
