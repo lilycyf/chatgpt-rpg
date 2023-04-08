@@ -67,7 +67,12 @@ def roleplaybot(request):
     }
     data = {
         "model": "gpt-3.5-turbo",
-        "messages": messageHistory
+        "messages": messageHistory,
+        "temperature": 0.2,
+        # "max_tokens": 60,
+        "frequency_penalty": 0.5,
+        "presence_penalty": 0.6,
+        "logit_bias": {"20185":-100, "42854":-100, "1296": -100},
     }
     headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)

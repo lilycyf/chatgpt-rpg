@@ -472,6 +472,11 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
+.long-answer {
+  display: flex;
+  flex-direction: column;
+}
+
 /* roleplay-survey warning message */
 
 /* The warning message box */

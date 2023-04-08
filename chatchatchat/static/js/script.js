@@ -6,6 +6,20 @@ const restPage = document.querySelector(".container-container")
 
 const sections = document.querySelectorAll('.container');
 
+let messageHistorySet = {}
+
+// Define a function to add items to the object
+function addHistorybyId(key, item) {
+    // If the key already exists in the object, add the item to the existing array
+    if (messageHistorySet.hasOwnProperty(key)) {
+        messageHistorySet[key].push(item);
+    }
+    // If the key does not exist in the object, initialize it to a new array containing the item
+    else {
+        messageHistorySet[key] = [item];
+    }
+}
+
 let _isExpanded = true;
 
 if (window.matchMedia("(max-width: 767px)").matches) {
@@ -367,4 +381,4 @@ function adjustLayout() {
 }
 
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick};
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId};

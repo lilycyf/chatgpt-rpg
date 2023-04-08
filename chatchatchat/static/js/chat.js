@@ -1,18 +1,4 @@
-import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick } from "./script.js";
-
-let messageHistorySet = {}
-
-// Define a function to add items to the object
-function addHistorybyId(key, item) {
-    // If the key already exists in the object, add the item to the existing array
-    if (messageHistorySet.hasOwnProperty(key)) {
-        messageHistorySet[key].push(item);
-    }
-    // If the key does not exist in the object, initialize it to a new array containing the item
-    else {
-        messageHistorySet[key] = [item];
-    }
-}
+import { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId } from "./script.js";
 
 function handleChatbotInputKeyDown(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -141,13 +127,15 @@ function updateHistoryTextOrder(pageId, message){
     historiesContainer.removeChild(history);
     historiesContainer.firstElementChild.insertAdjacentElement("afterend", history)
 
-    const historyTextBox = document.querySelector('p4')
+    const historyTextBox = history.querySelector('p4')
     historyTextBox.textContent = message
 }
 
 function sendMessage(chatbotInput, pageId) {
     const message = chatbotInput.value;
     const page = chatbotInput.parentNode.parentNode
+    const pageType = page.classList[0]
+    console.log(pageType)
     const chatbotButton = page.querySelector(".chatbot-input button");
     const messages = page.firstElementChild
     addMessage(message, true, messages);
@@ -198,7 +186,7 @@ function sendMessage(chatbotInput, pageId) {
 
     } else {
         // Send the message to the server and get a response
-        fetch('/chatbot/?messageHistory=' + encodeURIComponent(JSON.stringify(messageHistorySet[pageId])))
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(messageHistorySet[pageId])))
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
