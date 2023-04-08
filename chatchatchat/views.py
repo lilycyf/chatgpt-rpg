@@ -68,7 +68,7 @@ def roleplaybot(request):
     data = {
         "model": "gpt-3.5-turbo",
         "messages": messageHistory,
-        "temperature": 0.2,
+        "temperature": 0.5,
         # "max_tokens": 60,
         "frequency_penalty": 0.5,
         "presence_penalty": 0.6,
