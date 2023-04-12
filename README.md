@@ -1,10 +1,10 @@
 # Chatbot using OpenAI's gpt-3.5-turboGPT
 
-This project is a chatbot application that uses OpenAI's gpt-3.5-turboGPT to generate responses to user input.
+This is a project that uses OpenAI's API to simulate a chatbot with unique characteristics and integrate it into an RPG game.
 
-该项目是一个聊天机器人应用程序，它使用OpenAI的gpt-3.5-turboGPT来生成对用户输入的响应。
+这是一个使用 OpenAI API 模拟具有独特特征的聊天机器人，并将其集成到 RPG 游戏中的项目。
 
-🔗 [demo](https://lilycyf.github.io/Chatbot-using-OpenAI-s-gpt-3.5-turboGPT/chatchatchat/demo.html)
+🔗 [demo](https://lilycyf.github.io/chatgpt-rpg/chatchatchat/demo.html)
 
 ![1680237931061](image/README/1680237931061.png)
 
