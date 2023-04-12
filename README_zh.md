@@ -4,7 +4,7 @@
 
 这个项目的目标是利用OpenAI的API创建一个具有独特特征并将其整合到RPG游戏中的聊天机器人。
 
-目前，该项目包括两个构建好的角色，李明和艾弗里·金，你可以在demo的role play与他们互动。为了参与其中，请确保获取自己的OpenAI KPI，并在左下方提供的输入字段中输入。需要注意的是，演示是一个没有后端的静态网站，因此您的OpenAI API不会被传输给任何人。除了两个角色之外，你还可以通过chat与基本的ChatGPT进行交流。
+目前，该项目包括两个构建好的角色，李明和艾弗里·金，你可以在demo的role play与他们互动。为了参与其中，请确保获取自己的OpenAI KPI，并在左下方的输入框中提交。demo是一个没有后端的静态网站，因此你的OpenAI API不会被传输给任何人。除了两个角色之外，你还可以通过chat与基本的ChatGPT进行交流。
 
 注意：你可以按照[OpenAI网站](https://platform.openai.com/account/api-keys)上的说明免费生成OpenAI服务的API密钥。
 
