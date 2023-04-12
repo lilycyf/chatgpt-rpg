@@ -1,6 +1,6 @@
 # Chatbot RPG using OpenAI's gpt models
 
-[中文](https://lilycyf.github.io/chatgpt-rpg/README-ch.md) | English
+[中文](https://github.com/lilycyf/chatgpt-rpg/blob/master/README-ch.md) | English
 
 The objective of this project is to utilize OpenAI's API to create a chatbot that possesses unique characteristics and integrate it into an RPG game.
 
