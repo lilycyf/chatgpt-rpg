@@ -86,7 +86,7 @@ function getIsWaitingForResponse() {
     return isWaitingForResponse;
 }
 
-const homePage = 'chat';
+const homePage = 'roleplay';
 
 var buttonPagePairs = {};
 
