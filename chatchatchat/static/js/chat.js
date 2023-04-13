@@ -71,18 +71,31 @@ function newPageHistory(name, id, homePageId) {
     page.innerHTML = `
       <div class="${name}-messages">
         <div class="${name}-header">
-          <h1>NewChat</h1>
-          <p>Your friendly AI chatbot</p>
+            <h1>NewChat</h1>
+            <p>Your friendly AI chatbot</p>
         </div>
-        <div class="chatbot-message">
-          <p>Hello! How can I assist you today?</p>
+        <div class="chatbot-message-container">
+            <div class="message-headshot">
+                <img src="static/images/default-head.png" alt="default-head">
+            </div>
+            <div class="chatbot-message">
+                <div class="audio-message">
+                    <audio controls>
+                        <source src="static/media/start-speech.mp3" type="audio/mpeg">
+                        Hello! How can I assist you today?
+                    </audio>
+                </div>
+                <div class="audio-text">
+                    <p>Hello! How can I assist you today?</p>
+                </div>
+            </div>
         </div>
         <div class="end-message"></div>
-      </div>
-      <div class="chatbot-input">
+    </div>
+    <div class="chatbot-input">
         <textarea rows="1" placeholder="Type your message..."></textarea>
         <button>Send</button>
-      </div>
+    </div>
     `;
 
     const chatbotInput = page.querySelector('.chatbot-input textarea');
@@ -119,7 +132,7 @@ document.querySelectorAll('.chatbot-input button').forEach((chatbotButton) => {
     chatbotButton.addEventListener('click', handleChatbotButtonClick);
 })
 
-function updateHistoryTextOrder(pageId, message){
+function updateHistoryTextOrder(pageId, message) {
     console.log(`.chat-history#${pageId} p4`)
     const history = document.querySelector(`.chat-history#${pageId}`)
     // update order

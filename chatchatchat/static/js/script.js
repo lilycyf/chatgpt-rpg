@@ -276,14 +276,21 @@ function addMessage(message, isUser, messages) {
     // page.insertBefore(timeContent, lastChild)
 
     // add message
+    const messageContainerContainer = document.createElement('div');
     const messageContainer = document.createElement('div');
+    const messageHeadshot = document.createElement('div');
+    messageHeadshot.classList.add("message-headshot")
+    messageHeadshot.innerHTML = `<img src="static/images/default-head.png" alt="default-head">`
+    messageContainerContainer.appendChild(messageHeadshot)
     if (isUser) {
+        messageContainerContainer.classList.add('user-message-container')
         messageContainer.classList.add('user-message');
         const messageContent = document.createElement('p');
         messageContent.style.whiteSpace = 'pre-wrap';
         messageContent.textContent = message;
         messageContainer.appendChild(messageContent);
     } else {
+        messageContainerContainer.classList.add('chatbot-message-container')
         messageContainer.classList.add('chatbot-message');
         let parts = message.split('```');
         for (let i = 0; i < parts.length; i++) {
@@ -307,7 +314,8 @@ function addMessage(message, isUser, messages) {
             }
         }
     }
-    messages.insertBefore(messageContainer, lastChild)
+    messageContainerContainer.appendChild(messageContainer)
+    messages.insertBefore(messageContainerContainer, lastChild)
     messages.scrollTop = messages.scrollHeight;
 }
 

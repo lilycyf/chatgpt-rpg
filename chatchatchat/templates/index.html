@@ -106,15 +106,20 @@
                         <h1>NewChat</h1>
                         <p>Your friendly AI chatbot</p>
                     </div>
-                    <div class="chatbot-message">
-                        <div class="audio-message">
-                            <audio controls>
-                                <source src="{% static 'media/start-speech.mp3' %}" type="audio/mpeg">
-                                Hello! How can I assist you today?
-                            </audio>
+                    <div class="chatbot-message-container">
+                        <div class="message-headshot">
+                            <img src="{% static 'images/default-head.png' %}" alt="default-head">
                         </div>
-                        <div class="audio-text">
-                            <p>Hello! How can I assist you today?</p>
+                        <div class="chatbot-message">
+                            <div class="audio-message">
+                                <audio controls>
+                                    <source src="{% static 'media/start-speech.mp3' %}" type="audio/mpeg">
+                                    Hello! How can I assist you today?
+                                </audio>
+                            </div>
+                            <div class="audio-text">
+                                <p>Hello! How can I assist you today?</p>
+                            </div>
                         </div>
                     </div>
                     <div class="end-message"></div>
@@ -131,8 +136,13 @@
                         <p>Your friendly AI chatbot</p>
                     </div>
                     <!-- <div class="start-message"></div> -->
-                    <div class="chatbot-message">
-                        <p>Hello! How can I assist you today?</p>
+                    <div class="chatbot-message-container">
+                        <div class="message-headshot">
+                            <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                        </div>
+                        <div class="chatbot-message">
+                            <p>Hello! How can I assist you today?</p>
+                        </div>
                     </div>
                     <!-- <div class="user-message">
                     <p>Hello! How can I assist you today? Hello! Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? </p>
@@ -204,21 +214,21 @@
                             <div class="question">
                                 <p>Relationship with You:</p>
                                 <div class="choices">
-                                  <input type="radio" id="rel-close-friend" name="relationship" value="Close friend">
-                                  <label for="rel-close-friend">Close friend</label><br>
-                                  <input type="radio" id="rel-mentor" name="relationship" value="Mentor">
-                                  <label for="rel-mentor">Mentor</label><br>
-                                  <input type="radio" id="rel-romantic" name="relationship" value="Romantic partner">
-                                  <label for="rel-romantic">Romantic partner</label><br>
-                                  <input type="radio" id="rel-family" name="relationship" value="Family member">
-                                  <label for="rel-family">Family member</label><br>
-                                  <input type="radio" id="rel-colleague" name="relationship" value="Colleague">
-                                  <label for="rel-colleague">Colleague</label><br>
-                                  <input type="radio" id="rel-other" name="relationship" value="Other">
-                                  <label for="rel-other">Other (please specify):</label>
-                                  <input type="text" class="other-text" id="rel-other-text" name="relationship-other-text">
+                                    <input type="radio" id="rel-close-friend" name="relationship" value="Close friend">
+                                    <label for="rel-close-friend">Close friend</label><br>
+                                    <input type="radio" id="rel-mentor" name="relationship" value="Mentor">
+                                    <label for="rel-mentor">Mentor</label><br>
+                                    <input type="radio" id="rel-romantic" name="relationship" value="Romantic partner">
+                                    <label for="rel-romantic">Romantic partner</label><br>
+                                    <input type="radio" id="rel-family" name="relationship" value="Family member">
+                                    <label for="rel-family">Family member</label><br>
+                                    <input type="radio" id="rel-colleague" name="relationship" value="Colleague">
+                                    <label for="rel-colleague">Colleague</label><br>
+                                    <input type="radio" id="rel-other" name="relationship" value="Other">
+                                    <label for="rel-other">Other (please specify):</label>
+                                    <input type="text" class="other-text" id="rel-other-text" name="relationship-other-text">
                                 </div>
-                              </div>
+                            </div>
 
                             <div class="question">
                                 <label for="language">Language(s):</label><br>
@@ -1141,9 +1151,14 @@
                         <h1>Li Ming</h1>
                         <p>a university student studying business management</p>
                     </div>
-                    <div class="chatbot-message">
-                        <p>Hello, my name is Li Ming. I am 21 years old and come from Beijing, China. I am a university student studying business management at the University of Southern California in Los Angeles. My family has always placed a great emphasis on education and encouraged me to pursue academic goals. In my free time, I enjoy playing the piano, reading novels, and exploring new restaurants. I consider myself to be ambitious, organized, and friendly. Studying in the United States has been a challenging but rewarding experience for me. After graduation, I plan to return to China and join my family's real estate development company, hoping to use my education and international experience to contribute to the company's growth and expansion into new markets.</p>
-                        <!-- <p>你好，我叫李明，今年21岁，来自中国北京。我是一名大学生，在美国加州洛杉矶的南加州大学学习商业管理专业。我从小家庭就非常重视教育，鼓励我追求学业目标。闲暇时，我喜欢弹钢琴、读小说和探索新餐厅。我认为自己性格上比较有野心、有条理并且友好。在美国留学是对我来说一个充满挑战但值得的经历。毕业后，我计划回到中国加入家里的房地产开发公司，希望能利用我所学和国际经验为公司的增长和进入新市场做出贡献。</p> -->
+                    <div class="chatbot-message-container">
+                        <div class="message-headshot">
+                            <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                        </div>
+                        <div class="chatbot-message">
+                            <p>Hello, my name is Li Ming. I am 21 years old and come from Beijing, China. I am a university student studying business management at the University of Southern California in Los Angeles. My family has always placed a great emphasis on education and encouraged me to pursue academic goals. In my free time, I enjoy playing the piano, reading novels, and exploring new restaurants. I consider myself to be ambitious, organized, and friendly. Studying in the United States has been a challenging but rewarding experience for me. After graduation, I plan to return to China and join my family's real estate development company, hoping to use my education and international experience to contribute to the company's growth and expansion into new markets.</p>
+                            <!-- <p>你好，我叫李明，今年21岁，来自中国北京。我是一名大学生，在美国加州洛杉矶的南加州大学学习商业管理专业。我从小家庭就非常重视教育，鼓励我追求学业目标。闲暇时，我喜欢弹钢琴、读小说和探索新餐厅。我认为自己性格上比较有野心、有条理并且友好。在美国留学是对我来说一个充满挑战但值得的经历。毕业后，我计划回到中国加入家里的房地产开发公司，希望能利用我所学和国际经验为公司的增长和进入新市场做出贡献。</p> -->
+                        </div>
                     </div>
                     <div class="end-message"></div>
                 </div>
@@ -1158,8 +1173,13 @@
                         <h1>Avery Kim</h1>
                         <p>a graphic designer based in New York City</p>
                     </div>
-                    <div class="chatbot-message">
-                        <p>Hi, my name is Avery Kim. I am a graphic designer based in New York City. I am a creative and curious person who values empathy, independence, and perseverance. As someone who grew up in a collectivist culture, I believe in the importance of group harmony and treating others with kindness and respect. In my free time, I enjoy painting, drawing, and exploring different neighborhoods in the city. I am also passionate about advocating for better mental health services for survivors of crime, having overcome my own struggles with PTSD. I am excited to continue growing my business and working on projects that have a positive impact on society.</p>
+                    <div class="chatbot-message-container">
+                        <div class="message-headshot">
+                            <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                        </div>
+                        <div class="chatbot-message">
+                            <p>Hi, my name is Avery Kim. I am a graphic designer based in New York City. I am a creative and curious person who values empathy, independence, and perseverance. As someone who grew up in a collectivist culture, I believe in the importance of group harmony and treating others with kindness and respect. In my free time, I enjoy painting, drawing, and exploring different neighborhoods in the city. I am also passionate about advocating for better mental health services for survivors of crime, having overcome my own struggles with PTSD. I am excited to continue growing my business and working on projects that have a positive impact on society.</p>
+                        </div>
                     </div>
                     <div class="end-message"></div>
                 </div>
@@ -1176,8 +1196,13 @@
                         <h1>Edit</h1>
                         <p>Your friendly AI editbot</p>
                     </div>
-                    <div class="chatbot-message">
-                        <p>Hello! How can I assist you today?</p>
+                    <div class="chatbot-message-container">
+                        <div class="message-headshot">
+                            <img src="{% static 'images/default-head.png' %}" alt="default-head">
+                        </div>
+                        <div class="chatbot-message">
+                            <p>Hello! How can I assist you today?</p>
+                        </div>
                     </div>
                     <div class="end-message"></div>
                 </div>
