@@ -1,4 +1,5 @@
 :root {
+  --theme-light:#ffeded;
   --theme: #f8cfcf;
   /* --theme: linear-gradient(45deg, #ffcda5, #ee4d5f); */
   --theme-hover: #edadad;
@@ -462,7 +463,7 @@ h3 {
 }
 
 .roleplaybot-personality-content {
-  background-color: var(--theme);
+  background-color: var(--theme-light);
   border: none;
   border-radius: 5px;
   padding: 10px;
