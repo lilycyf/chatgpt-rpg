@@ -15,7 +15,9 @@ body {
   display: flex;
   position: fixed;
 }
-
+audio {
+  width: 100%;
+}
 button {
   cursor: pointer;
 }

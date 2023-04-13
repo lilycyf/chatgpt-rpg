@@ -112,7 +112,7 @@
                         </div>
                         <div class="chatbot-message">
                             <div class="audio-message">
-                                <audio controls style="width: 100%">
+                                <audio controls>
                                     <source src="{% static 'media/start-speech.mp3' %}" type="audio/mpeg">
                                     Hello! How can I assist you today?
                                 </audio>
@@ -178,14 +178,17 @@
             <div class="roleplay page roleplay-start" id="a106">
                 <div class="roleplaybot-personality-survey">
                     <div class="roleplaybot-personality-content">
-                        <h1>Survey</h1>
+                        <div class="roleplay-header">
+                            <h1>Unleash Your Creativity: A Guide to Character Creation</h1>
+                            <p>🎉🎊🎭 Welcome to the fascinating world of character creation, where the only limit is your imagination! 🌟💫 As you embark on this creative journey, you have the freedom to design unique and compelling characters. 💡💭 With each question answered, you'll develop a fully-formed personality and backstory for your character, giving them depth and authenticity. 🤔📝 Use your creativity to shape your character's interests, hobbies, and beliefs, all while using third-person pronouns to describe them. 🧑‍🎨👩‍🎨 There are no boundaries to your imagination, so let it take flight and bring your character to life! 🦄🎨</p>
+                        </div>
                         <form id="survey-form">
                             <div class="question">
-                                <label for="firstname">First Name:</label><br>
+                                <p>First Name:</p>
                                 <input type="text" id="firstname" name="firstname"><br>
                             </div>
                             <div class="question">
-                                <label for="lastname">Last Name:</label><br>
+                                <p>Last Name:</p>
                                 <input type="text" id="lastname" name="lastname"><br>
                             </div>
                             <div class="question">
@@ -231,7 +234,7 @@
                             </div>
 
                             <div class="question">
-                                <label for="language">Language(s):</label><br>
+                                <p>Language:</p>
                                 <input type="text" id="language" name="language"><br>
                             </div>
 
@@ -249,7 +252,7 @@
                             </div>
 
                             <div class="question">
-                                <label for="height">Height (Please include the unit):</label><br>
+                                <p>Height:</p>
                                 <input type="text" id="height" name="height"><br>
                             </div>
 
@@ -490,7 +493,6 @@
                                     <li>Has your character traveled or gone on any adventures?</li>
                                 </ul>
                                 <div class="long-answer">
-                                    <label for="long-answer"></label>
                                     <textarea rows="4" placeholder="Please describe your character's backstory"></textarea>
                                 </div>
                             </div>
