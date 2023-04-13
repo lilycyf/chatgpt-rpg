@@ -187,11 +187,20 @@ h3 {
   cursor: pointer;
 }
 
+.guide-bar-page-histories {
+  height: 650px;
+  overflow-y: scroll;
+}
+
+.guide-bar-page-histories::-webkit-scrollbar {
+  display: none;
+}
+
 .chat-history {
   display: flex;
   align-items: center;
   height: 40px;
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
   border-radius: 15px;
   margin: 5px;
