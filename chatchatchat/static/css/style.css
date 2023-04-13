@@ -549,7 +549,7 @@ button[type="submit"]:disabled {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 40%;
+  width: 60%;
   text-align: center;
 }
 
@@ -581,7 +581,7 @@ button[type="submit"]:disabled {
 }
 
 .warning-modal-buttons button {
-  padding: 10px 20px;
+  padding: 10px 0px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
