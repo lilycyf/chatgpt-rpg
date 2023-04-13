@@ -12,9 +12,9 @@
 
 ## Screenshots
 
-![1681293419502](image/README/1681293419502.png)
+<img src="image/README/1681363147175.png" alt="1681363147175" width="33%"/><img src="image/README/1681363512437.png" alt="1681363512437" width="33%"/><img src="image/README/1681363557274.png" alt="1681363557274" width="33%"/>
 
-![1681293455715](image/README/1681293455715.png)
+![1681363127495](image/README/1681363127495.png)
 
 ## Getting Started
 
