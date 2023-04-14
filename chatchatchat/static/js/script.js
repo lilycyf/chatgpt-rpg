@@ -1,3 +1,5 @@
+import { Character, CustomCharacter } from "./character.js"
+
 const sidebarToggleButton = document.querySelector("#sidebarToggle");
 const guideBarContent = document.querySelector(".guide-bar-content")
 const freezeBack = document.querySelector(".freeze-background")
@@ -5,6 +7,9 @@ const sidebarEle = document.querySelector(".guide-bar")
 const restPage = document.querySelector(".container-container")
 
 const sections = document.querySelectorAll('.container');
+
+let user = new CustomCharacter({})
+let characterSet = {}
 
 let messageHistorySet = {}
 
@@ -100,9 +105,6 @@ for (let i = 0; i < sections.length; i++) {
     };
 }
 
-// Get the current URL
-const url = window.location.href;
-
 // Define function to set button and page as active
 function setActive(pair) {
     pair.button.classList.add('active');
@@ -162,8 +164,6 @@ function updatePageFromUrl(url) {
     }
 }
 
-// Update page on initial load from URL
-updatePageFromUrl(url);
 
 // Add event listeners for the guide bar buttons
 Object.values(buttonPagePairs).forEach(pair => {
@@ -501,7 +501,9 @@ function createNewPageIfNecessary(currentPage) {
     const currentPageId = currentPage.getAttribute("id");
     if (currentPage.classList.contains('startnew')) {
         currentPage.classList.remove('startnew');
-        const id = generateUniqueId();
+        const newCharacter = new Character()
+        characterSet[newCharacter.id] = newCharacter
+        const id = newCharacter.id;
         currentPage.setAttribute('id', id);
         const container = currentPage.parentNode;
         const container_name = container.getAttribute("id");
@@ -541,7 +543,7 @@ function sendMessage(chatbotInput, pageId) {
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
     // Add user message to message history
-    addHistorybyId(pageId, { "role": "user", "content": message });
+    characterSet[pageId].updateChatHistory(user.id, { "role": "user", "content": message })
 
     // get api from frontend if exist
     if (openaiapi !== '') {
@@ -555,7 +557,7 @@ function sendMessage(chatbotInput, pageId) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": messageHistorySet[pageId]
+            "messages": characterSet[pageId].getChatHistory(user.id)
         };
         const requestOptions = {
             method: 'POST',
@@ -571,7 +573,7 @@ function sendMessage(chatbotInput, pageId) {
                 addMessage(response, false, messages);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
-                addHistorybyId(pageId, { "role": "assistant", "content": response });
+                characterSet[pageId].updateChatHistory(user.id, { "role": "assistant", "content": response })
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
             })
@@ -584,14 +586,15 @@ function sendMessage(chatbotInput, pageId) {
 
     } else {
         // Send the message to the server and get a response
-        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(messageHistorySet[pageId])))
+        console.log(characterSet[pageId].getChatHistory[user.id])
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[pageId].getChatHistory(user.id))))
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
                 addMessage(response, false, messages);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
-                addHistorybyId(pageId, { "role": "assistant", "content": response });
+                characterSet[pageId].updateChatHistory[user.id, { "role": "assistant", "content": response }]
 
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
@@ -605,27 +608,27 @@ function sendMessage(chatbotInput, pageId) {
     }
 }
 
-function showTopError(text){
+function showTopError(text) {
     const errorMessage = document.createElement('p');
-                errorMessage.textContent = text;
-                errorMessage.style.backgroundColor = '#e9e9e9';
-                errorMessage.style.width = "60%"
-                errorMessage.style.padding = '10px';
-                errorMessage.style.borderRadius = "5px";
-                errorMessage.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.3)";
-                errorMessage.style.position = 'fixed';
-                errorMessage.style.top = '20px';
-                errorMessage.style.left = '50%';
-                errorMessage.style.transform = 'translateX(-50%)';
-                errorMessage.style.zIndex = '9999';
-                document.body.appendChild(errorMessage);
-                setTimeout(() => {
-                    errorMessage.style.transition = 'opacity 1s ease-in-out';
-                    errorMessage.style.opacity = '0';
-                    setTimeout(() => {
-                        errorMessage.parentNode.removeChild(errorMessage);
-                    }, 1000);
-                }, 2000);
+    errorMessage.textContent = text;
+    errorMessage.style.backgroundColor = '#e9e9e9';
+    errorMessage.style.width = "60%"
+    errorMessage.style.padding = '10px';
+    errorMessage.style.borderRadius = "5px";
+    errorMessage.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.3)";
+    errorMessage.style.position = 'fixed';
+    errorMessage.style.top = '20px';
+    errorMessage.style.left = '50%';
+    errorMessage.style.transform = 'translateX(-50%)';
+    errorMessage.style.zIndex = '9999';
+    document.body.appendChild(errorMessage);
+    setTimeout(() => {
+        errorMessage.style.transition = 'opacity 1s ease-in-out';
+        errorMessage.style.opacity = '0';
+        setTimeout(() => {
+            errorMessage.parentNode.removeChild(errorMessage);
+        }, 1000);
+    }, 2000);
 }
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown };
+export { user, setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown, characterSet, updatePageFromUrl };
