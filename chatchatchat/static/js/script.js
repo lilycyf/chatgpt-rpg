@@ -142,6 +142,11 @@ function updatePageFromUrl(url) {
         item.classList.remove('active')
     })
 
+    // set all pages none display
+    document.querySelectorAll('.page').forEach((item) => {
+        item.style.display = 'none'
+    })
+
     // Set active pair based on the page name from URL
     const activePair = buttonPagePairs[pageName] || buttonPagePairs[homePage];
     setActive(activePair);
@@ -246,10 +251,10 @@ Object.values(buttonPagePairs).forEach(pair => {
     var historiesContainer = pair.history;
     var histories = historiesContainer.querySelectorAll('.chat-history');
 
-    histories.forEach(function(history) {
+    histories.forEach(function (history) {
         history.addEventListener('click', handleHistoryButtonClick);
-      });
-      
+    });
+
 });
 
 
@@ -598,4 +603,4 @@ function sendMessage(chatbotInput, pageId) {
     }
 }
 
-export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown};
+export { setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown };
