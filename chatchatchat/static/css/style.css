@@ -487,6 +487,7 @@ label {
   margin-bottom: 1em;
 }
 
+input[type="text"],
 .other-text,
 textarea {
   padding: 0.5em;
