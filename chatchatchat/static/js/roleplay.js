@@ -44,41 +44,41 @@ const headShotDropArea = document.getElementById('headShotDropArea');
 const headShotInput = document.getElementById('headShotInput');
 
 // Prevent the default drag-and-drop behavior
-headShotDropArea.addEventListener('dragover', function(e) {
-  e.preventDefault();
+headShotDropArea.addEventListener('dragover', function (e) {
+    e.preventDefault();
 });
 
 // Handle the drop event
-headShotDropArea.addEventListener('drop', function(e) {
-  e.preventDefault();
-  const file = e.dataTransfer.files[0];
-  readFile(file);
+headShotDropArea.addEventListener('drop', function (e) {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    readFile(file);
 });
 
 // Handle the click event on the drop area
-headShotDropArea.addEventListener('click', function() {
-  headShotInput.click();
+headShotDropArea.addEventListener('click', function () {
+    headShotInput.click();
 });
 
 // Handle the file input change event
-headShotInput.addEventListener('change', function() {
-  const file = headShotInput.files[0];
-  readFile(file);
+headShotInput.addEventListener('change', function () {
+    const file = headShotInput.files[0];
+    readFile(file);
 });
 
 // Read the selected file and display it in the image element
 function readFile(file) {
-  const reader = new FileReader();
+    const reader = new FileReader();
 
-  reader.addEventListener('load', function() {
-    headShotDropArea.style.backgroundImage = `url(${reader.result})`;
-    headShotDropArea.innerText = ''
-    headShotDropArea.style.borderStyle = 'None'
-  }, false);
+    reader.addEventListener('load', function () {
+        headShotDropArea.style.backgroundImage = `url(${reader.result})`;
+        headShotDropArea.innerText = ''
+        headShotDropArea.style.borderStyle = 'None'
+    }, false);
 
-  if (file) {
-    reader.readAsDataURL(file);
-  }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 }
 
 
@@ -110,7 +110,11 @@ warningSubmitBtn.addEventListener('click', () => {
     // freeze form
 
     const [formData, headShot] = extractFormData(form);
-    createNewRole(formData, headShot)
+    if (headShot !== "none") {
+        createNewRole(formData, headShot)
+    } else {
+        createNewRole(formData)
+    }
     console.log('submitted');
     //   form.submit();
 
@@ -129,7 +133,7 @@ warningSubmitBtn.addEventListener('click', () => {
 });
 
 
-function createNewRole(formData, headShot="static/images/default-head.png") {
+function createNewRole(formData, headShot = "static/images/default-head.png") {
     const newRole = new CustomCharacter(formData)
     characterSet[newRole.id] = newRole
     characterSet[newRole.id].headShot = headShot
