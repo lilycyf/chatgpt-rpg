@@ -2,6 +2,7 @@ class Character {
     constructor() {
         this.id = this.generateUniqueId();
         this.chatHistory = {};
+        this.headShot = "static/images/default-head.png";
     }
 
     generateUniqueId() {
@@ -30,10 +31,6 @@ class CustomCharacter extends Character {
 
     getPersona() {
         return this.persona;
-    }
-
-    startChatWith(targetId) {
-
     }
 }
 

@@ -268,7 +268,7 @@ function adjustTextareaHeight(element, reference) {
     element.style.height = reference.scrollHeight - reference_padding + 'px';
 }
 
-function addMessage(message, isUser, messages) {
+function addMessage(message, isUser, messages, pageId) {
     const lastChild = messages.lastElementChild
     // // TODO: add time
     // const now = new Date();
@@ -289,9 +289,9 @@ function addMessage(message, isUser, messages) {
     const messageContainer = document.createElement('div');
     const messageHeadshot = document.createElement('div');
     messageHeadshot.classList.add("message-headshot")
-    messageHeadshot.innerHTML = `<img src="static/images/default-head.png" alt="default-head">`
-    messageContainerContainer.appendChild(messageHeadshot)
     if (isUser) {
+        messageHeadshot.innerHTML = `<img src="${characterSet[currentUserId].headShot}" alt="default-head">`
+        messageContainerContainer.appendChild(messageHeadshot)
         messageContainerContainer.classList.add('user-message-container')
         messageContainer.classList.add('user-message');
         const messageContent = document.createElement('p');
@@ -299,6 +299,8 @@ function addMessage(message, isUser, messages) {
         messageContent.textContent = message;
         messageContainer.appendChild(messageContent);
     } else {
+        messageHeadshot.innerHTML = `<img src="${characterSet[pageId].headShot}" alt="default-head">`
+        messageContainerContainer.appendChild(messageHeadshot)
         messageContainerContainer.classList.add('chatbot-message-container')
         messageContainer.classList.add('chatbot-message');
         let parts = message.split('```');
@@ -541,7 +543,7 @@ function sendMessage(chatbotInput, pageId) {
     console.log(pageType)
     const chatbotButton = page.querySelector(".chatbot-input button");
     const messages = page.firstElementChild
-    addMessage(message, true, messages);
+    addMessage(message, true, messages, pageId);
     updateHistoryTextOrder(pageId, message);
     chatbotInput.value = '';
     chatbotButton.disabled = true;
@@ -575,7 +577,7 @@ function sendMessage(chatbotInput, pageId) {
             .then(data => {
                 const response = data.choices[0].message.content;
                 console.log(response);
-                addMessage(response, false, messages);
+                addMessage(response, false, messages, pageId);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
                 characterSet[pageId].updateChatHistory(currentUserId, { "role": "user", "content": response })
@@ -597,7 +599,7 @@ function sendMessage(chatbotInput, pageId) {
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
-                addMessage(response, false, messages);
+                addMessage(response, false, messages, pageId);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
                 characterSet[pageId].updateChatHistory[currentUserId, { "role": "user", "content": response }]

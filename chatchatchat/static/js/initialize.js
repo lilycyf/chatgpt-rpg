@@ -3,8 +3,7 @@ import { Character, CustomCharacter } from "./character.js"
 import { createNewRole } from "./roleplay.js"
 
 const LiMingPersona = {
-    "First Name:": "Li",
-    "Last Name:": "Ming",
+    "Name:": "Li Ming",
     "age": "21",
     "gender": "Female",
     "nationality": "Chinese",
@@ -23,8 +22,7 @@ const LiMingPersona = {
 
 
 const AveryKimPersona = {
-    "First Name:": "Avery",
-    "Last Name:": "Kim",
+    "Name:": "Avery Kim",
     "Age": "28",
     "Height": `5'8"`,
     "Occupation": "Graphic Designer",
