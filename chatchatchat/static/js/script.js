@@ -8,6 +8,7 @@ const restPage = document.querySelector(".container-container")
 
 const sections = document.querySelectorAll('.container');
 
+let autoReply = false;
 let user = new CustomCharacter({})
 let characterSet = {}
 
@@ -481,7 +482,8 @@ function handleChatbotButtonClick(event) {
 
 
     if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-        sendMessage(chatbotInput, updatedPageId);
+        sendMessage(chatbotInput.value, updatedPageId, true);
+        chatbotInput.value = '';
         adjustTextareaHeight(chatbotInput, chatbotInput);
     }
 }
@@ -496,7 +498,8 @@ function handleChatbotInputKeyDown(event) {
 
 
         if (!getIsWaitingForResponse() && chatbotInput.value !== '') {
-            sendMessage(chatbotInput, updatedPageId);
+            sendMessage(chatbotInput.value, updatedPageId, true);
+            chatbotInput.value = '';
             adjustTextareaHeight(chatbotInput, chatbotInput);
             event.preventDefault();
         }
@@ -536,21 +539,28 @@ function updateHistoryTextOrder(pageId, message) {
     historyTextBox.textContent = message
 }
 
-function sendMessage(chatbotInput, pageId) {
-    const message = chatbotInput.value;
-    const page = chatbotInput.parentNode.parentNode
+function sendMessage(message, pageId, isUser) {
+    var sendId = ""
+    var receiveId = ""
+    if (isUser) {
+        sendId = currentUserId;
+        receiveId = pageId;
+    } else {
+        sendId = pageId;
+        receiveId = currentUserId;
+    }
+    const page = document.querySelector(`.page#${pageId}`)
     const pageType = page.classList[0]
     console.log(pageType)
     const chatbotButton = page.querySelector(".chatbot-input button");
     const messages = page.firstElementChild
-    addMessage(message, true, messages, pageId);
+    addMessage(message, isUser, messages, pageId);
     updateHistoryTextOrder(pageId, message);
-    chatbotInput.value = '';
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
     // Add user message to message history
-    characterSet[pageId].updateChatHistory(currentUserId, { "role": "assistant", "content": message })
-    characterSet[currentUserId].updateChatHistory(pageId, { "role": "user", "content": message })
+    characterSet[receiveId].updateChatHistory(sendId, { "role": "assistant", "content": message })
+    characterSet[sendId].updateChatHistory(receiveId, { "role": "user", "content": message })
 
     // get api from frontend if exist
     if (openaiapi !== '') {
@@ -564,7 +574,7 @@ function sendMessage(chatbotInput, pageId) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": characterSet[currentUserId].getChatHistory(pageId)
+            "messages": characterSet[sendId].getChatHistory(receiveId)
         };
         const requestOptions = {
             method: 'POST',
@@ -577,11 +587,11 @@ function sendMessage(chatbotInput, pageId) {
             .then(data => {
                 const response = data.choices[0].message.content;
                 console.log(response);
-                addMessage(response, false, messages, pageId);
+                addMessage(response, !isUser, messages, pageId);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
-                characterSet[pageId].updateChatHistory(currentUserId, { "role": "user", "content": response })
-                characterSet[currentUserId].updateChatHistory(pageId, { "role": "assistant", "content": response })
+                characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": response })
+                characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": response })
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
             })
@@ -594,16 +604,21 @@ function sendMessage(chatbotInput, pageId) {
 
     } else {
         // Send the message to the server and get a response
-        console.log(characterSet[currentUserId].getChatHistory(pageId))
-        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[currentUserId].getChatHistory(pageId))))
+        console.log(characterSet[sendId].getChatHistory(receiveId))
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId))))
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
-                addMessage(response, false, messages, pageId);
-                updateHistoryTextOrder(pageId, response);
-                // Add assistant message to message history
-                characterSet[pageId].updateChatHistory[currentUserId, { "role": "user", "content": response }]
-                characterSet[currentUserId].updateChatHistory(pageId, { "role": "assistant", "content": response })
+
+                if (autoReply) {
+                    sendMessage(response, pageId, !isUser)
+                } else {
+                    addMessage(response, !isUser, messages, pageId);
+                    updateHistoryTextOrder(pageId, response);
+                    // Add assistant message to message history
+                    characterSet[receiveId].updateChatHistory[sendId, { "role": "user", "content": response }]
+                    characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": response })
+                }
 
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
