@@ -13,6 +13,8 @@ let characterSet = {}
 
 characterSet[user.id] = user
 
+let currentUserId = user.id
+
 let messageHistorySet = {}
 
 // Define a function to add items to the object
@@ -545,8 +547,8 @@ function sendMessage(chatbotInput, pageId) {
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
     // Add user message to message history
-    characterSet[pageId].updateChatHistory(user.id, { "role": "assistant", "content": message })
-    characterSet[user.id].updateChatHistory(pageId, { "role": "user", "content": message })
+    characterSet[pageId].updateChatHistory(currentUserId, { "role": "assistant", "content": message })
+    characterSet[currentUserId].updateChatHistory(pageId, { "role": "user", "content": message })
 
     // get api from frontend if exist
     if (openaiapi !== '') {
@@ -560,7 +562,7 @@ function sendMessage(chatbotInput, pageId) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": characterSet[user.id].getChatHistory(pageId)
+            "messages": characterSet[currentUserId].getChatHistory(pageId)
         };
         const requestOptions = {
             method: 'POST',
@@ -576,8 +578,8 @@ function sendMessage(chatbotInput, pageId) {
                 addMessage(response, false, messages);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
-                characterSet[pageId].updateChatHistory(user.id, { "role": "user", "content": response })
-                characterSet[user.id].updateChatHistory(pageId, { "role": "assistant", "content": response })
+                characterSet[pageId].updateChatHistory(currentUserId, { "role": "user", "content": response })
+                characterSet[currentUserId].updateChatHistory(pageId, { "role": "assistant", "content": response })
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
             })
@@ -590,16 +592,16 @@ function sendMessage(chatbotInput, pageId) {
 
     } else {
         // Send the message to the server and get a response
-        console.log(characterSet[user.id].getChatHistory(pageId))
-        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[user.id].getChatHistory(pageId))))
+        console.log(characterSet[currentUserId].getChatHistory(pageId))
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[currentUserId].getChatHistory(pageId))))
             .then(response => response.json())
             .then(data => {
                 const response = data.response;
                 addMessage(response, false, messages);
                 updateHistoryTextOrder(pageId, response);
                 // Add assistant message to message history
-                characterSet[pageId].updateChatHistory[user.id, { "role": "user", "content": response }]
-                characterSet[user.id].updateChatHistory(pageId, { "role": "assistant", "content": response })
+                characterSet[pageId].updateChatHistory[currentUserId, { "role": "user", "content": response }]
+                characterSet[currentUserId].updateChatHistory(pageId, { "role": "assistant", "content": response })
 
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
@@ -636,4 +638,4 @@ function showTopError(text) {
     }, 2000);
 }
 
-export { user, setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown, characterSet, updatePageFromUrl };
+export { user, setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown, characterSet, updatePageFromUrl, currentUserId };
