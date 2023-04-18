@@ -585,13 +585,13 @@ function sendMessage(message, pageId, isUser) {
         fetch(endpoint, requestOptions)
             .then(response => response.json())
             .then(data => {
-                const response = data.choices[0].message.content;
-                console.log(response);
-                addMessage(response, !isUser, messages, pageId);
-                updateHistoryTextOrder(pageId, response);
+                const content = data.choices[0].message.content;
+                console.log(content);
+                addMessage(content, !isUser, messages, pageId);
+                updateHistoryTextOrder(pageId, content);
                 // Add assistant message to message history
-                characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": response })
-                characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": response })
+                characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": content })
+                characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
                 chatbotButton.disabled = false;
                 setIsWaitingForResponse(false);
             })
@@ -608,16 +608,16 @@ function sendMessage(message, pageId, isUser) {
         fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId))))
             .then(response => response.json())
             .then(data => {
-                const response = data.response;
+                const content = data.choices[0].message.content;
 
                 if (autoReply) {
-                    sendMessage(response, pageId, !isUser)
+                    sendMessage(content, pageId, !isUser)
                 } else {
-                    addMessage(response, !isUser, messages, pageId);
-                    updateHistoryTextOrder(pageId, response);
+                    addMessage(content, !isUser, messages, pageId);
+                    updateHistoryTextOrder(pageId, content);
                     // Add assistant message to message history
-                    characterSet[receiveId].updateChatHistory[sendId, { "role": "user", "content": response }]
-                    characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": response })
+                    characterSet[receiveId].updateChatHistory[sendId, { "role": "user", "content": content }]
+                    characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
                 }
 
                 chatbotButton.disabled = false;

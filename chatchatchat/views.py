@@ -50,7 +50,7 @@ def editbot(request):
     headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
     response_text = response.json()['choices'][0]['text']
-    return JsonResponse({'response': response_text})
+    return JsonResponse(response.json())
 
 def roleplaybot(request):
     messageHistory = request.GET.get('messageHistory')
@@ -78,7 +78,7 @@ def roleplaybot(request):
     response = requests.post(endpoint, headers=headers, json=data)
     response = response.json()['choices'][0]['message']
     response_text = response['content']
-    return JsonResponse({'response': response_text})
+    return JsonResponse(response.json())
 
 def home(request):
     return render(request, 'index.html')
