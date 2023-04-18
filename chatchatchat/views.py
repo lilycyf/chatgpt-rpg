@@ -23,10 +23,8 @@ def chatbot(request):
     }
     headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
-    response = response.json()['choices'][0]['message']
-    response_text = response['content']
-    return JsonResponse({'response': response_text})
-
+    print(response)
+    return JsonResponse(response.json())
 
 def editbot(request):
     editInput = request.GET.get('input')
@@ -76,8 +74,6 @@ def roleplaybot(request):
     }
     headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
-    response = response.json()['choices'][0]['message']
-    response_text = response['content']
     return JsonResponse(response.json())
 
 def home(request):
