@@ -585,15 +585,19 @@ function sendMessage(message, pageId, isUser) {
         fetch(endpoint, requestOptions)
             .then(response => response.json())
             .then(data => {
-                const content = data.choices[0].message.content;
-                console.log(content);
-                addMessage(content, !isUser, messages, pageId);
-                updateHistoryTextOrder(pageId, content);
-                // Add assistant message to message history
-                characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": content })
-                characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
-                chatbotButton.disabled = false;
-                setIsWaitingForResponse(false);
+                try {
+                    const content = data.choices[0].message.content;
+                    console.log(content);
+                    addMessage(content, !isUser, messages, pageId);
+                    updateHistoryTextOrder(pageId, content);
+                    // Add assistant message to message history
+                    characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": content })
+                    characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
+                    chatbotButton.disabled = false;
+                    setIsWaitingForResponse(false);
+                } catch (error) {
+                    showTopError(`${data.error.code}: ${data.error.message}`);
+                }
             })
             .catch(error => {
                 // console.error('Error:', error);
@@ -608,20 +612,22 @@ function sendMessage(message, pageId, isUser) {
         fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId))))
             .then(response => response.json())
             .then(data => {
-                const content = data.choices[0].message.content;
-
-                if (autoReply) {
-                    sendMessage(content, pageId, !isUser)
-                } else {
-                    addMessage(content, !isUser, messages, pageId);
-                    updateHistoryTextOrder(pageId, content);
-                    // Add assistant message to message history
-                    characterSet[receiveId].updateChatHistory[sendId, { "role": "user", "content": content }]
-                    characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
+                try {
+                    const content = data.choices[0].message.content;
+                    if (autoReply) {
+                        sendMessage(content, pageId, !isUser)
+                    } else {
+                        addMessage(content, !isUser, messages, pageId);
+                        updateHistoryTextOrder(pageId, content);
+                        // Add assistant message to message history
+                        characterSet[receiveId].updateChatHistory[sendId, { "role": "user", "content": content }]
+                        characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content })
+                    }
+                    chatbotButton.disabled = false;
+                    setIsWaitingForResponse(false);
+                } catch (error) {
+                    showTopError(`${data.error.code}: ${data.error.message}`);
                 }
-
-                chatbotButton.disabled = false;
-                setIsWaitingForResponse(false);
             })
             .catch(error => {
                 // console.error('Error:', error);
