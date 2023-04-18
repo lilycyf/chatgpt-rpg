@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import requests
 import json
 
+
 def chatbot(request):
     messageHistory = request.GET.get('messageHistory')
     print("testtest")
@@ -21,10 +22,10 @@ def chatbot(request):
         "model": "gpt-3.5-turbo",
         "messages": messageHistory
     }
-    headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
     print(response)
     return JsonResponse(response.json())
+
 
 def editbot(request):
     editInput = request.GET.get('input')
@@ -45,10 +46,10 @@ def editbot(request):
         "input": editInput,
         "instruction": editInstruction,
     }
-    headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
     response_text = response.json()['choices'][0]['text']
     return JsonResponse(response.json())
+
 
 def roleplaybot(request):
     messageHistory = request.GET.get('messageHistory')
@@ -70,20 +71,45 @@ def roleplaybot(request):
         # "max_tokens": 60,
         "frequency_penalty": 0.5,
         "presence_penalty": 0.6,
-        "logit_bias": {"20185":-100, "42854":-100, "1296": -100},
+        "logit_bias": {"20185": -100, "42854": -100, "1296": -100},
     }
-    headers = {'Authorization': f'Bearer {api_key}'}
     response = requests.post(endpoint, headers=headers, json=data)
     return JsonResponse(response.json())
+
+def embedding(request):
+    message = request.GET.get('message')
+    message = json.loads(message)
+
+    api_key = settings.OPENAI_API_KEY
+
+    headers = {
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+    }
+
+    headers = {'Authorization': f'Bearer {api_key}'}
+
+    endpoint = 'https://api.openai.com/v1/embeddings'
+    data = {
+        "model": "gpt-3.5-turbo",
+        "data": message
+    }
+
+    embeddings = requests.post(endpoint, headers=headers, json=data)
+
+    return JsonResponse(embeddings.json())
 
 def home(request):
     return render(request, 'index.html')
 
+
 def chat(request):
     return render(request, 'index.html')
 
+
 def edit(request):
     return render(request, 'index.html')
+
 
 def roleplay(request):
     return render(request, 'index.html')

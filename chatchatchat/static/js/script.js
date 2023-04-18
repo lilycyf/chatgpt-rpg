@@ -587,7 +587,11 @@ function sendMessage(message, pageId, isUser) {
             .then(data => {
                 try {
                     const content = data.choices[0].message.content;
-                    console.log(content);
+                    const finish_reason = data.choices[0].finish_reason;
+                    const usage = data.usage;
+                    const prompt_tokens = usage.prompt_tokens;
+                    const completion_tokens = usage.completion_tokens;
+
                     addMessage(content, !isUser, messages, pageId);
                     updateHistoryTextOrder(pageId, content);
                     // Add assistant message to message history
@@ -614,6 +618,11 @@ function sendMessage(message, pageId, isUser) {
             .then(data => {
                 try {
                     const content = data.choices[0].message.content;
+                    const finish_reason = data.choices[0].finish_reason;
+                    const usage = data.usage;
+                    const prompt_tokens = usage.prompt_tokens;
+                    const completion_tokens = usage.completion_tokens;
+
                     if (autoReply) {
                         sendMessage(content, pageId, !isUser)
                     } else {
