@@ -78,7 +78,7 @@ def roleplaybot(request):
 
 def embedding(request):
     message = request.GET.get('message')
-    message = json.loads(message)
+    print(message)
 
     api_key = settings.OPENAI_API_KEY
 
@@ -87,12 +87,10 @@ def embedding(request):
         'Content-Type': 'application/json'
     }
 
-    headers = {'Authorization': f'Bearer {api_key}'}
-
     endpoint = 'https://api.openai.com/v1/embeddings'
     data = {
-        "model": "gpt-3.5-turbo",
-        "data": message
+        "model": "text-embedding-ada-002",
+        "input": message
     }
 
     embeddings = requests.post(endpoint, headers=headers, json=data)
