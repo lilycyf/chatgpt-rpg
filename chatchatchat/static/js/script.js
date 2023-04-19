@@ -574,7 +574,7 @@ function sendMessage(message, pageId, isUser) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": characterSet[sendId].getChatHistory(receiveId)
+            "messages": characterSet[sendId].getChatHistory(receiveId).map(item => item["history"])
         };
         const requestOptions = {
             method: 'POST',
@@ -613,7 +613,7 @@ function sendMessage(message, pageId, isUser) {
     } else {
         // Send the message to the server and get a response
         console.log(characterSet[sendId].getChatHistory(receiveId))
-        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId))))
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId).map(item => item["history"]))))
             .then(response => response.json())
             .then(data => {
                 try {

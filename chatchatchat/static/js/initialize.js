@@ -48,3 +48,4 @@ createNewRole(AveryKimPersona)
 const url = window.location.href;
 // Update page on initial load from URL
 updatePageFromUrl(url);
+
