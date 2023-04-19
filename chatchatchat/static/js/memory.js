@@ -18,10 +18,10 @@ function findTopSimilar(memories, newVector, n = 10, maxToken = 2500) {
     // Iterate through the list of items and add each item to the heap.
     for (let i = 0; i < memories.length; i++) {
         const vector = memories[i].vector;
-        const dotProduct = dotProduct(newVector, vector);
+        const dotP = dotProduct(newVector, vector);
         const magnitude1 = magnitude(newVector);
         const magnitude2 = magnitude(vector);
-        const score = dotProduct / (magnitude1 * magnitude2);
+        const score = dotP / (magnitude1 * magnitude2);
         const item = [score, memories[i]];
 
         // If the heap is not yet full, add the item.

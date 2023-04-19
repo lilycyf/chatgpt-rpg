@@ -1,5 +1,6 @@
 import { Character, CustomCharacter } from "./character.js"
 import { showTopError } from "./helpers.js"
+import { generateHistory, generateHistoryWithMemory, formattedResponseFormat } from './messageHistory.js'
 
 const sidebarToggleButton = document.querySelector("#sidebarToggle");
 const guideBarContent = document.querySelector(".guide-bar-content")
@@ -540,7 +541,7 @@ function updateHistoryTextOrder(pageId, message) {
     historyTextBox.textContent = message
 }
 
-function sendMessage(message, pageId, isUser) {
+async function sendMessage(message, pageId, isUser) {
     var sendId = ""
     var receiveId = ""
     if (isUser) {
@@ -560,8 +561,16 @@ function sendMessage(message, pageId, isUser) {
     chatbotButton.disabled = true;
     setIsWaitingForResponse(true);
     // Add user message to message history
-    characterSet[receiveId].updateChatHistory(sendId, { "role": "assistant", "content": message })
-    characterSet[sendId].updateChatHistory(receiveId, { "role": "user", "content": message })
+    await characterSet[receiveId].updateChatHistory(sendId, { "role": "assistant", "content": message })
+    await characterSet[sendId].updateChatHistory(receiveId, { "role": "user", "content": message })
+
+    var sendmessages = ""
+    if (pageType == "roleplay") {
+        sendmessages = generateHistory(characterSet[receiveId], characterSet[sendId], receiveId, sendId)
+    } else if (pageType == "chat") {
+        sendmessages = characterSet[sendId].getChatHistory(receiveId).map(item => item["history"])
+    }
+    console.log(sendmessages)
 
     // get api from frontend if exist
     if (openaiapi !== '') {
@@ -575,7 +584,7 @@ function sendMessage(message, pageId, isUser) {
         };
         const data = {
             "model": "gpt-3.5-turbo",
-            "messages": characterSet[sendId].getChatHistory(receiveId).map(item => item["history"])
+            "messages": sendmessages
         };
         const requestOptions = {
             method: 'POST',
@@ -613,8 +622,7 @@ function sendMessage(message, pageId, isUser) {
 
     } else {
         // Send the message to the server and get a response
-        console.log(characterSet[sendId].getChatHistory(receiveId))
-        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(characterSet[sendId].getChatHistory(receiveId).map(item => item["history"]))))
+        fetch(`/${pageType}bot/?messageHistory=` + encodeURIComponent(JSON.stringify(sendmessages)))
             .then(response => response.json())
             .then(data => {
                 try {
