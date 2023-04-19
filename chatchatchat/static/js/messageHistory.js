@@ -25,18 +25,18 @@ function generateHistory(character, userId, action, user_input, maxToken = 4000)
         const content = actions["args"]["content"]
         var contentVector = []
         fetch(`/embedding/?message=` + encodeURIComponent(content))
-                .then(response => response.json())
-                .then(data => {
-                    try {
-                        contentVector = data.data[0].embedding
-                    } catch (error) {
-                        showTopError(`${data.error.code}: ${data.error.message}`);
-                    }
-                })
-                .catch(error => {
-                    // console.error('Error:', error);
-                    showTopError(error.message);
-                });
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    contentVector = data.data[0].embedding
+                } catch (error) {
+                    showTopError(`${data.error.code}: ${data.error.message}`);
+                }
+            })
+            .catch(error => {
+                // console.error('Error:', error);
+                showTopError(error.message);
+            });
         var [relevantMemories, memoryToken] = findTopSimilar(allMemory, contentVector, n = 10)
         current_context.push({ "role": "system", "content": `This reminds you of these events from your past:${relevantMemories.join("\n")}` })
     }
