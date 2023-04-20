@@ -630,6 +630,7 @@ async function sendMessage(message, pageId, isUser) {
                     const finish_reason = data.choices[0].finish_reason;
                     const usage = data.usage;
                     const prompt_tokens = usage.prompt_tokens;
+                    console.log(prompt_tokens)
                     const completion_tokens = usage.completion_tokens;
 
                     if (autoReply) {

@@ -2,7 +2,7 @@ import { findTopSimilar } from "./memory.js"
 import { showTopError } from "./helpers.js"
 
 const actions_list = [
-    { "command_name": "Recall past events in memory", "args": { "similar_event": "<event related key phrase>" } },
+    { "command_name": "Check past events in memory", "args": { "similar_event": "<event related key phrase>" } },
     { "command_name": "Speak to user", "args": { "content": "<content>" } },
     { "command_name": "Add memory in memory", "args": { "summary": "<summary>" } }
 ]
@@ -12,7 +12,7 @@ for (let index = 0; index < actions_list.length; index++) {
     actions += `${index+1}. ` + JSON.stringify(actions_list[index]) + '\n'
 }
 
-const responseFormat = { "commend_name": "commend name", "args": { "arg name": "value" } }
+const responseFormat = { "command_name": "command name", "args": { "arg name": "value" } }
 const formattedResponseFormat = JSON.stringify(responseFormat)
 
 function generateHistory(character, user, characterId, userId, maxToken = 4000) {
@@ -24,7 +24,7 @@ function generateHistory(character, user, characterId, userId, maxToken = 4000) 
     ]
 
     tokenNum += character.prompt["token"]
-    tokenNum += 10
+    tokenNum += 20
 
     const fullHistory = user.getChatHistory(characterId)
 
@@ -34,6 +34,7 @@ function generateHistory(character, user, characterId, userId, maxToken = 4000) 
         var i = 0
         while ((i+1) <= fullHistory.length && tokenNum + fullHistory[fullHistory.length - (i+1)]["token"] < maxToken ){
             i += 1
+            tokenNum += fullHistory[fullHistory.length - (i)]["token"]
         }
 
         const recentHistory = fullHistory.slice(fullHistory.length - i, fullHistory.length).map(tuple => tuple["history"])
