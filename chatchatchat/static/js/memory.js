@@ -11,6 +11,98 @@
 //     }
 // ]
 
+class MinHeap {
+    constructor(maxSize) {
+        this.heap = [];
+        this.maxSize = maxSize;
+    }
+
+    size() {
+        return this.heap.length;
+    }
+
+    insert(item) {
+        if (this.size() < this.maxSize) {
+            this.heap.push(item);
+            this._bubbleUp(this.size() - 1);
+        } else if (this.size() === this.maxSize && item[0] > this.peek()[0]) {
+            this.extractMin();
+            this.insert(item);
+        }
+    }
+
+    extractMin() {
+        const min = this.heap[0];
+        const end = this.heap.pop();
+        if (this.size() > 0) {
+            this.heap[0] = end;
+            this._sinkDown(0);
+        }
+        return min;
+    }
+
+    extractAllMin() {
+        const minHeap = [];
+        while (this.size() > 0) {
+            minHeap.push(this.extractMin());
+        }
+        return minHeap;
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+
+    _bubbleUp(index) {
+        const item = this.heap[index];
+        while (index > 0) {
+            const parentIndex = Math.floor((index - 1) / 2);
+            const parent = this.heap[parentIndex];
+            if (item[0] < parent[0]) {
+                this.heap[index] = parent;
+                index = parentIndex;
+            } else {
+                break;
+            }
+        }
+        this.heap[index] = item;
+    }
+
+    _sinkDown(index) {
+        const item = this.heap[index];
+        while (true) {
+            const leftChildIndex = 2 * index + 1;
+            const rightChildIndex = 2 * index + 2;
+            let leftChild, rightChild;
+            let swap = null;
+
+            if (leftChildIndex < this.size()) {
+                leftChild = this.heap[leftChildIndex];
+                if (leftChild[0] < item[0]) {
+                    swap = leftChildIndex;
+                }
+            }
+
+            if (rightChildIndex < this.size()) {
+                rightChild = this.heap[rightChildIndex];
+                if ((swap === null && rightChild[0] < item[0]) ||
+                    (swap !== null && rightChild[0] < leftChild[0])) {
+                    swap = rightChildIndex;
+                }
+            }
+
+            if (swap === null) {
+                break;
+            }
+
+            this.heap[index] = this.heap[swap];
+            index = swap;
+        }
+        this.heap[index] = item;
+    }
+}
+
+
 function findTopSimilar(memories, newVector, n = 10, maxToken = 2500) {
     // Create a min-heap of size n to store the top n items.
     const heap = new MinHeap(n);

@@ -611,6 +611,8 @@ async function sendMessage(message, pageId, isUser) {
                     setIsWaitingForResponse(false);
                 } catch (error) {
                     showTopError(`${data.error.code}: ${data.error.message}`);
+                    chatbotButton.disabled = false;
+                    setIsWaitingForResponse(false);
                 }
             })
             .catch(error => {
@@ -641,11 +643,14 @@ async function sendMessage(message, pageId, isUser) {
                         // Add assistant message to message history
                         characterSet[receiveId].updateChatHistory(sendId, { "role": "user", "content": content }, completion_tokens)
                         characterSet[sendId].updateChatHistory(receiveId, { "role": "assistant", "content": content }, completion_tokens)
+                        handleResponse(content, completion_tokens, receiveId, sendId, page)
                     }
                     chatbotButton.disabled = false;
                     setIsWaitingForResponse(false);
                 } catch (error) {
                     showTopError(`${data.error.code}: ${data.error.message}`);
+                    chatbotButton.disabled = false;
+                    setIsWaitingForResponse(false);
                 }
             })
             .catch(error => {
@@ -655,6 +660,33 @@ async function sendMessage(message, pageId, isUser) {
                 setIsWaitingForResponse(false);
             });
     }
+}
+
+async function handleResponse(content, token, pageId, userId, page) {
+    try {
+        const contentJson = JSON.parse(content)
+        const command_name = contentJson["command"]["command_name"]
+        const args = contentJson["command"]["args"]
+        var sysResponse = ''
+        if (command_name == "Check past events in memory") {
+            const relatedMemories = await characterSet[pageId].recallMemory(args["similar_event"])
+            sysResponse = `System Message: This reminds you of these events from your past: \n${relatedMemories}`
+        } else if (command_name == "Speak to") {
+            sysResponse = `${args["target"]}: `
+        } else if (command_name == "Add memory in memory") {
+            await characterSet[pageId].addMemory(args["summary"])
+            sysResponse = "System Message: Memory added successfully"
+        } else if (command_name == "Go to") {
+            sysResponse = `System Message: You arrived at ${args["location"]}`
+        } else if (command_name == "Look around") {
+            sysResponse = "System Message: You see"
+        } else if (command_name == "Take a closer look at") {
+            sysResponse = `${args["target"]}: `
+        }
+    } catch {
+        sysResponse = "System Error: Wrong response format, please resend response"
+    }
+    page.querySelector(".chatbot-input textarea").value = sysResponse
 }
 
 export { user, setIsWaitingForResponse, getIsWaitingForResponse, adjustTextareaHeight, addMessage, openaiapi, buttonPagePairs, handleHistoryButtonClick, messageHistorySet, addHistorybyId, generateUniqueId, newPageHistory, handleChatbotButtonClick, handleChatbotInputKeyDown, characterSet, updatePageFromUrl, currentUserId };

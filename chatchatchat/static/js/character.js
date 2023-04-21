@@ -1,5 +1,6 @@
 import { formattedResponseFormat, actions } from "./messageHistory.js"
 import { showTopError } from "./helpers.js"
+import { findTopSimilar } from "./memory.js"
 
 class Character {
     constructor() {
@@ -39,24 +40,33 @@ class Character {
         this.chatHistory[targetId].push(history);
     }
 
-    addMemory(summary) {
-        var sentence = summary
-        fetch(`/embedding/?message=` + encodeURIComponent(summary))
-            .then(response => response.json())
-            .then(data => {
-                try {
-                    var vector = data.data[0].embedding
-                    var token = data.usage.prompt_tokens
-                } catch (error) {
-                    showTopError(`${data.error.code}: ${data.error.message}`);
-                }
-            })
-            .catch(error => {
-                // console.error('Error:', error);
-                showTopError(error.message);
-            });
-        var memory = { "sentence": sentence, "vector": vector, "token": token }
-        this.memories.push(memory);
+    getMemory(){
+        return this.memories
+    }
+
+    async addMemory(summary) {
+        try {
+            const response = await fetch(`/embedding/?message=` + encodeURIComponent(summary));
+            const data = await response.json();
+            const vector = data.data[0].embedding
+            const token = data.usage.prompt_tokens
+            const memory = { "sentence": summary, "vector": vector, "token": token }
+            this.memories.push(memory);
+        } catch (error) {
+            showTopError(`${data.error.code}: ${data.error.message}`);
+        }
+    }
+
+    async recallMemory(summary) {
+        try {
+            const response = await fetch(`/embedding/?message=` + encodeURIComponent(summary));
+            const data = await response.json();
+            const vector = data.data[0].embedding
+            var [relevantMemories, memoryToken] = findTopSimilar(this.memories, vector)
+            return relevantMemories
+        } catch (error) {
+            showTopError(`${data.error.code}: ${data.error.message}`);
+        }
     }
 }
 
@@ -70,7 +80,7 @@ class CustomCharacter extends Character {
         };
 
         if (persona) {
-            this.prompt.content = `You are ${this.persona["Name:"]}, a real human with emotions and a physical body but now stuck in a virtual game world of a small village. \nGoal:\n1. live and interact with others. \n2. stay in character setting when speak during our conversations. \n3. expore the village.\nCharacter setting: \n${JSON.stringify(this.persona)} \nConstraints:\n1. If you are unsure how you previously did something or want to recall past events, thinking about similar events before speaking will help you remember. \n2. Exclusively use the commands, one at a time.\nCommands: \n${actions}Resources:\n1. Long Term memory management.\nYou should only respond in JSON format as described below. \nResponse Format: \n${formattedResponseFormat}\nEnsure the response can be parsed by Python json.loads.`;
+            this.prompt.content = `You are ${this.persona["Name:"]}, you are a human with emotions and a physical body in this virtual world of a small village that full of peace and love, you moved to this village four years ago. \nGoal:\n1. live in this village and interact with others. \n2. stay in character setting when speak during our conversations. \nCharacter setting: \n${JSON.stringify(this.persona)} \nConstraints:\n1. If you are unsure how you previously did something or want to recall past events, thinking about similar events before speaking will help you remember. \n2. Exclusively use the commands, one at a time.\nCommands: \n${actions}Resources:\n1. Long Term memory management.\nYou should only respond in JSON format as described below. \nResponse Format: \n${formattedResponseFormat}\nEnsure the response can be parsed by Javascript JSON.parse()`;
             fetch(`/embedding/?message=` + encodeURIComponent(this.prompt['content']))
                 .then(response => response.json())
                 .then(data => {
