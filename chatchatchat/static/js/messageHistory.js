@@ -1,11 +1,29 @@
 import { findTopSimilar } from "./memory.js"
 import { showTopError } from "./helpers.js"
 
+const map = {
+    "home": {
+        "bedroom": {
+
+        }
+    },
+    "school": {
+
+    },
+    "market": {
+
+    },
+    "grocery store": {
+
+    }
+}
+
+
 const actions_list = [
     { "command_name": "Check past events in memory", "args": { "similar_event": "<event related key phrase>" } },
     { "command_name": "Speak to", "args": { "target": "<target>", "content": "<content>" } },
     { "command_name": "Add memory in memory", "args": { "summary": "<summary>", "time": "<time in UTCString format>" } },
-    { "command_name": "Go to", "args": { "location": "<home|school|market|hospital>" } },
+    { "command_name": "Go to", "args": { "location": map } },
     { "command_name": "Look around", "args": {} },
     { "command_name": "Take a closer look at", "args": { "target": "<target>" } },
     // { "command_name": "Sleep", "args": { "wake up time": "<weak up time in UTCString format>" } }
@@ -18,8 +36,8 @@ for (let index = 0; index < actions_list.length; index++) {
 
 const responseFormat = {
     "thoughts": {
-        "inner voice":"thought",
-        "plan":[{ "start time": "<in UTCString format>", "duration": "<duration>", "location":"<location>", "action":"<action description>"}]
+        "inner voice": "thought",
+        "plan": [{ "start time": "<in UTCString format>", "end time": "<in UTCString format>", "location": "<location>", "action": "<action description>" }]
     },
     "command": {
         "command_name": "command name", "args": { "arg name": "value" }
